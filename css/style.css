@@ -76,6 +76,7 @@
     overflow: hidden;
     margin: 0 auto;
     width: 1200px;
+    display: none;
 }
 .famous-inner .case-item {
     float: left;
