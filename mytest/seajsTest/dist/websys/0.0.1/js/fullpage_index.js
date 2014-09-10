@@ -1,0 +1,1 @@
+define("websys/0.0.1/js/fullpage_index",["jquery/1.10.1/jquery"],function(e,n,u){e("jquery/1.10.1/jquery");u.exports=function(){console.log("test")}});

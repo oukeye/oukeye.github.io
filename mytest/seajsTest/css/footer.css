@@ -1,0 +1,10 @@
+#footer {
+background: #fff;
+border: 1px solid #D7D7D7;
+padding: 20px 0;
+text-align: center;
+}
+#footer .copyRight {
+padding: 10px 0;
+font-family: Arial;
+}

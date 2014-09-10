@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>oukeye web前端个人简介</title>
+    <link rel="stylesheet" href="css/jquery.fullPage.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.fullPage.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $.fn.fullpage({
+            slidesColor: ['#0075D1', '#196a73', '#050505'],
+            anchors: ['page1', 'page2', 'page3'],
+            css3: true,
+            menu: '#menu',
+            afterRender: function() {
+                $('.screen-main .item').each(function() {
+                    var $rel = $(this).attr('rel');
+                    var $arr = $rel.split(',');
+                    $(this).animate({
+                        left: $arr[2] + 'px',
+                        top: $arr[3] + 'px'
+                    }, 500);
+                });
+                $('.screen-main .animate').each(function() {
+                    var $rel = $(this).attr('rel');
+                    var $arr = $rel.split(',');
+                    $(this).addClass('animate-sp show');
+                });
+            },
+            afterLoad: function(anchorLink, index) {
+                if (index == 1) {
+                    $('.screen-main .item').each(function() {
+                        var $rel = $(this).attr('rel');
+                        var $arr = $rel.split(',');
+                        $(this).animate({
+                            left: $arr[2] + 'px',
+                            top: $arr[3] + 'px'
+                        }, 500);
+                    });
+                    $('.screen-main .animate').each(function() {
+                        var $rel = $(this).attr('rel');
+                        var $arr = $rel.split(',');
+                        $(this).addClass('animate-sp show');
+                    });
+                }
+                if (index == 2) {
+                    $('.inner').eq(index - 2).find('.item').each(function() {
+                        var $rel = $(this).attr('rel');
+                        var $arr = $rel.split(',');
+                        $(this).animate({
+                            left: $arr[2] + 'px',
+                            top: $arr[3] + 'px'
+                        }, 500);
+                    });
+                    $('.inner').find(".meteorites").each(function() {
+                        $(this).addClass('dh');
+                    });
+                    /*星星定位*/
+                    $(".m-meteorShower").find(".star").each(function() {
+                        var w = fRandomBy(10, $("body").width());
+                        var h = fRandomBy(10, $("body").height());
+                        $(this).css({
+                            "left": w + 'px',
+                            "top": h + 'px'
+                        });
+                    });
+                }
+
+
+                if (index == 3) {
+                    //$('.zanzhu-con a').fadeIn(1000);
+                }
+            },
+            onLeave: function(index, direction) {
+                if (index == 1) {
+                    $('.screen-main .item').each(function() {
+                        var $rel = $(this).attr('rel');
+                        var $arr = $rel.split(',');
+                        $(this).animate({
+                            left: $arr[0] + 'px',
+                            top: $arr[1] + 'px'
+                        }, 500);
+                    });
+                    $('.screen-main .animate').each(function() {
+                        var $rel = $(this).attr('rel');
+                        var $arr = $rel.split(',');
+                        $(this).removeClass('animate-sp show');
+                    });
+                }
+                if (index == 2) {
+                    $('.inner').eq(index - 2).find('.item').each(function() {
+                        var $rel = $(this).attr('rel');
+                        var $arr = $rel.split(',');
+                        $(this).animate({
+                            left: $arr[0] + 'px',
+                            top: $arr[1] + 'px'
+                        }, 500);
+                    });
+                }
+
+                if (index == 3) {
+                    $('.zanzhu-con a').fadeOut(1000);
+                }
+            }
+        });
+        /*在一定范围里生成随机数*/
+        function fRandomBy(under, over) {
+            switch (arguments.length) {
+                case 1:
+                    return parseInt(Math.random() * under + 1);
+                case 2:
+                    return parseInt(Math.random() * (over - under + 1) + under);
+                default:
+                    return 0;
+            }
+        }
+    });
+    </script>
+</head>
+
+<body>
+
+    <ul id="menu">
+        <li data-menuanchor="page1" class="active">
+            <a href="#page1" title="TOP">
+                <span>TOP</span>
+            </a>
+        </li>
+        <li data-menuanchor="page2">
+            <a href="#page2" title="个人简介">
+                <span>个人简介</span>
+            </a>
+        </li>
+        <li data-menuanchor="page3">
+            <a href="#page3" title="个人作品">
+                <span>个人作品</span>
+            </a>
+        </li>
+
+    </ul>
+    <div class="section section1">
+        <div class="screen-main">
+
+            <span class="tu item" rel="-501,-455,587.5,155"></span>
+            <span class="name item" rel="1387,-359,351,320"></span>
+            <span class="profession item animate" rel="463.5,350,463.5,450"></span>
+            <span class="xz item animate" rel="42.5,10,42.5,10"></span>
+            <a class="godown item" href="#page2" rel="615,-150,615,600"></a>
+        </div>
+    </div>
+
+    <div class="section section2">
+        <div class="science-inner inner">
+
+            <a class="item" href="javascript:void(0)" rel="1024,840,350,100">我是一名WEB前端工程师</a>
+            <a class="item" href="javascript:void(0)" rel="1024,840,350,200">oukeye是拼音，我的昵称叫“欧嘢”</a>
+            <a class="item" href="javascript:void(0)" rel="1024,840,350,300">程序员中的设计师，设计师中的程序员</a>
+            <img class="item" src="./css/images/rocket.png" alt="" rel="-100,840,200,80" />
+            <img class="item" src="./css/images/ufo.png" alt="" rel="-100,840,200,180" />
+            <img class="item meteorites" src="./css/images/meteorites.png" alt="" rel="-100,840,200,280" />
+            <div class="m-animationBox m-meteorShower">
+                <i class="star style1" style=" -webkit-animation-delay:0.18s; -webkit-animation: star 3s linear infinite;"></i>
+                <i class="star style3" style=" -webkit-animation-delay:0.99s; -webkit-animation: star 2s linear infinite;"></i>
+                <i class="star style2" style="left:195.03px; top:156.34px; -webkit-animation-delay:0.28s; -webkit-animation: star 1s linear infinite;"></i>
+                <i class="star style3" style="left:561.09px; top:571.77px; -webkit-animation-delay:0.35s; -webkit-animation: star 2s linear infinite;"></i>
+                <i class="star style2" style="left:625.74px; top:508.01px; -webkit-animation-delay:0.37s; -webkit-animation: star 3s linear infinite;"></i>
+                <i class="star style3" style="left:607.15px; top:78.62px; -webkit-animation-delay:0.52s; -webkit-animation: star 2s linear infinite;"></i>
+                <i class="star style3" style="left:468.92px; top:271.89px; -webkit-animation-delay:0.44s; -webkit-animation: star 3s linear infinite;"></i>
+                <i class="star style3" style="left:282.47px; top:74.16px; -webkit-animation-delay:0.60s; -webkit-animation: star 4s linear infinite;"></i>
+                <i class="star style4" style="left:380.10px; top:196.86px; -webkit-animation-delay:0.44s; -webkit-animation: star 2s linear infinite;"></i>
+                <i class="star style3" style="left:138.70px; top:243.70px; -webkit-animation-delay:0.79s; -webkit-animation: star 5s linear infinite;"></i>
+                <i class="star style1" style="left:419.68px; top:244.42px; -webkit-animation-delay:0.94s; -webkit-animation: star 3s linear infinite;"></i>
+                <i class="star style3" style="left:86.65px; top:449.01px; -webkit-animation-delay:0.67s; -webkit-animation: star 1s linear infinite;"></i>
+                <i class="star style2" style="left:406.94px; top:474.08px; -webkit-animation-delay:0.23s; -webkit-animation: star 2s linear infinite;"></i><i class="star style1" style="left:511.94px; top:335.90px; -webkit-animation-delay:0.71s; -webkit-animation: star 1s linear infinite;"></i><i class="star style2" style="left:236.66px; top:462.72px; -webkit-animation-delay:0.14s; -webkit-animation: star 4s linear infinite;"></i><i class="star style2" style="left:462.70px; top:480.25px; -webkit-animation-delay:0.91s; -webkit-animation: star 2s linear infinite;"></i><i class="star style2" style="left:557.07px; top:178.60px; -webkit-animation-delay:0.26s; -webkit-animation: star 3s linear infinite;"></i><i class="star style3" style="left:401.52px; top:564.33px; -webkit-animation-delay:0.88s; -webkit-animation: star 1s linear infinite;"></i><i class="star style3" style="left:375.50px; top:131.79px; -webkit-animation-delay:0.83s; -webkit-animation: star 3s linear infinite;"></i><i class="star style2" style="left:96.60px; top:13.41px; -webkit-animation-delay:0.24s; -webkit-animation: star 2s linear infinite;"></i><i class="star style2" style="left:401.98px; top:185.23px; -webkit-animation-delay:0.34s; -webkit-animation: star 2s linear infinite;"></i><i class="star style3" style="left:213.35px; top:335.84px; -webkit-animation-delay:0.91s; -webkit-animation: star 3s linear infinite;"></i><i class="star style3" style="left:579.87px; top:113.75px; -webkit-animation-delay:0.36s; -webkit-animation: star 3s linear infinite;"></i><i class="star style3" style="left:70.39px; top:560.29px; -webkit-animation-delay:0.49s; -webkit-animation: star 5s linear infinite;"></i><i class="star style2" style="left:612.95px; top:341.72px; -webkit-animation-delay:0.37s; -webkit-animation: star 2s linear infinite;"></i><i class="star style2" style="left:481.63px; top:225.58px; -webkit-animation-delay:0.15s; -webkit-animation: star 2s linear infinite;"></i><i class="star style1" style="left:413.77px; top:535.08px; -webkit-animation-delay:0.04s; -webkit-animation: star 5s linear infinite;"></i><i class="star style2" style="left:153.59px; top:41.14px; -webkit-animation-delay:0.82s; -webkit-animation: star 2s linear infinite;"></i><i class="star style2" style="left:617.00px; top:103.06px; -webkit-animation-delay:0.71s; -webkit-animation: star 3s linear infinite;"></i><i class="star style2" style="left:305.06px; top:415.20px; -webkit-animation-delay:0.79s; -webkit-animation: star 5s linear infinite;"></i><i class="star style2" style="left:567.03px; top:367.18px; -webkit-animation-delay:0.48s; -webkit-animation: star 5s linear infinite;"></i><i class="star style2" style="left:175.55px; top:132.07px; -webkit-animation-delay:0.39s; -webkit-animation: star 1s linear infinite;"></i><i class="star style2" style="left:612.18px; top:407.21px; -webkit-animation-delay:0.79s; -webkit-animation: star 1s linear infinite;"></i><i class="star style1" style="left:350.76px; top:550.77px; -webkit-animation-delay:0.64s; -webkit-animation: star 4s linear infinite;"></i><i class="star style2" style="left:109.91px; top:532.99px; -webkit-animation-delay:0.34s; -webkit-animation: star 3s linear infinite;"></i><i class="star style4" style="left:457.37px; top:308.79px; -webkit-animation-delay:0.37s; -webkit-animation: star 4s linear infinite;"></i><i class="star style2" style="left:42.84px; top:118.79px; -webkit-animation-delay:0.48s; -webkit-animation: star 4s linear infinite;"></i><i class="star style3" style="left:465.32px; top:281.30px; -webkit-animation-delay:0.79s; -webkit-animation: star 3s linear infinite;"></i><i class="star style2" style="left:375.38px; top:380.32px; -webkit-animation-delay:0.51s; -webkit-animation: star 5s linear infinite;"></i><i class="star style2" style="left:81.70px; top:451.53px; -webkit-animation-delay:0.35s; -webkit-animation: star 3s linear infinite;"></i><i class="star style3" style="left:211.03px; top:92.77px; -webkit-animation-delay:0.41s; -webkit-animation: star 4s linear infinite;"></i><i class="star style3" style="left:613.29px; top:218.33px; -webkit-animation-delay:0.38s; -webkit-animation: star 3s linear infinite;"></i><i class="star style3" style="left:240.85px; top:514.46px; -webkit-animation-delay:0.05s; -webkit-animation: star 4s linear infinite;"></i><i class="star style4" style="left:341.16px; top:367.98px; -webkit-animation-delay:0.64s; -webkit-animation: star 2s linear infinite;"></i><i class="star style2" style="left:201.04px; top:78.54px; -webkit-animation-delay:0.84s; -webkit-animation: star 4s linear infinite;"></i><i class="star style2" style="left:583.81px; top:427.74px; -webkit-animation-delay:0.90s; -webkit-animation: star 2s linear infinite;"></i><i class="star style2" style="left:418.65px; top:156.03px; -webkit-animation-delay:0.90s; -webkit-animation: star 1s linear infinite;"></i><i class="star style2" style="left:57.95px; top:188.25px; -webkit-animation-delay:0.92s; -webkit-animation: star 3s linear infinite;"></i><i class="star style1" style="left:396.59px; top:85.47px; -webkit-animation-delay:0.99s; -webkit-animation: star 2s linear infinite;"></i><i class="star style2" style="left:204.76px; top:64.17px; -webkit-animation-delay:0.37s; -webkit-animation: star 2s linear infinite;"></i><i class="star style1" style="left:182.84px; top:288.86px; -webkit-animation-delay:0.97s; -webkit-animation: star 1s linear infinite;"></i><i class="star style1" style="left:37.82px; top:377.07px; -webkit-animation-delay:0.38s; -webkit-animation: star 1s linear infinite;"></i><i class="star style1" style="left:125.93px; top:261.03px; -webkit-animation-delay:0.60s; -webkit-animation: star 2s linear infinite;"></i><i class="star style3" style="left:239.50px; top:113.52px; -webkit-animation-delay:0.24s; -webkit-animation: star 1s linear infinite;"></i><i class="star style2" style="left:312.45px; top:540.73px; -webkit-animation-delay:0.03s; -webkit-animation: star 2s linear infinite;"></i><i class="star style1" style="left:588.25px; top:190.01px; -webkit-animation-delay:0.97s; -webkit-animation: star 1s linear infinite;"></i><i class="star style1" style="left:122.52px; top:94.38px; -webkit-animation-delay:0.17s; -webkit-animation: star 1s linear infinite;"></i><i class="star style2" style="left:67.62px; top:364.78px; -webkit-animation-delay:0.21s; -webkit-animation: star 4s linear infinite;"></i><i class="star style2" style="left:7.23px; top:278.95px; -webkit-animation-delay:0.21s; -webkit-animation: star 1s linear infinite;"></i><i class="meteor style3" style="left:-131.59px; top:-3.22px; -webkit-animation-delay:1s; -webkit-animation: meteor 3s linear infinite;"></i>
+                <i class="meteor style3" style="left:473.35px; top:-28.72px; -webkit-animation-delay:2s; -webkit-animation: meteor 1s linear infinite;"></i><i class="meteor style3" style="left:-65.34px; top:-72.98px; -webkit-animation-delay:1s; -webkit-animation: meteor 2s linear infinite;"></i><i class="meteor style2" style="left:-227.71px; top:-42.69px; -webkit-animation-delay:2s; -webkit-animation: meteor 1s linear infinite;"></i><i class="meteor style1" style="left:163.88px; top:-15.42px; -webkit-animation-delay:1s; -webkit-animation: meteor 1s linear infinite;"></i><i class="meteor style3" style="left:113.32px; top:-7.57px; -webkit-animation-delay:2s; -webkit-animation: meteor 4s linear infinite;"></i><i class="meteor style2" style="left:207.00px; top:-25.77px; -webkit-animation-delay:1s; -webkit-animation: meteor 3s linear infinite;"></i><i class="meteor style3" style="left:165.64px; top:0.38px; -webkit-animation-delay:1s; -webkit-animation: meteor 2s linear infinite;"></i><i class="meteor style3" style="left:167.23px; top:-30.41px; -webkit-animation-delay:2s; -webkit-animation: meteor 3s linear infinite;"></i><i class="meteor style3" style="left:414.33px; top:-35.01px; -webkit-animation-delay:2s; -webkit-animation: meteor 3s linear infinite;"></i><i class="meteor style2" style="left:32.47px; top:-55.98px; -webkit-animation-delay:1s; -webkit-animation: meteor 3s linear infinite;"></i><i class="meteor style3" style="left:438.61px; top:13.67px; -webkit-animation-delay:1s; -webkit-animation: meteor 2s linear infinite;"></i><i class="meteor style3" style="left:-5.07px; top:4.47px; -webkit-animation-delay:3s; -webkit-animation: meteor 3s linear infinite;"></i><i class="meteor style2" style="left:-201.35px; top:-17.31px; -webkit-animation-delay:2s; -webkit-animation: meteor 1s linear infinite;"></i><i class="meteor style1" style="left:-127.47px; top:18.85px; -webkit-animation-delay:1s; -webkit-animation: meteor 2s linear infinite;"></i><i class="meteor style3" style="left:238.20px; top:-44.09px; -webkit-animation-delay:3s; -webkit-animation: meteor 3s linear infinite;"></i><i class="meteor style2" style="left:169.87px; top:-14.04px; -webkit-animation-delay:1s; -webkit-animation: meteor 3s linear infinite;"></i><i class="meteor style4" style="left:384.17px; top:-49.78px; -webkit-animation-delay:2s; -webkit-animation: meteor 2s linear infinite;"></i><i class="meteor style3" style="left:-42.81px; top:-1.50px; -webkit-animation-delay:2s; -webkit-animation: meteor 3s linear infinite;"></i><i class="meteor style2" style="left:-123.94px; top:-12.08px; -webkit-animation-delay:2s; -webkit-animation: meteor 3s linear infinite;"></i><i class="meteor style3" style="left:-278.49px; top:-38.61px; -webkit-animation-delay:1s; -webkit-animation: meteor 1s linear infinite;"></i>
+            </div>
+            <a class="godown item" href="#page3" rel="615,-150,615,600"></a>
+        </div>
+    </div>
+
+    <div class="section section3">
+        <div class="famous-inner inner">
+            <div class="case-item">
+                <div class="ih-item circle effect1">
+                    <a href="./mytest/seajsTest/index.html" target="_blank">
+                        <div class="spinner"></div>
+                        <div class="img">
+                            <img src="./images/seajs.png" alt="seajs">
+                        </div>
+                        <div class="info">
+                            <div class="info-back">
+                                <h3>seajs简例</h3>
+                                <p>赖的自动加载、配置的简洁清晰，可以让我们更多地享受编码的乐趣.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="case-item">
+                <div class="ih-item circle effect1">
+                    <a href="./mytest/1688seach/index.html" target="_blank">
+                        <div class="spinner"></div>
+                        <div class="img">
+                            <img src="./images/1688seach.png" alt="seajs">
+                        </div>
+                        <div class="info">
+                            <div class="info-back">
+                                <h3>1688排名查询</h3>
+                                <p>阿里巴巴关键词排名查询。MVC框架backbone简例</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
