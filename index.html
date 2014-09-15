@@ -4,126 +4,11 @@
 <head>
     <meta charset="utf-8">
     <title>oukeye web前端个人简介</title>
-    <link rel="stylesheet" href="css/jquery.fullPage.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.fullPage.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        $.fn.fullpage({
-            slidesColor: ['#0075D1', '#196a73', '#050505'],
-            anchors: ['page1', 'page2', 'page3'],
-            css3: true,
-            menu: '#menu',
-            afterRender: function() {
-                $('.screen-main .item').each(function() {
-                    var $rel = $(this).attr('rel');
-                    var $arr = $rel.split(',');
-                    $(this).animate({
-                        left: $arr[2] + 'px',
-                        top: $arr[3] + 'px'
-                    }, 500);
-                });
-                $('.screen-main .animate').each(function() {
-                    var $rel = $(this).attr('rel');
-                    var $arr = $rel.split(',');
-                    $(this).addClass('animate-sp show');
-                });
-            },
-            afterLoad: function(anchorLink, index) {
-                if (index == 1) {
-                    $('.screen-main .item').each(function() {
-                        var $rel = $(this).attr('rel');
-                        var $arr = $rel.split(',');
-                        $(this).animate({
-                            left: $arr[2] + 'px',
-                            top: $arr[3] + 'px'
-                        }, 500);
-                    });
-                    $('.screen-main .animate').each(function() {
-                        var $rel = $(this).attr('rel');
-                        var $arr = $rel.split(',');
-                        $(this).addClass('animate-sp show');
-                    });
-                }
-                if (index == 2) {
-                    $('.inner').eq(index - 2).find('.item').each(function() {
-                        var $rel = $(this).attr('rel');
-                        var $arr = $rel.split(',');
-                        $(this).animate({
-                            left: $arr[2] + 'px',
-                            top: $arr[3] + 'px'
-                        }, 500);
-                    });
-                    $('.inner').find(".meteorites").each(function() {
-                        $(this).addClass('dh');
-                    });
-                    /*星星定位*/
-                    $(".m-meteorShower").find(".star").each(function() {
-                        var w = fRandomBy(10, $("body").width());
-                        var h = fRandomBy(10, $("body").height());
-                        $(this).css({
-                            "left": w + 'px',
-                            "top": h + 'px'
-                        });
-                    });
-                }
-
-
-                if (index == 3) {
-                    $('.famous-inner').fadeIn(1000);
-                }
-            },
-            onLeave: function(index, direction) {
-                if (index == 1) {
-                    $('.screen-main .item').each(function() {
-                        var $rel = $(this).attr('rel');
-                        var $arr = $rel.split(',');
-                        $(this).animate({
-                            left: $arr[0] + 'px',
-                            top: $arr[1] + 'px'
-                        }, 500);
-                    });
-                    $('.screen-main .animate').each(function() {
-                        var $rel = $(this).attr('rel');
-                        var $arr = $rel.split(',');
-                        $(this).removeClass('animate-sp show');
-                    });
-                }
-                if (index == 2) {
-                    $('.inner').eq(index - 2).find('.item').each(function() {
-                        var $rel = $(this).attr('rel');
-                        var $arr = $rel.split(',');
-                        $(this).animate({
-                            left: $arr[0] + 'px',
-                            top: $arr[1] + 'px'
-                        }, 500);
-                    });
-                }
-
-                if (index == 3) {
-                    $('.famous-inner').fadeOut(1000);
-                }
-            }
-        });
-        /*在一定范围里生成随机数*/
-        function fRandomBy(under, over) {
-            switch (arguments.length) {
-                case 1:
-                    return parseInt(Math.random() * under + 1);
-                case 2:
-                    return parseInt(Math.random() * (over - under + 1) + under);
-                default:
-                    return 0;
-            }
-        }
-    });
-    </script>
+    <link rel="stylesheet" href="style/style.css">
+    <script src="js/require.js" defer async="true" data-main="js/main"></script>
 </head>
 
 <body>
-
     <ul id="menu">
         <li data-menuanchor="page1" class="active">
             <a href="#page1" title="TOP">
@@ -140,7 +25,6 @@
                 <span>个人作品</span>
             </a>
         </li>
-
     </ul>
     <div class="section section1">
         <div class="screen-main">
@@ -152,16 +36,15 @@
             <a class="godown item" href="#page2" rel="615,-150,615,600"></a>
         </div>
     </div>
-
     <div class="section section2">
         <div class="science-inner inner">
 
             <a class="item" href="javascript:void(0)" rel="1024,840,350,100">我是一名WEB前端工程师</a>
             <a class="item" href="javascript:void(0)" rel="1024,840,350,200">oukeye是拼音，我的昵称叫“欧嘢”</a>
             <a class="item" href="javascript:void(0)" rel="1024,840,350,300">程序员中的设计师，设计师中的程序员</a>
-            <img class="item" src="./css/images/rocket.png" alt="" rel="-100,840,200,80" />
-            <img class="item" src="./css/images/ufo.png" alt="" rel="-100,840,200,180" />
-            <img class="item meteorites" src="./css/images/meteorites.png" alt="" rel="-100,840,200,280" />
+            <img class="item" src="./style/images/rocket.png" alt="" rel="-100,840,200,80" />
+            <img class="item" src="./style/images/ufo.png" alt="" rel="-100,840,200,180" />
+            <img class="item meteorites" src="./style/images/meteorites.png" alt="" rel="-100,840,200,280" />
             <div class="m-animationBox m-meteorShower">
                 <i class="star style1" style=" -webkit-animation-delay:0.18s; -webkit-animation: star 3s linear infinite;"></i>
                 <i class="star style3" style=" -webkit-animation-delay:0.99s; -webkit-animation: star 2s linear infinite;"></i>
@@ -181,7 +64,6 @@
             <a class="godown item" href="#page3" rel="615,-150,615,600"></a>
         </div>
     </div>
-
     <div class="section section3">
         <div class="famous-inner inner">
             <div class="case-item">
@@ -218,7 +100,6 @@
             </div>
         </div>
     </div>
-
 </body>
 
 </html>
