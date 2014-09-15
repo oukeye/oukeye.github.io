@@ -94,6 +94,7 @@
                 'click footer button': 'seachByKeyWord',
                 'click #search': 'filter',
                 'keyup #search': 'filter'
+                
             },
             ListHtml: [],
             ranksStr: "",
@@ -224,6 +225,10 @@
             getkeyWord: function() {
                 return this.$("footer .search_keyword").val();
 
+            },
+            viewResize:function(){
+                $(".sidebar").css("width",$('body').width());
+              //  console.log($(this).width());
             }
         });
 
@@ -239,6 +244,13 @@
 
                 this.vdiv = $('<div />').addClass('vdivide');
                 this.render();
+                var _this=this;
+                $(window).load(function(){
+                    _this.sidebar.viewResize();
+                });
+                $(window).resize(function(){
+                    _this.sidebar.viewResize();
+                });
             },
 
             render: function() {

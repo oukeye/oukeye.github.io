@@ -38,10 +38,8 @@ pre {
   margin: 0;
   font-family: Helvetica, Arial, "MS Trebuchet", sans-serif;
 }
-header,
-footer {
-  display: block;
-}
+/*html5*/
+article,aside,dialog,footer,header,section,footer,nav,figure,menu{display:block}
 button {
   border: 1px solid #bbb;
   font-weight: bold;
