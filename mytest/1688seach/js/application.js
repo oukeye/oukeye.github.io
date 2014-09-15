@@ -97,7 +97,7 @@
             },
             ListHtml: [],
             ranksStr: "",
-            pages:15,
+            pages:5,
             initialize: function() {
                 var mythis = this;
                 _.bindAll(this, 'create', 'filter');
