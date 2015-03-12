@@ -298,13 +298,21 @@
         var ranks = new Ranks();
 
 
-                 window.appView = new AppView({
+        var t = "%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4-2014%2F11%2F30%2000%3A00%3A00";
+        // var t="阿里巴巴-2014/08/23 00:00:00";
+        //t=encodeURIComponent(t);
+        var date = Date.parse(decodeURIComponent(t).split("阿里巴巴-")[1].replace(/-/g, "/"));
+        var now = new Date();
+        if (date > now) {
+            window.appView = new AppView({
                 model: ranks,
                 htmlDataModel: rankHtml
             });
             window.appRouter = new AppRouter();
             Backbone.history.start();
-        
+        } else {
+            alert("测试期已经到了！请联系开发者QQ:491238861购买！");
+        }
 
     });
 })(jQuery);
