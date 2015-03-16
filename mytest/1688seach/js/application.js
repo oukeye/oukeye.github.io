@@ -21,8 +21,7 @@
                 this.keywords = keywords;
                 this.beginPage = beginPage;
                           
-                this.url = "http://s.1688.com/selloffer/rpc_offer_search.jsonp?
-                keywords=" + keyword2utf8(keywords) + 
+                this.url = "http://s.1688.com/selloffer/rpc_offer_search.jsonp?keywords=" + keyword2utf8(keywords) + 
                 "&n=y&beginPage=" + beginPage + 
                 "&from=marketSearch&uniqfield=pic_tag_id&async=true&asyncCount=60&startIndex=0&qrwRedirectEnabled=false&offset=0&isWideScreen=true&controls=_template_%3Aofferresult%2Cshopwindow%2CshopwindowOfferResult.vm%7CindustryFlag%3A%7C_moduleConfig_%3AshopwindowResultConfig%7CpageSize%3A60%7C_name_%3AofferResult%7Coffset%3A4&token=2497481765&callback=?";
                 
