@@ -9,22 +9,22 @@
             },
             initialize: function() {
                 this.beginPage = 9,
-                this.keywords = '内裤',
-                this.url = "",
+                    this.keywords = '内裤',
+                    this.url = "",
 
-                //初始化时绑定监听
-                this.bind("error", function(model, error) {
-                    alert(error);
-                });
+                    //初始化时绑定监听
+                    this.bind("error", function(model, error) {
+                        alert(error);
+                    });
             },
             setUrl: function(keywords, beginPage) {
                 this.keywords = keywords;
                 this.beginPage = beginPage;
-                          
-                this.url = "http://s.1688.com/selloffer/rpc_offer_search.jsonp?keywords=" + keyword2utf8(keywords) + 
-                "&n=y&beginPage=" + beginPage + 
-                "&from=marketSearch&uniqfield=pic_tag_id&async=true&asyncCount=60&startIndex=0&qrwRedirectEnabled=false&offset=0&isWideScreen=true&controls=_template_%3Aofferresult%2Cshopwindow%2CshopwindowOfferResult.vm%7CindustryFlag%3A%7C_moduleConfig_%3AshopwindowResultConfig%7CpageSize%3A60%7C_name_%3AofferResult%7Coffset%3A4&token=2497481765&callback=?";
-                
+
+                this.url = "http://s.1688.com/selloffer/rpc_offer_search.jsonp?keywords=" + keyword2utf8(keywords) +
+                    "&n=y&beginPage=" + beginPage +
+                    "&from=marketSearch&uniqfield=pic_tag_id&async=true&asyncCount=60&startIndex=0&qrwRedirectEnabled=false&offset=0&isWideScreen=true&controls=_template_%3Aofferresult%2Cshopwindow%2CshopwindowOfferResult.vm%7CindustryFlag%3A%7C_moduleConfig_%3AshopwindowResultConfig%7CpageSize%3A60%7C_name_%3AofferResult%7Coffset%3A4&token=2497481765&callback=?";
+
                 /*this.url = "http://s.1688.com/selloffer/rpc_offer_search.jsonp?"
                            +"keywords="+ keyword2utf8(keywords) + 
                             +"uniqfield=pic_tag_id&"+
@@ -107,11 +107,11 @@
                 'click footer button': 'seachByKeyWord',
                 'click #search': 'filter',
                 'keyup #search': 'filter'
-                
+
             },
             ListHtml: [],
             ranksStr: "",
-            pages:5,
+            pages: 5,
             initialize: function() {
                 var mythis = this;
                 _.bindAll(this, 'create', 'filter');
@@ -121,19 +121,19 @@
                 this.model.bind('remove', this.remove, this);
                 this.options.htmlDataModel.bind('change:content', function() {
                     var str = removeAllSpace(this.get('content').offerResult.html);
-                    mythis.ListHtml[this.beginPage-1] = str;
-  
-                        if (this.beginPage < mythis.pages) {
-                            this.setUrl(this.keywords, this.beginPage+1);
-                            window.layerid = layer.load("第" + this.beginPage + '页，加载中...');
-                        }else {                  
-                            window.layerid = layer.load("加载了" + this.beginPage + "页", 2);
-                            for(var i=0;i<mythis.ListHtml.length;i++){
-                               mythis.ranksStr+=mythis.ListHtml[i];
-                            }
-                            
-                            mythis.model.reset(mythis.addCollection(mythis.ranksStr));
-                        }    
+                    mythis.ListHtml[this.beginPage - 1] = str;
+
+                    if (this.beginPage < mythis.pages) {
+                        this.setUrl(this.keywords, this.beginPage + 1);
+                        window.layerid = layer.load("第" + this.beginPage + '页，加载中...');
+                    } else {
+                        window.layerid = layer.load("加载了" + this.beginPage + "页", 2);
+                        for (var i = 0; i < mythis.ListHtml.length; i++) {
+                            mythis.ranksStr += mythis.ListHtml[i];
+                        }
+
+                        mythis.model.reset(mythis.addCollection(mythis.ranksStr));
+                    }
                 });
                 this.options.htmlDataModel.bind('change:url', function() {
                     this.fetch({
@@ -165,8 +165,8 @@
                     rank.offerid = re.exec(offerid[i])[1];
                     rank.companyid = companyid[i].split('"')[3];
                     rank.companyName = re2.exec(companyName[i])[1];
-                    rank.rank =  i + 1;
-                    rank.page = '第' + parseInt(i/60+1) + '页第' + (i%60+1) + '条';
+                    rank.rank = i + 1;
+                    rank.page = '第' + parseInt(i / 60 + 1) + '页第' + (i % 60 + 1) + '条';
                     ranksList.push(rank);
 
                 };
@@ -239,13 +239,13 @@
                 return this.$("footer .search_keyword").val();
 
             },
-            viewResize:function(){
-                $(".sidebar").css("width",$('body').width());
-              //  console.log($(this).width());
+            viewResize: function() {
+                $(".sidebar").css("width", $('body').width());
+                //  console.log($(this).width());
             }
         });
 
-  
+
         // 整个页面的视图，管理SiderbarView
         var AppView = Backbone.View.extend({
             className: 'contacts',
@@ -257,11 +257,11 @@
 
                 this.vdiv = $('<div />').addClass('vdivide');
                 this.render();
-                var _this=this;
-                $(window).load(function(){
+                var _this = this;
+                $(window).load(function() {
                     _this.sidebar.viewResize();
                 });
-                $(window).resize(function(){
+                $(window).resize(function() {
                     _this.sidebar.viewResize();
                 });
             },
@@ -316,7 +316,7 @@
         window.appRouter = new AppRouter();
         Backbone.history.start();
 
-        
+
 
     });
 })(jQuery);
