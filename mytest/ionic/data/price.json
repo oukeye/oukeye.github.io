@@ -1,0 +1,39 @@
+{
+    "message": null,
+    "code": 0,
+    "success": true,
+    "object": [{
+        "contact_code": "XAG1",
+        "contact_name": "粤银",
+        "latest_price": "2199.57",
+        "open_price": "2231.25",
+        "low_price": "2199.57",
+        "high_price": "2231.25",
+        "yesterday_price": "2230.61",
+        "recon_price": "0.00",
+        "trade_amount": "0.00000",
+        "price_time": "1426265840000"
+    }, {
+        "contact_code": "OIL",
+        "contact_name": "粤油",
+        "latest_price": "43935",
+        "open_price": "44334",
+        "low_price": "43875",
+        "high_price": "44361",
+        "yesterday_price": "44255",
+        "recon_price": "0",
+        "trade_amount": "0.00000",
+        "price_time": "1433407951000"
+    }, {
+        "contact_code": "CU",
+        "contact_name": "粤铜",
+        "latest_price": "43935",
+        "open_price": "44334",
+        "low_price": "43875",
+        "high_price": "44361",
+        "yesterday_price": "44255",
+        "recon_price": "0",
+        "trade_amount": "0.00000",
+        "price_time": "1433407951000"
+    }]
+}

@@ -1,22 +1,24 @@
-<ion-view view-title="微盘">
+<ion-view view-title="mini盘首页">
     <ion-content>
-        <div class="item range">
-            <i class="icon ion-volume-low"></i>
-            <input type="range" name="volume">
-            <i class="icon ion-volume-high"></i>
-        </div>
-        <div class="list">
-            <div class="item range range-positive">
-                <i class="icon ion-ios-sunny-outline"></i>
-                <input type="range" name="volume" min="0" max="100" value="33">
-                <i class="icon ion-ios-sunny"></i>
+        <ul class="product-list list">
+            <div class="item item-divider">
+                <div class="row">
+                    <div class="col">产品名称</div>
+                    <div class="col">买价</div>
+                </div>
             </div>
-        </div>
-        <button class="button button-primary" ng-click="showConfirm()">
-            Confirm
-        </button>
-        <button class="button button-primary" ng-click="show()">
-            show
-        </button>
+            <a class="item" ng-repeat="productlist in productlists" href="#/app/productlists/{{productlist.contact_code}}">
+                <div class="row price-up">
+                    <div class="col"> {{productlist.contact_name}}</div>
+                    <div class="col price"> {{productlist.latest_price}}
+                        <i class="ion-arrow-up-b"></i>
+                    </div>
+                    <i class="icon ion-chevron-right"></i>
+                </div>
+            </a>
+            <!--             <li class="item" ng-repeat="productlist in productlists" href="#/app/productlists/{{productlist.id}}">
+   
+</li> -->
+        </ul>
     </ion-content>
 </ion-view>

@@ -4,8 +4,8 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var v = "1.0.5";
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives'])
+var v = "1.0.6"+new Date();
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives','starter.services'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -23,7 +23,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives']
     });
 })
 .config(function($ionicConfigProvider) {
-  $ionicConfigProvider.views.maxCache(15);
+  $ionicConfigProvider.views.maxCache(0);
 
   // note that you can also chain configs
   $ionicConfigProvider.backButton.text('返回').icon('ion-chevron-left');
@@ -82,8 +82,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives']
             url: "/playlists/:playlistId",
             views: {
                 'menuContent': {
-                    templateUrl: "templates/playlist.html?v=" + v,
+                    templateUrl: "templates/playlists.html?v=" + v,
                     controller: 'PlaylistCtrl'
+                }
+            }
+        })
+        .state('app.productlists', {
+            url: "/productlists/:productId",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/productlists.html?v=" + v,
+                    controller: 'ProductlistsCtrl'
                 }
             }
         })

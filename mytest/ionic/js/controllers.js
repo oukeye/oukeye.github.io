@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, $ionicActionSheet) {
@@ -10,6 +12,7 @@ angular.module('starter.controllers', [])
     }).then(function(modal) {
         $scope.modal = modal;
     });
+
 
     // Triggered in the login modal to close it
     $scope.closeLogin = function() {
@@ -63,7 +66,7 @@ angular.module('starter.controllers', [])
             buttonClicked: function(index) {
                 return true;
             },
-            cssClass :'testclass'
+            cssClass: 'testclass'
         });
 
         // For example's sake, hide the sheet after two seconds
@@ -99,19 +102,71 @@ angular.module('starter.controllers', [])
 
 
     })
-    .controller('IndexCtrl', function($scope, $stateParams) {
-        /* $scope.onDrag = function() {
-             console.log("onDrag");
-         };
-         $scope.show = function() {
-             $ionicLoading.show({
-                 template: 'Loading...'
-             });
-         };
-         $scope.hide = function() {
-             $ionicLoading.hide();
-         };*/
+    .controller('IndexCtrl', function($scope, $stateParams, userService) {
+        userService.price()
+            .success(function(data, status) {
+                $scope.productlists = data.object;
+                console.log(status);
+            });
     })
-    .controller('PlaylistCtrl', function($scope, $stateParams) {})
-    .controller('UIlistCtrl', function($scope, $stateParams) {})
+
+.controller('PlaylistCtrl', function($scope, $stateParams) {
+
+    })
+    .controller('ProductlistsCtrl', function($scope, $stateParams, $ionicModal, productsService) {
+
+        var productId = $stateParams.productId;
+        var _p_array = [];
+        console.log(typeof $scope.allProductlists);
+        if (typeof $scope.allProductlists === 'undefined') {
+            productsService.products()
+                .success(function(data, status) {
+                    var _o = data.object;
+                    $scope.allProductlists = data.object;
+                    for (var i = 0; i < $scope.allProductlists.length; i++) {
+                        if ($scope.allProductlists[i]['contact_code'] == productId) {
+                            _p_array.push($scope.allProductlists[i]);
+
+                        }
+                    }
+                    $scope.productlist = _p_array;
+                });
+
+
+        } else {
+            for (var i = 0; i < $scope.allProductlists.length; i++) {
+                if ($scope.allProductlists[i]['contact_code'] == productId) {
+                    _p_array.push($scope.productlist[i]);
+
+                }
+            }
+            $scope.productlist = _p_array;
+        }
+
+
+
+
+
+
+
+        // Create the login modal that we will use later
+        $ionicModal.fromTemplateUrl('templates/buy_order.html', {
+            scope: $scope
+        }).then(function(buymodal) {
+            $scope.buymodal = buymodal;
+        });
+
+
+        // Open the login modal
+        $scope.buy = function() {
+            $scope.buymodal.show();
+        };
+        // Triggered in the login modal to close it
+        $scope.closeLogin = function() {
+            $scope.buymodal.hide();
+        };
+
+    })
+
+.controller('UIlistCtrl', function($scope, $stateParams) {})
     .controller('TabsCtrl', function($scope, $stateParams) {});
