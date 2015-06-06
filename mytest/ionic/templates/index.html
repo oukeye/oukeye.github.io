@@ -1,24 +1,47 @@
-<ion-view view-title="mini盘首页">
-    <ion-content>
-        <ul class="product-list list">
-            <div class="item item-divider">
-                <div class="row">
-                    <div class="col">产品名称</div>
-                    <div class="col">买价</div>
-                </div>
+<ion-view view-title="mini盘-index">
+      <ion-content name="indexContent">
+    <!--    <ion-tabs class="tabs-positive tabs-icon-only">
+        <ion-tab title="Home" icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline">
+            <ul class="product-list list">
+        <div class="item item-divider">
+            <div class="row">
+                <div class="col">产品名称</div>
+                <div class="col">买价</div>
             </div>
-            <a class="item" ng-repeat="productlist in productlists" href="#/app/productlists/{{productlist.contact_code}}">
-                <div class="row price-up">
-                    <div class="col"> {{productlist.contact_name}}</div>
-                    <div class="col price"> {{productlist.latest_price}}
-                        <i class="ion-arrow-up-b"></i>
-                    </div>
-                    <i class="icon ion-chevron-right"></i>
+        </div>
+        <a class="item" ng-repeat="productlist in productlists" href="#/app/productlists/{{productlist.contact_code}}">
+            <div class="row price-up">
+                <div class="col"> {{productlist.contact_name}}</div>
+                <div class="col price"> {{productlist.latest_price}}
+                    <i class="ion-arrow-up-b"></i>
                 </div>
-            </a>
-            <!--             <li class="item" ng-repeat="productlist in productlists" href="#/app/productlists/{{productlist.id}}">
+                <i class="icon ion-chevron-right"></i>
+            </div>
+        </a>
+             </ul>
+        </ion-tab>
+        <ion-tab title="About" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
+            2
+        </ion-tab>
+        <ion-tab title="Settings" icon-on="ion-ios-gear" icon-off="ion-ios-gear-outline">
+            3
+        </ion-tab>
+             </ion-tabs>
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button>22
+        </ion-nav-back-button>
+    </ion-nav-bar> -->
    
-</li> -->
-        </ul>
-    </ion-content>
+   </ion-content> 
+    <ion-tabs class="tabs-icon-top tabs-positive">
+        <ion-tab title="Home" icon="ion-home" ui-sref="app.index.home">
+            <ion-nav-view name="home-tab"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="About" icon="ion-ios-information" ui-sref="app.index.about">
+            <ion-nav-view name="about-tab"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="Contact" icon="ion-ios-world" ui-sref="app.index.contact">
+            <ion-nav-view name="contact-tab"></ion-nav-view>
+        </ion-tab>
+    </ion-tabs>
 </ion-view>

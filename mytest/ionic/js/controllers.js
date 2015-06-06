@@ -103,6 +103,7 @@ angular.module('starter.controllers', [])
 
     })
     .controller('IndexCtrl', function($scope, $stateParams, userService) {
+        console.log("IndexCtrl");
         userService.price()
             .success(function(data, status) {
                 $scope.productlists = data.object;
