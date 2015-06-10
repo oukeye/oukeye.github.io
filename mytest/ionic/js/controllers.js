@@ -102,20 +102,14 @@ angular.module('starter.controllers', [])
 
 
     })
-    .controller('IndexCtrl', function($scope, $stateParams, userService) {
-        console.log("IndexCtrl");
-        userService.price()
-            .success(function(data, status) {
-                $scope.productlists = data.object;
-                console.log(status);
-            });
+    .controller('IndexCtrl', function($scope, $stateParams, priceService) {
+
     })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 
     })
     .controller('ProductlistsCtrl', function($scope, $stateParams, $ionicModal, productsService) {
-
         var productId = $stateParams.productId;
         var _p_array = [];
         console.log(typeof $scope.allProductlists);
@@ -144,12 +138,6 @@ angular.module('starter.controllers', [])
             $scope.productlist = _p_array;
         }
 
-
-
-
-
-
-
         // Create the login modal that we will use later
         $ionicModal.fromTemplateUrl('templates/buy_order.html', {
             scope: $scope
@@ -169,5 +157,55 @@ angular.module('starter.controllers', [])
 
     })
 
-.controller('UIlistCtrl', function($scope, $stateParams) {})
+.controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $interval, priceService, products, utils) {
+        console.log('HomeCtrl');
+
+        $scope.$on('priceService.update', function(event) {
+
+            priceService.all().then(function(data) {
+                for (var i = 0; i < data.length; i++) {
+                    var _v = data[i].latest_price;
+                    var _v_last = parseFloat(_v) + parseFloat(utils.newRandomNum(10, -10));
+                    if (_v_last > _v) {
+                        data[i].trend = true;
+                    } else if (_v_last < _v) {
+                        data[i].trend = false;
+                    }
+                }
+                $scope.priceList = data;
+            });
+
+            //  $scope.$apply(); //注意，原文这里少了这一行
+        });
+
+        $scope.getPriceByContract = function(contract, dataList) {
+            if (angular.isArray(dataList)) {
+                for (var i = 0; i < dataList.length; i++) {
+                    if (dataList[i].contact_code == contract) {
+                        return dataList[i];
+                    }
+                }
+            }
+
+        }
+        $scope.allProductlists = products;
+
+        // Create the login modal that we will use later
+        $ionicModal.fromTemplateUrl('templates/buy_order.html', {
+            scope: $scope
+        }).then(function(buymodal) {
+            $scope.buymodal = buymodal;
+        });
+
+
+        // Open the login modal
+        $scope.buy = function() {
+            $scope.buymodal.show();
+        };
+        // Triggered in the login modal to close it
+        $scope.closeLogin = function() {
+            $scope.buymodal.hide();
+        };
+
+    })
     .controller('TabsCtrl', function($scope, $stateParams) {});

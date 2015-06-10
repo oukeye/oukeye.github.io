@@ -1,7 +1,46 @@
-<ion-view view-title="Home">
-    <ion-content class="padding">
-        <p>
-            <a class="button icon icon-right ion-chevron-right" href="#/tab/facts">Scientific Facts</a>
-        </p>
+<ion-view view-title="商品列表">
+    <ion-content>
+        <ul class="product-list list">
+            <ul class="product-list list">
+                <div class="item item-divider">
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">产品名称</div>
+                            <div class="row info">产品代码</div>
+                        </div>
+                        <div class="col">
+                            <div class="row">行情价格(元)</div>
+                            <div class="row info">波动盈亏(元)</div>
+                        </div>
+                        <div class="col">
+                            <div class="row">价格(元/手)</div>
+                            <div class="row info">手续费(元/手)</div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-bind='allProductlists.value'></div>
+                <li class="item" ng-repeat="produc in allProductlists" ng-click="buy()">
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">{{produc.contact_name}}</div>
+                            <div class="row info">{{produc.contact_code}}</div>
+                        </div>
+                        <div class="col" ng-class="{'price-up':getPriceByContract(produc.contact_code,priceList).trend,'price-down':!getPriceByContract(produc.contact_code,priceList).trend}">
+                            <div class="row ">
+                                <i class="latest-price">
+                                {{getPriceByContract(produc.contact_code,priceList).latest_price}}
+                            </i>
+                                <i ng-class="{'ion-arrow-up-b':getPriceByContract(produc.contact_code,priceList).trend,'ion-arrow-down-b':!getPriceByContract(produc.contact_code,priceList).trend}"></i>
+                            </div>
+                            <div class="row info">{{produc.yk}}</div>
+                        </div>
+                        <div class="col ">
+                            <div class="row"> {{produc.price}}</div>
+                            <div class="row info">{{produc.sxf}}</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </ul>
     </ion-content>
 </ion-view>

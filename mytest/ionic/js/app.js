@@ -69,40 +69,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives',
                     }
                 }
             })
-            /*.state('app.index', {
-                url: "/index",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/index.html?v=" + v,
-                        controller: 'IndexCtrl'
-                    },
-                    'tabs': {
-                        templateUrl: "templates/home.html?v=" + v
-                            //  controller: 'IndexCtrl'
-                    }
-                }
-            })*/
-            .state('app.single', {
-                url: "/playlists/:playlistId",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/playlists.html?v=" + v,
-                        controller: 'PlaylistCtrl'
-                    }
-                }
-            })
-            .state('app.productlists', {
-                url: "/productlists/:productId",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/productlists.html?v=" + v,
-                        controller: 'ProductlistsCtrl'
-                    }
-                }
-            });
 
+        .state('app.single', {
+            url: "/playlists/:playlistId",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/playlists.html?v=" + v,
+                    controller: 'PlaylistCtrl'
+                }
+            }
+        });
 
-        $urlRouterProvider.otherwise('/app/index');
+        $urlRouterProvider.otherwise('/app/index/home');
     })
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
@@ -116,22 +94,36 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives',
                     }
                 }
             })
-           /* .state('app.index.tabs', {
-                url: "",
-                //abstract: true,
-                views: {
-                    'home-tab': {
-                        templateUrl: "templates/tabs_test.html"
-                    }
-                }
 
-            })*/
-            .state('app.index.home', {
-                url: "",
+        .state('app.index.home', {
+            url: "/home",
+            resolve: {
+               /* price: ['priceService',
+                    function(priceService) {
+
+                        return priceService.all();
+                    }
+                ],*/
+                products: ['productsService',
+                    function(productsService) {
+                        return productsService.all();
+                    }
+                ]
+            },
+            views: {
+                'home-tab': {
+                    templateUrl: "templates/home.html",
+                    controller: 'HomeCtrl'
+                }
+            }
+        })
+
+        .state('app.index.productlists', {
+                url: "/productlists/:productId",
                 views: {
                     'home-tab': {
-                        templateUrl: "templates/home.html",
-                        // controller: 'HomeTabCtrl'
+                        templateUrl: "templates/productlists.html?v=" + v,
+                        controller: 'ProductlistsCtrl'
                     }
                 }
             })
@@ -175,8 +167,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives',
                     }
                 }
             });
-        // $urlRouterProvider.otherwise("/home");
-
 
         // if none of the above states are matched, use this as the fallback
     });
