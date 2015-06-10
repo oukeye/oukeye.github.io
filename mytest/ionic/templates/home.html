@@ -19,18 +19,18 @@
                     </div>
                 </div>
                 <div ng-bind='allProductlists.value'></div>
-                <li class="item" ng-repeat="produc in allProductlists" ng-click="buy()">
+                <li class="item" ng-repeat="produc in allProductlists" ng-click="buy(produc.contact_code)">
                     <div class="row">
                         <div class="col">
                             <div class="row">{{produc.contact_name}}</div>
                             <div class="row info">{{produc.contact_code}}</div>
                         </div>
-                        <div class="col" ng-class="{'price-up':getPriceByContract(produc.contact_code,priceList).trend,'price-down':!getPriceByContract(produc.contact_code,priceList).trend}">
+                        <div class="col" ng-class="{'price-up':getPriceByContract(produc.contact_code).trend,'price-down':!getPriceByContract(produc.contact_code).trend}">
                             <div class="row ">
                                 <i class="latest-price">
-                                {{getPriceByContract(produc.contact_code,priceList).latest_price}}
+                                {{getPriceByContract(produc.contact_code).latest_price}}
                             </i>
-                                <i ng-class="{'ion-arrow-up-b':getPriceByContract(produc.contact_code,priceList).trend,'ion-arrow-down-b':!getPriceByContract(produc.contact_code,priceList).trend}"></i>
+                                <i ng-class="{'ion-arrow-up-b':getPriceByContract(produc.contact_code).trend,'ion-arrow-down-b':!getPriceByContract(produc.contact_code).trend}"></i>
                             </div>
                             <div class="row info">{{produc.yk}}</div>
                         </div>

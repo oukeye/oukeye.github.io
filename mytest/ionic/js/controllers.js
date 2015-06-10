@@ -163,26 +163,19 @@ angular.module('starter.controllers', [])
         $scope.$on('priceService.update', function(event) {
 
             priceService.all().then(function(data) {
-                for (var i = 0; i < data.length; i++) {
-                    var _v = data[i].latest_price;
-                    var _v_last = parseFloat(_v) + parseFloat(utils.newRandomNum(10, -10));
-                    if (_v_last > _v) {
-                        data[i].trend = true;
-                    } else if (_v_last < _v) {
-                        data[i].trend = false;
-                    }
-                }
-                $scope.priceList = data;
+               var _data =  utils.newRandomPrice(data);//模拟价格数据
+                $scope.priceList = _data;
             });
 
             //  $scope.$apply(); //注意，原文这里少了这一行
         });
 
-        $scope.getPriceByContract = function(contract, dataList) {
-            if (angular.isArray(dataList)) {
-                for (var i = 0; i < dataList.length; i++) {
-                    if (dataList[i].contact_code == contract) {
-                        return dataList[i];
+        $scope.getPriceByContract = function(contract) {
+            var datalist=$scope.priceList;
+            if (angular.isArray(datalist)) {
+                for (var i = 0; i < datalist.length; i++) {
+                    if (datalist[i].contact_code == contract) {
+                        return datalist[i];
                     }
                 }
             }
@@ -191,7 +184,7 @@ angular.module('starter.controllers', [])
         $scope.allProductlists = products;
 
         // Create the login modal that we will use later
-        $ionicModal.fromTemplateUrl('templates/buy_order.html', {
+        $ionicModal.fromTemplateUrl('templates/buy_order.html?v=5', {
             scope: $scope
         }).then(function(buymodal) {
             $scope.buymodal = buymodal;
@@ -199,11 +192,12 @@ angular.module('starter.controllers', [])
 
 
         // Open the login modal
-        $scope.buy = function() {
+        $scope.buy = function(contract) {
+            $scope.buyProduct = $scope.getPriceByContract(contract,$scope.priceList);
             $scope.buymodal.show();
         };
         // Triggered in the login modal to close it
-        $scope.closeLogin = function() {
+        $scope.closeBuyorder = function() {
             $scope.buymodal.hide();
         };
 

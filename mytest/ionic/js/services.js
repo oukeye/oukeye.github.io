@@ -46,6 +46,37 @@ angular.module('starter.services', [])
         return factory;
     })
     .factory('utils', function() {
+        var _numlength = function(num) {
+            if (typeof(num) != "undefined") {
+                var _list = num.toString().split(".");
+                if (typeof(_list[1]) != "undefined") {
+                    return _list[1].length;
+                }
+
+            } else {
+                return 0;
+            }
+
+        };
+        var _newRandomNum = function(max, min, num) {
+            var randKey = parseFloat(Math.random() * (max - min + 1) + min).toFixed(_numlength(num));
+            return randKey;
+        }
+        var _newRandomPrice = function(data) {
+            for (var i = 0; i < data.length; i++) {
+                var _v = data[i].latest_price;
+                var _m = parseFloat(_v);
+                var _v_last = _m + parseFloat(_newRandomNum(10, -10, _m));
+
+                if (_v_last > _v) {
+                    data[i].trend = true;
+                } else if (_v_last < _v) {
+                    data[i].trend = false;
+                }
+                data[i].latest_price = parseFloat(_v_last).toFixed(_numlength(_m));
+            }
+            return data;
+        };
         return {
             // Util for finding an object by its 'id' property among an array
             findById: function findById(a, id) {
@@ -54,14 +85,18 @@ angular.module('starter.services', [])
                 }
                 return null;
             },
-
-            // Util for returning a random key from a collection that also isn't the current key
-            newRandomNum: function newRandomNum(max,min) {
-                var randKey = Math.floor(Math.random() * (max - min + 1) + min);
-                return randKey;
+            numPointlength: function(num) {
+                return _numlength(num)
             },
-            newRandomPrice:function(){
+            // Util for returning a random key from a collection that also isn't the current key
+            newRandomNum: function(max, min, num) {
 
-            }
+                return _newRandomNum(max, min, num);
+            },
+            newRandomPrice: function(data) {
+               return  _newRandomPrice(data);
+            },
+
+
         };
     });;
