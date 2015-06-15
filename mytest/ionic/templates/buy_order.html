@@ -1,25 +1,54 @@
-<ion-modal-view>
-    <ion-header-bar>
+<ion-modal-view class="gdiex-modal">
+    <ion-header-bar class="gdiex-modal-title">
         <h1 class="title">建仓</h1>
         <div class="buttons">
             <button class="button button-clear" ng-click="closeBuyorder()">关闭</button>
         </div>
     </ion-header-bar>
-    <ion-content>
-        <form ng-submit="doBuy()">
-            <div class="list">
-                <label class="item item-input">
-                    <span class="input-label">账号:</span>
-                    <input type="text" ng-model="buyProduct.latest_price">
-                </label>
-                <label class="item item-input">
-                    <span class="input-label">密码:</span>
-                    <input type="password" ng-model="loginData.password">
-                </label>
-                <label class="item">
-                    <button class="button button-block button-positive" type="submit">确认建仓</button>
-                </label>
-            </div>
-        </form>
+    <ion-content locking="false">
+        <label class="item item-input" ng-class="{'price-up':getPriceByContract(buyProduct.contact_code).trend,'price-down':!getPriceByContract(buyProduct.contact_code).trend}">
+            <span class="input-label">行情价格:</span>
+            <i class="latest-price">
+                               {{getPriceByContract(buyProduct.contact_code).latest_price}}
+                           </i>
+            <i ng-class="{'ion-arrow-up-b':getPriceByContract(buyProduct.contact_code).trend,'ion-arrow-down-b':!getPriceByContract(buyProduct.contact_code).trend}"></i>
+        </label>
+        <label class="item item-input">
+            <span class="input-label">产品名称:</span>
+            <span ng-bind="buyProduct.contact_name">-</span>
+        </label>
+        <label class="item item-input">
+            <span class="input-label">产品代码:</span>
+            <span ng-bind="buyProduct.contact_code">-</span>
+        </label>
+        <label class="item item-input">
+            <span class="input-label">价格(元/手):</span>
+            <span ng-bind="buyProduct.price">-</span>
+        </label>
+        <label class="item item-input">
+            <span class="input-label">手续费(元/手):</span>
+            <span ng-bind="buyProduct.sxf">-</span>
+        </label>
+        <label class="item item-input">
+            <span class="input-label">波动盈亏:</span>
+            <span ng-bind="buyProduct.yk">-</span>
+        </label>
+        <div class=" bar-positive item item-input">
+            <span class="input-label">手数:</span>
+            <div numberinput-Directive></div>
+            <!--  <span class="number-input">
+               <button class='button ion-minus-round' ng-click="minusBuyCount($event)"></button>
+               <input class='button button-outline' ng-model='buyCount' />
+               <button class='button ion-plus-round' ng-click="plusBuyCount($event)"></button> 
+           </span> -->
+            <!--  <div class="input-group" style="width:65%;">
+               <span class="input-group-addon ion-minus-round positive" ng-click="minusBuyCount($event)"></span>
+               <input type="text" class="form-control" placeholder="手数" ng-model="buyCount">
+               <span class="input-group-addon ion-plus-round button-positive" ng-click="plusBuyCount($event)"></span>
+           </div> -->
+        </div>
+        <label class="item">
+            <button class="button button-block button-positive" type="botton" ng-click='doBuyorder()'>确认建仓</button>
+        </label>
     </ion-content>
 </ion-modal-view>

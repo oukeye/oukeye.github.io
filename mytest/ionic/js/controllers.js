@@ -1,5 +1,5 @@
 'use strict';
-
+var v = new Date();
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, $ionicActionSheet) {
@@ -7,12 +7,11 @@ angular.module('starter.controllers', [])
     $scope.loginData = {};
 
     // Create the login modal that we will use later
-    $ionicModal.fromTemplateUrl('templates/login.html', {
+    $ionicModal.fromTemplateUrl('templates/login.html?v=' + v, {
         scope: $scope
     }).then(function(modal) {
         $scope.modal = modal;
     });
-
 
     // Triggered in the login modal to close it
     $scope.closeLogin = function() {
@@ -103,7 +102,7 @@ angular.module('starter.controllers', [])
 
     })
     .controller('IndexCtrl', function($scope, $stateParams, priceService) {
-
+        $scope.orders = 12;
     })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
@@ -139,7 +138,7 @@ angular.module('starter.controllers', [])
         }
 
         // Create the login modal that we will use later
-        $ionicModal.fromTemplateUrl('templates/buy_order.html', {
+        $ionicModal.fromTemplateUrl('templates/buy_order.html?v=16', {
             scope: $scope
         }).then(function(buymodal) {
             $scope.buymodal = buymodal;
@@ -157,13 +156,14 @@ angular.module('starter.controllers', [])
 
     })
 
-.controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $interval, priceService, products, utils) {
-        console.log('HomeCtrl');
+.controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $timeout, $interval, priceService, products, utils) {
+
+        var vm = this;
 
         $scope.$on('priceService.update', function(event) {
 
             priceService.all().then(function(data) {
-               var _data =  utils.newRandomPrice(data);//模拟价格数据
+                var _data = utils.newRandomPrice(data); //模拟价格数据
                 $scope.priceList = _data;
             });
 
@@ -171,7 +171,7 @@ angular.module('starter.controllers', [])
         });
 
         $scope.getPriceByContract = function(contract) {
-            var datalist=$scope.priceList;
+            var datalist = $scope.priceList;
             if (angular.isArray(datalist)) {
                 for (var i = 0; i < datalist.length; i++) {
                     if (datalist[i].contact_code == contract) {
@@ -181,24 +181,36 @@ angular.module('starter.controllers', [])
             }
 
         }
-        $scope.allProductlists = products;
 
+        $scope.allProductlists = products;
         // Create the login modal that we will use later
-        $ionicModal.fromTemplateUrl('templates/buy_order.html?v=5', {
+        $ionicModal.fromTemplateUrl('templates/buy_order.html?v=16', {
             scope: $scope
         }).then(function(buymodal) {
             $scope.buymodal = buymodal;
         });
+     
 
-
-        // Open the login modal
-        $scope.buy = function(contract) {
-            $scope.buyProduct = $scope.getPriceByContract(contract,$scope.priceList);
+        $scope.buyCount = 1;
+        $scope.buy = function(id) {
+            $scope.buyCount = 1;
+            $scope.buyProduct = utils.findById($scope.allProductlists, id);
             $scope.buymodal.show();
         };
+
         // Triggered in the login modal to close it
         $scope.closeBuyorder = function() {
             $scope.buymodal.hide();
+        };
+        // Perform the login action when the user submits the login form
+        $scope.doBuyorder = function() {
+            console.log('Doing doBuyorder');
+
+            // Simulate a login delay. Remove this and replace with your login
+            // code if using a login system
+            $timeout(function() {
+                $scope.closeBuyorder();
+            }, 1000);
         };
 
     })

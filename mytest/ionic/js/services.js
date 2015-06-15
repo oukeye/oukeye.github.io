@@ -26,7 +26,7 @@ angular.module('starter.services', [])
         return factory;
 
     })
-    .factory('productsService', function($http) {
+    .factory('productsService', function($http, utils) {
 
         var path = 'data/products.json?v=5';
         var products = $http.get(path).then(function(resp) {
@@ -37,9 +37,9 @@ angular.module('starter.services', [])
         factory.all = function() {
             return products;
         };
-        factory.get = function() {
-            return products.then(function() {
-                return products;
+        factory.get = function(id) {
+            return products.then(function(data) {
+                return utils.findById(data, 'id', id);
             })
         };
 
@@ -58,10 +58,21 @@ angular.module('starter.services', [])
             }
 
         };
+
+        // Util for finding an object by its 'id' property among an array
+        var _findById = function(a, val) {
+            
+            for (var i = 0; i < a.length; i++) {
+                if (a[i].id == val) {
+                    return a[i]
+                };
+            }
+            return null;
+        };
         var _newRandomNum = function(max, min, num) {
             var randKey = parseFloat(Math.random() * (max - min + 1) + min).toFixed(_numlength(num));
             return randKey;
-        }
+        };
         var _newRandomPrice = function(data) {
             for (var i = 0; i < data.length; i++) {
                 var _v = data[i].latest_price;
@@ -79,11 +90,8 @@ angular.module('starter.services', [])
         };
         return {
             // Util for finding an object by its 'id' property among an array
-            findById: function findById(a, id) {
-                for (var i = 0; i < a.length; i++) {
-                    if (a[i].id == id) return a[i];
-                }
-                return null;
+            findById: function(a, val) {
+                return _findById(a, val);
             },
             numPointlength: function(num) {
                 return _numlength(num)
@@ -94,7 +102,7 @@ angular.module('starter.services', [])
                 return _newRandomNum(max, min, num);
             },
             newRandomPrice: function(data) {
-               return  _newRandomPrice(data);
+                return _newRandomPrice(data);
             },
 
 

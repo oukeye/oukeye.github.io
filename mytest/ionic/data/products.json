@@ -3,36 +3,42 @@
     "code": 0,
     "success": true,
     "object": [{
+        "id": "1",
         "contact_code": "XAG1",
         "contact_name": "150g粤银",
         "price": "10",
         "yk": "0.15",
         "sxf": "0.900"
-    },{
+    }, {
+        "id": "2",
         "contact_code": "XAG1",
         "contact_name": "3000g粤银",
         "price": "200",
         "yk": "3.00",
         "sxf": "18.000"
-    },{
+    }, {
+        "id": "3",
         "contact_code": "CU",
         "contact_name": "10kg粤铜",
         "price": "10",
         "yk": "0.15",
         "sxf": "0.900"
-    },{
+    }, {
+        "id": "4",
         "contact_code": "CU",
         "contact_name": "200kg粤铜",
         "price": "200",
         "yk": "0.01",
         "sxf": "0.900"
-    },{
+    }, {
+        "id": "5",
         "contact_code": "OIL",
         "contact_name": "1桶粤油",
         "price": "10",
         "yk": "1.00",
         "sxf": "0.900"
-    },{
+    }, {
+        "id": "6",
         "contact_code": "OIL",
         "contact_name": "20桶粤油",
         "price": "200",
