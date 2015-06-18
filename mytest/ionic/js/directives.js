@@ -47,7 +47,7 @@ angular.module('starter.directives', [])
                     }
                 };
                 scope.plusBuyCount = function($event) {
-                    scope.buyCount = scope.buyCount + 1;
+                    scope.buyCount = parseInt(scope.buyCount) + 1;
                     console.log(scope.buyCount + 'plusBuyCount');
                 };
             }

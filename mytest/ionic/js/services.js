@@ -1,7 +1,33 @@
 'use strict';
 angular.module('starter.services', [])
+    .factory('buyorderService', function($http, $templateCache) {
 
-.factory('priceService', function($http, $interval, $rootScope) {
+        var postdata = function() {
+            return $http({
+                url: 'http://www.xxx.com/index.php?app=api&ac=user&ts=login',
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                data: {
+                    'email': 'root@qq.com',
+                    'password': '123456'
+                }
+            }).then(function(resp) {
+                $rootScope.$broadcast('buyorderService.update');
+                return resp.data.object;
+            });
+        }
+
+        var factory = {};
+
+        factory.buy = function() {
+            return postdata;
+        };
+
+        return factory;
+    })
+    .factory('priceService', function($http, $interval, $rootScope) {
         var path = 'data/price.json?v=5';
 
         var getPrice = function() {
@@ -61,7 +87,7 @@ angular.module('starter.services', [])
 
         // Util for finding an object by its 'id' property among an array
         var _findById = function(a, val) {
-            
+
             for (var i = 0; i < a.length; i++) {
                 if (a[i].id == val) {
                     return a[i]

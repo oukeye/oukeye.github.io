@@ -5,8 +5,10 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 var v = "1.0.6" + new Date();
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives', 'starter.services'])
-
+angular.module('starter', ['ionic', 'templates','starter.controllers', 'starter.directives', 'starter.services'])
+.constant("$ionicLoadingConfig",{
+          template : '<div class="ion-load-c loading-icon"></div>加载中...'
+      })
 .run(function($ionicPlatform) {
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -38,7 +40,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives',
             .state('app', {
             url: "/app",
             abstract: true,
-            templateUrl: "templates/menu.html?v=" + v,
+            templateUrl: "menu.html",
             controller: 'AppCtrl'
         })
 
@@ -46,7 +48,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives',
             url: "/search",
             views: {
                 'menuContent': {
-                    templateUrl: "templates/search.html?v=" + v
+                    templateUrl: "search.html"
                 }
             }
         })
@@ -55,7 +57,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives',
                 url: "/browse",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/browse.html?v=" + v,
+                        templateUrl: "browse.html",
                         controller: 'BrowseCtrl'
                     }
                 }
@@ -64,7 +66,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives',
                 url: "/playlists",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/playlists.html?v=" + v,
+                        templateUrl: "playlists.html",
                         controller: 'PlaylistsCtrl'
                     }
                 }
@@ -74,7 +76,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives',
             url: "/playlists/:playlistId",
             views: {
                 'menuContent': {
-                    templateUrl: "templates/playlists.html?v=" + v,
+                    templateUrl: "playlists.html",
                     controller: 'PlaylistCtrl'
                 }
             }
@@ -89,7 +91,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives',
                 abstract: true,
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/index.html?v=" + v,
+                        templateUrl: "index.html",
                         controller: 'IndexCtrl'
                     }
                 }
@@ -112,7 +114,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives',
             },
             views: {
                 'home-tab': {
-                    templateUrl: "templates/home.html",
+                    templateUrl: "home.html",
                     controller: 'HomeCtrl'
                 }
             }
@@ -122,7 +124,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives',
                 url: "/productlists/:productId",
                 views: {
                     'home-tab': {
-                        templateUrl: "templates/productlists.html?v=" + v,
+                        templateUrl: "productlists.html",
                         controller: 'ProductlistsCtrl'
                     }
                 }
@@ -131,7 +133,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives',
                 url: "/facts",
                 views: {
                     'home-tab': {
-                        templateUrl: "templates/facts.html"
+                        templateUrl: "facts.html"
                     }
                 }
             })
@@ -139,7 +141,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives',
                 url: "/facts2",
                 views: {
                     'home-tab': {
-                        templateUrl: "templates/facts2.html"
+                        templateUrl: "facts2.html"
                     }
                 }
             })
@@ -147,7 +149,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives',
                 url: "/about",
                 views: {
                     'about-tab': {
-                        templateUrl: "templates/about.html"
+                        templateUrl: "about.html"
                     }
                 }
             })
@@ -155,7 +157,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives',
                 url: "/navstack",
                 views: {
                     'about-tab': {
-                        templateUrl: "templates/nav-stack.html"
+                        templateUrl: "nav-stack.html"
                     }
                 }
             })
@@ -163,7 +165,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives',
                 url: "/contact",
                 views: {
                     'contact-tab': {
-                        templateUrl: "templates/contact.html"
+                        templateUrl: "contact.html"
                     }
                 }
             });

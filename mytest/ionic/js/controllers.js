@@ -7,7 +7,7 @@ angular.module('starter.controllers', [])
     $scope.loginData = {};
 
     // Create the login modal that we will use later
-    $ionicModal.fromTemplateUrl('templates/login.html?v=' + v, {
+    $ionicModal.fromTemplateUrl('login.html', {
         scope: $scope
     }).then(function(modal) {
         $scope.modal = modal;
@@ -102,7 +102,8 @@ angular.module('starter.controllers', [])
 
     })
     .controller('IndexCtrl', function($scope, $stateParams, priceService) {
-        $scope.orders = 12;
+        $scope.orderCounts = 0; //默认没有订单
+
     })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
@@ -138,7 +139,7 @@ angular.module('starter.controllers', [])
         }
 
         // Create the login modal that we will use later
-        $ionicModal.fromTemplateUrl('templates/buy_order.html?v=16', {
+        $ionicModal.fromTemplateUrl('buy_order.html', {
             scope: $scope
         }).then(function(buymodal) {
             $scope.buymodal = buymodal;
@@ -156,7 +157,7 @@ angular.module('starter.controllers', [])
 
     })
 
-.controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $timeout, $interval, priceService, products, utils) {
+.controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $timeout, $interval,$ionicLoading, priceService, products, utils) {
 
         var vm = this;
 
@@ -184,12 +185,12 @@ angular.module('starter.controllers', [])
 
         $scope.allProductlists = products;
         // Create the login modal that we will use later
-        $ionicModal.fromTemplateUrl('templates/buy_order.html?v=16', {
+        $ionicModal.fromTemplateUrl('buy_order.html', {
             scope: $scope
         }).then(function(buymodal) {
             $scope.buymodal = buymodal;
         });
-     
+
 
         $scope.buyCount = 1;
         $scope.buy = function(id) {
@@ -205,12 +206,13 @@ angular.module('starter.controllers', [])
         // Perform the login action when the user submits the login form
         $scope.doBuyorder = function() {
             console.log('Doing doBuyorder');
-
+            $ionicLoading.show();
             // Simulate a login delay. Remove this and replace with your login
             // code if using a login system
             $timeout(function() {
+                $ionicLoading.hide();
                 $scope.closeBuyorder();
-            }, 1000);
+            }, 3000);
         };
 
     })
