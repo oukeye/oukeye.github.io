@@ -1,40 +1,64 @@
 'use strict';
 angular.module('starter.services', [])
-    .factory('buyorderService', function($http, $templateCache) {
-
-        var postdata = function() {
-            return $http({
-                url: 'http://www.xxx.com/index.php?app=api&ac=user&ts=login',
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                data: {
-                    'email': 'root@qq.com',
-                    'password': '123456'
-                }
-            }).then(function(resp) {
-                $rootScope.$broadcast('buyorderService.update');
+    .factory('orderService', function($http, $q, $interval, $rootScope, productsService, utils) {
+        var path = 'data/order.json?v=5';
+        var getOrder = function() {
+            return $http.get(path).then(function(resp) {
+                $rootScope.$broadcast('orderService.update');
+               /* var dataList = resp.data.object;
+                for (var i = 0; i < dataList.length; i++) {
+                    var _newPrice = 0;
+                    var _yk = 0;
+                    productsService.get(dataList[i].productId).then(function(data) {
+                        _yk = data.yk;
+                    });
+                    utils.orderProfit(_newPrice, dataList[i].buyPirce, _yk, dataList[i].sl, dataList[i].buyType);
+                }*/
                 return resp.data.object;
             });
         }
+        var orders = getOrder();
+        $interval(function() {
+
+            orders = getOrder();
+        }, 3000);
 
         var factory = {};
 
-        factory.buy = function() {
-            return postdata;
+        factory.all = function() {
+            return orders;
         };
+        factory.buy = function(orderobj) {
 
+            return orders;
+        };
+        factory.getById = function(orderId) {
+            return orders.then(function(data) {
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].orderId == orderId) {
+                        return data[i];
+                    }
+                }
+
+            });
+            return null;
+        };
         return factory;
+
     })
-    .factory('priceService', function($http, $interval, $rootScope) {
+    .factory('priceService', function($http, $interval, $rootScope, utils) {
         var path = 'data/price.json?v=5';
 
         var getPrice = function() {
             return $http.get(path).then(function(resp) {
                 $rootScope.$broadcast('priceService.update');
-                return resp.data.object;
+
+                return utils.newRandomPrice(resp.data.object);
             });
+            /*.then(function(resp) {
+                $rootScope.$broadcast('priceService.update');
+                return resp.data.object;
+            });*/
         }
         var prices = getPrice();
         $interval(function() {
@@ -52,25 +76,30 @@ angular.module('starter.services', [])
         return factory;
 
     })
-    .factory('productsService', function($http, utils) {
+    .factory('productsService', function($http, $q, utils) {
 
         var path = 'data/products.json?v=5';
-        var products = $http.get(path).then(function(resp) {
-            return resp.data.object;
-        });
+        var products = function() {
+
+            return $http({
+                method: 'get',
+                url: path
+            }).then(function(resp) {
+                return utils.newRandomPrice(resp.data.object);
+            });
+        };
 
         var factory = {};
         factory.all = function() {
-            return products;
+            return products();
         };
         factory.get = function(id) {
-            return products.then(function(data) {
-                return utils.findById(data, 'id', id);
-            })
+            return products();
         };
 
         return factory;
     })
+   
     .factory('utils', function() {
         var _numlength = function(num) {
             if (typeof(num) != "undefined") {
@@ -114,6 +143,19 @@ angular.module('starter.services', [])
             }
             return data;
         };
+        var _orderProfit = function(newPrice, buyPirce, yk, sl, buyType) {
+            var profit = 0;
+            switch (buyType) {
+                case '1':
+                    profit = (newPrice - buyPirce) * yk * sl;
+                    break;
+
+                case '2':
+                    profit = (buyPirce - newPrice) * yk * sl;
+                    break;
+            }
+            return profit;
+        }
         return {
             // Util for finding an object by its 'id' property among an array
             findById: function(a, val) {
@@ -130,6 +172,9 @@ angular.module('starter.services', [])
             newRandomPrice: function(data) {
                 return _newRandomPrice(data);
             },
+            orderProfit: function(newPrice, buyPirce, yk, sl, buyType) {
+                return _orderProfit(newPrice, buyPirce, yk, sl, buyType);
+            }
 
 
         };

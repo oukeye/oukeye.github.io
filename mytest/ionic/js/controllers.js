@@ -157,7 +157,7 @@ angular.module('starter.controllers', [])
 
     })
 
-.controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $timeout, $interval,$ionicLoading, priceService, products, utils) {
+.controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $timeout, $interval, $ionicLoading, buyOrderService, priceService, products, utils) {
 
         var vm = this;
 
@@ -184,7 +184,6 @@ angular.module('starter.controllers', [])
         }
 
         $scope.allProductlists = products;
-        // Create the login modal that we will use later
         $ionicModal.fromTemplateUrl('buy_order.html', {
             scope: $scope
         }).then(function(buymodal) {
@@ -199,16 +198,12 @@ angular.module('starter.controllers', [])
             $scope.buymodal.show();
         };
 
-        // Triggered in the login modal to close it
         $scope.closeBuyorder = function() {
             $scope.buymodal.hide();
         };
-        // Perform the login action when the user submits the login form
         $scope.doBuyorder = function() {
-            console.log('Doing doBuyorder');
+            buyOrderService.buy();
             $ionicLoading.show();
-            // Simulate a login delay. Remove this and replace with your login
-            // code if using a login system
             $timeout(function() {
                 $ionicLoading.hide();
                 $scope.closeBuyorder();

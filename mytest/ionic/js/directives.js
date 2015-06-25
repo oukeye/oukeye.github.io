@@ -28,16 +28,14 @@ angular.module('starter.directives', [])
             }
         }
     })
-    .directive('numberinputDirective', function() {
+    .directive('numberinput', function() {
         return {
-            restrict: 'EA',
+            restrict: 'AE',
             replace: true,
-
-            template: '<div class="input-group" style="width:65%;">' 
-             + '<span class="input-group-addon ion-minus-round positive" ng-click="minusBuyCount($event)"></span>'
-             + '<input type="text" class="form-control" placeholder="手数" ng-model="buyCount">' 
-             + '<span class="input-group-addon ion-plus-round button-positive" ng-click="plusBuyCount($event)"></span>' 
-             + '</div>',
+            scope: {
+                buyCount: '=buycount'
+            },
+            template: '<div class="input-group" style="width:65%">' + '<span class="input-group-addon ion-minus-round positive" ng-click="minusBuyCount($event)"></span>' + '<input type="tel" class="form-control" placeholder="手数" ng-model="buyCount">' + '<span class="input-group-addon ion-plus-round button-positive" ng-click="plusBuyCount($event)"></span>' + '</div>',
             link: function(scope, element, attrs, accordionController) {
 
                 scope.minusBuyCount = function($event) {
@@ -52,4 +50,13 @@ angular.module('starter.directives', [])
                 };
             }
         }
-    });
+    })
+    .directive("drink", function() {
+        return {
+            restrict: 'AE',
+            scope: {
+                flavor: '='
+            },
+            template: '<input type="text" ng-model="flavor"/>'
+        }
+    });;

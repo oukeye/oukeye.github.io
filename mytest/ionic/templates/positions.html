@@ -1,0 +1,57 @@
+<ion-view view-title="持仓单">
+    <div class="bar bar-header">
+    </div>
+    <div class="bar bar-subheader product-list-bar">
+        <ul class="product-list-title list">
+            <div class="item item-divider">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">产品名称</div>
+                        <div class="row info">方向</div>
+                    </div>
+                    <div class="col">
+                        <div class="row">行情价</div>
+                        <div class="row info">建仓价</div>
+                    </div>
+                    <div class="col">
+                        <div class="row">盈亏</div>
+                        <div class="row info">数量</div>
+                    </div>
+                    
+                </div>
+            </div>
+        </ul>
+    </div>
+    <ion-content>
+        <ul class="product-list list">
+            <li class="item" ng-repeat="order in orders">
+                <div class="row">
+                    <div class="col">
+                        <div class="row" ng-bind="getProductByproductId(order.productId).contact_name">-</div>
+                        <div class="row info" ng-bind="order.buyType==1?'买涨':'买跌'">-</div>
+                    </div>
+                    <div class="col" ng-class="{'price-up':getPriceByProductId(order.productId).trend,'price-down':!getPriceByProductId(order.productId).trend}">
+                        <div class="row ">
+                            <i class="latest-price" ng-bind="getPriceByProductId(order.productId).latest_price">
+                                -
+                            </i>
+                            <i ng-class="{'ion-arrow-up-b':getPriceByProductId(order.productId).trend,'ion-arrow-down-b':!getPriceByProductId(order.productId).trend}"></i>
+                        </div>
+                        <div class="row info" ng-bind="order.buyPrice">-</div>
+                    </div>
+                    <div class="col ">
+                    <div class="row">
+                        <div class="col padding-none">
+                            <div class="row" ng-bind="getOrderProfit(order.orderId)">-</div>
+                        <div class="row info" ng-bind="order.sl">-</div>
+                        </div>
+                        
+                    </div>
+                        
+                         
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </ion-content>
+</ion-view>

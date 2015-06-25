@@ -7778,8 +7778,34 @@ a.button {
   /*  border-bottom: 2px solid $gdiex_light; */ }
   .gdiex-modal .gdiex-modal-title .title {
     color: #fff; }
-.gdiex-modal .item-input {
+.gdiex-modal .item-input, .gdiex-modal .buyTypeLine {
   padding: 0px 0px 0px 16px; }
+.gdiex-modal .buyTypeLine {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -o-box;
+  display: -o-floex;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 6px 0 5px 16px; }
+.gdiex-modal .item-checkbox {
+  padding-left: 30px; }
+  .gdiex-modal .item-checkbox .checkbox {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    left: 0px;
+    z-index: 3;
+    margin-top: -21px; }
 
 .bar-stable .button.button-clear {
   color: #097ddf; }
@@ -7816,6 +7842,13 @@ a.button {
 
 .tabs-positive > .tabs, .tabs.tabs-positive {
   background-color: #097ddf; }
+
+.padding-none {
+  padding: 0; }
+
+.chicang-icon {
+  font-size: 24px;
+  color: #ff9500; }
 
 .product-list {
   padding-top: 45px; }
@@ -7951,3 +7984,13 @@ a.button {
   color: #097ddf; }
 .menu .menu-list .ion-log-in {
   color: #ff9900; }
+
+.checkbox input, .checkbox-icon2 {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  display: block;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-appearance: none; }

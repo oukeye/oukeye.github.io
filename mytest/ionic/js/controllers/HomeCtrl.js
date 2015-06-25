@@ -1,59 +1,95 @@
-angular.module('starter').controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $timeout, $interval,$ionicLoading, priceService,products,  utils) {
+angular.module('starter').controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $timeout, $interval, $ionicLoading, orderService, priceService, products, utils) {
 
-        var vm = this;
+    // Form data for the login modal
+    $scope.buyData = {};
 
-        $scope.$on('priceService.update', function(event) {
+    // Create the login modal that we will use later
+    $ionicModal.fromTemplateUrl('buy_order.html', {
+        scope: $scope
+    }).then(function(buymodal) {
+        $scope.buymodal = buymodal;
+    });
 
-            priceService.all().then(function(data) {
-                var _data = utils.newRandomPrice(data); //模拟价格数据
-                $scope.priceList = _data;
+    // Triggered in the login modal to close it
+    $scope.closeBuy = function() {
+        $scope.buymodal.hide();
+    };
+
+    // Open the login modal
+    $scope.buy = function(id) {
+        $scope.buyData.sl = 1;
+        $scope.buyData.productId = id;
+        $scope.buyData.buyType = 1;
+        $scope.buyProduct = utils.findById($scope.allProductlists, id);
+        $scope.buymodal.show();
+    };
+
+    $scope.doBuy = function() {
+        $ionicLoading.show();
+        console.log('Doing doBuy', $scope.buyData);
+        orderService.buy($scope.buyData)
+            .then(function(data) {
+                $scope.closeBuy();
+                $ionicLoading.hide();
+                console.log($scope.buyData);
+            })
+            .catch(function(data) {
+                console.log(data);
+                $ionicLoading.show({
+                    template: data.statusText,
+                    noBackdrop: true,
+                    hideOnStateChange: true
+                });
+                $timeout(function() {
+                    $ionicLoading.hide();
+                }, 1000);
+            })
+            .finally(function() {
+                //  $ionicLoading.hide();
             });
 
-            //  $scope.$apply(); //注意，原文这里少了这一行
-        });
+    };
 
-        $scope.getPriceByContract = function(contract) {
-            var datalist = $scope.priceList;
-            if (angular.isArray(datalist)) {
-                for (var i = 0; i < datalist.length; i++) {
-                    if (datalist[i].contact_code == contract) {
-                        return datalist[i];
-                    }
+    ////////////////////////////////////////////////////////////
+    $scope.$on('priceService.update', function(event) {
+
+        priceService.all().then(function(data) {
+          //  var _data = utils.newRandomPrice(data); 
+            $scope.priceList = data;
+        });
+    });
+    $scope.$on('orderService.update', function(event) {
+
+        orderService.all().then(function(data) {
+            $scope.orders = data;
+        });
+    });
+    $scope.getPriceByContract = function(contract) {
+        var datalist = $scope.priceList;
+        if (angular.isArray(datalist)) {
+            for (var i = 0; i < datalist.length; i++) {
+                if (datalist[i].contact_code == contract) {
+                    return datalist[i];
                 }
             }
-
         }
 
-        $scope.allProductlists =  products;
-        // Create the login modal that we will use later
-        $ionicModal.fromTemplateUrl('buy_order.html', {
-            scope: $scope
-        }).then(function(buymodal) {
-            $scope.buymodal = buymodal;
-        });
+    };
+    $scope.getOrderByproductId = function(productId) {
+        var datalist = $scope.orders;
+        if (angular.isArray(datalist)) {
+            for (var i = 0; i < datalist.length; i++) {
+                if (datalist[i].productId == productId) {
+                    return datalist[i];
+                }
+            }
+        }
+        return null;
+
+    };
+    
+    $scope.allProductlists = products;
 
 
-        $scope.buyCount = 1;
-        $scope.buy = function(id) {
-            $scope.buyCount = 1;
-            $scope.buyProduct = utils.findById($scope.allProductlists, id);
-            $scope.buymodal.show();
-        };
 
-        // Triggered in the login modal to close it
-        $scope.closeBuyorder = function() {
-            $scope.buymodal.hide();
-        };
-        // Perform the login action when the user submits the login form
-        $scope.doBuyorder = function() {
-            console.log('Doing doBuyorder');
-            $ionicLoading.show();
-            // Simulate a login delay. Remove this and replace with your login
-            // code if using a login system
-            $timeout(function() {
-                $ionicLoading.hide();
-                $scope.closeBuyorder();
-            }, 3000);
-        };
-
-    });
+});

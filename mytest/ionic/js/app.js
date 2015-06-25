@@ -38,22 +38,22 @@ angular.module('starter', ['ionic', 'oc.lazyLoad', 'templates', 'starter.directi
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('app', {
-            url: "/app",
-            abstract: true,
-            views: {
-                "": {
-                    controller: 'AppCtrl', // This view will use AppCtrl loaded below in the resolve
-                    templateUrl: "menu.html",
+                url: "/app",
+                abstract: true,
+                views: {
+                    "": {
+                        controller: 'AppCtrl', // This view will use AppCtrl loaded below in the resolve
+                        templateUrl: "menu.html",
+                    }
+                },
+                resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+                    AppCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                        // you can lazy load files for an existing module
+                        return $ocLazyLoad.load('js/controllers/AppCtrl.js');
+                    }]
                 }
-            },
-            resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-                AppCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                    // you can lazy load files for an existing module
-                    return $ocLazyLoad.load('js/controllers/AppCtrl.js');
-                }]
-            }
 
-        })
+            })
 
         .state('app.search', {
             url: "/search",
@@ -135,7 +135,7 @@ angular.module('starter', ['ionic', 'oc.lazyLoad', 'templates', 'starter.directi
 
         .state('app.index.home', {
             url: "/home",
-           
+
             views: {
                 'home-tab': {
                     templateUrl: "home.html",
@@ -147,7 +147,7 @@ angular.module('starter', ['ionic', 'oc.lazyLoad', 'templates', 'starter.directi
                     // you can lazy load files for an existing module
                     return $ocLazyLoad.load('js/controllers/HomeCtrl.js');
                 }],
-                 products: ['productsService',
+                products: ['productsService',
                     function(productsService) {
                         return productsService.all();
                     }
@@ -186,12 +186,24 @@ angular.module('starter', ['ionic', 'oc.lazyLoad', 'templates', 'starter.directi
                     }
                 }
             })
-            .state('app.index.about', {
-                url: "/about",
+            .state('app.index.positions', {
+                url: "/positions",
                 views: {
-                    'about-tab': {
-                        templateUrl: "about.html"
+                    'positions-tab': {
+                        templateUrl: "positions.html",
+                        controller: 'PositionsCtrl'
                     }
+                },
+                resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+                    loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                        // you can lazy load files for an existing module
+                        return $ocLazyLoad.load('js/controllers/PositionsCtrl.js');
+                    }],
+                    products: ['productsService',
+                    function(productsService) {
+                        return productsService.all();
+                    }
+                ]
                 }
             })
             .state('app.index.tabs.navstack', {
