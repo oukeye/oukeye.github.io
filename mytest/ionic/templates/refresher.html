@@ -1,0 +1,26 @@
+<ion-header-bar class="bar-positive">
+    <h1 class="title">Pull To Refresh</h1>
+</ion-header-bar>
+<ion-content>
+    <!--  <ion-refresher on-pulling="doRefresh()"></ion-refresher> -->
+    <ion-list>
+        <ion-item class="item-avatar" ng-repeat="item in items">
+            <img src="{{item.user.picture.thumbnail}} " />
+            <h2>{{item.user.name.first}} {{item.user.name.last}}</h2>
+            <p>{{item.user.location.city}} {{item.user.password}}</p>
+            <ion-option-button class="button-positive" ng-click="share(item)">
+                Share
+            </ion-option-button>
+            <ion-option-button class="button-info" ng-click="edit(item)">
+                Edit
+            </ion-option-button>
+            <ion-delete-button class="ion-minus-circled" ng-click="items.splice($index, 1)">
+            </ion-delete-button>
+            <ion-reorder-button class="ion-navicon" on-reorder="reorderItem(item, $fromIndex, $toIndex)">
+            </ion-reorder-button>
+        </ion-item>
+    </ion-list>
+    <!--上拉更多 ng-if="moreDataCanBeLoaded()"-->
+    <ion-infinite-scroll on-infinite="doRefresh()" spinner="spiral" distance="10%">
+    </ion-infinite-scroll>
+</ion-content>

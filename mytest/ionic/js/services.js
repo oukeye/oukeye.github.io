@@ -1,19 +1,22 @@
 'use strict';
-angular.module('starter.services', [])
+angular.module('starter.services', ['ngResource'])
     .factory('orderService', function($http, $q, $interval, $rootScope, productsService, utils) {
         var path = 'data/order.json?v=5';
         var getOrder = function() {
             return $http.get(path).then(function(resp) {
                 $rootScope.$broadcast('orderService.update');
-               /* var dataList = resp.data.object;
-                for (var i = 0; i < dataList.length; i++) {
-                    var _newPrice = 0;
-                    var _yk = 0;
-                    productsService.get(dataList[i].productId).then(function(data) {
-                        _yk = data.yk;
-                    });
-                    utils.orderProfit(_newPrice, dataList[i].buyPirce, _yk, dataList[i].sl, dataList[i].buyType);
-                }*/
+                /* var dataList = resp.data.object;
+                 for (var i = 0; i < dataList.length; i++) {
+                     var _newPrice = 0;
+                     var _yk = 0;
+                     productsService.get(dataList[i].productId).then(function(data) {
+                         _yk = data.yk;
+                     });
+                     utils.orderProfit(_newPrice, dataList[i].buyPirce, _yk, dataList[i].sl, dataList[i].buyType);
+                 }*/
+                productsService.get(function(data) {
+                    console.log(data);
+                });
                 return resp.data.object;
             });
         }
@@ -28,9 +31,14 @@ angular.module('starter.services', [])
         factory.all = function() {
             return orders;
         };
+        var BASE_URL = "http://api.randomuser.me/";
+        var items = [];
         factory.buy = function(orderobj) {
+            return $http.get(BASE_URL + '?results=10').then(function(response) {
+                items = response.data.results;
+                return orders;
+            });
 
-            return orders;
         };
         factory.getById = function(orderId) {
             return orders.then(function(data) {
@@ -44,7 +52,6 @@ angular.module('starter.services', [])
             return null;
         };
         return factory;
-
     })
     .factory('priceService', function($http, $interval, $rootScope, utils) {
         var path = 'data/price.json?v=5';
@@ -74,13 +81,11 @@ angular.module('starter.services', [])
         };
 
         return factory;
-
     })
     .factory('productsService', function($http, $q, utils) {
 
         var path = 'data/products.json?v=5';
         var products = function() {
-
             return $http({
                 method: 'get',
                 url: path
@@ -93,13 +98,12 @@ angular.module('starter.services', [])
         factory.all = function() {
             return products();
         };
-        factory.get = function(id) {
+        factory.get = function() {
             return products();
         };
 
         return factory;
     })
-   
     .factory('utils', function() {
         var _numlength = function(num) {
             if (typeof(num) != "undefined") {
@@ -178,4 +182,4 @@ angular.module('starter.services', [])
 
 
         };
-    });;
+    });

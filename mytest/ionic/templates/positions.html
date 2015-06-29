@@ -7,15 +7,18 @@
                 <div class="row">
                     <div class="col">
                         <div class="row">产品名称</div>
-                        <div class="row info">方向</div>
+                        <div class="row info">
+                            <div class="col info padding-none">方向</div>
+                            <div class="col info padding-none">数量</div>
+                        </div>
                     </div>
                     <div class="col">
                         <div class="row">行情价</div>
                         <div class="row info">建仓价</div>
                     </div>
                     <div class="col">
-                        <div class="row">盈亏</div>
-                        <div class="row info">数量</div>
+                        <div class="row">总盈亏</div>
+                        <div class="row info">浮动盈亏</div>
                     </div>
                     
                 </div>
@@ -28,7 +31,10 @@
                 <div class="row">
                     <div class="col">
                         <div class="row" ng-bind="getProductByproductId(order.productId).contact_name">-</div>
-                        <div class="row info" ng-bind="order.buyType==1?'买涨':'买跌'">-</div>
+                        <div class="row " >
+                            <div class="col info" ng-bind="order.buyType==1?'买涨':'买跌'"></div>
+                            <dov class="col info" ng-bind="order.sl"></dov>
+                        </div>
                     </div>
                     <div class="col" ng-class="{'price-up':getPriceByProductId(order.productId).trend,'price-down':!getPriceByProductId(order.productId).trend}">
                         <div class="row ">
@@ -43,7 +49,7 @@
                     <div class="row">
                         <div class="col padding-none">
                             <div class="row" ng-bind="getOrderProfit(order.orderId)">-</div>
-                        <div class="row info" ng-bind="order.sl">-</div>
+                        <div class="row info" ng-bind="getProductByproductId(order.productId).yk">-</div>
                         </div>
                         
                     </div>

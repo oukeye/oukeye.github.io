@@ -17,14 +17,15 @@
                         <div class="row">价格(元/手)</div>
                         <div class="row info">手续费(元/手)</div>
                     </div>
-                    
                 </div>
             </div>
         </ul>
     </div>
     <ion-content>
-        <ul class="product-list list">
-            <li class="item" ng-repeat="produc in allProductlists" ng-click="buy(produc.id)">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+        </ion-refresher>
+        <ion-list class="product-list list">
+            <ion-item ng-repeat="produc in allProductlists" ng-click="buy(produc.id)">
                 <div class="row">
                     <div class="col">
                         <div class="row" ng-bind="produc.contact_name">-</div>
@@ -40,21 +41,22 @@
                         <div class="row info" ng-bind="produc.yk">-</div>
                     </div>
                     <div class="col ">
-                    <div class="row">
-                        <div class="col padding-none">
-                            <div class="row" ng-bind="produc.price">-</div>
-                        <div class="row info" ng-bind="produc.sxf"></div>
+                        <div class="row">
+                            <div class="col padding-none">
+                                <div class="row" ng-bind="produc.price">-</div>
+                                <div class="row info" ng-bind="produc.sxf"></div>
+                            </div>
+                            <div class="col col-center padding-none" ng-if="getOrderByproductId(produc.id).productId==produc.id">
+                                <i class="ion-android-checkmark-circle chicang-icon" data-pack="android" data-tags=""></i>
+                            </div>
                         </div>
-
-                        <div class="col col-center padding-none" ng-if="getOrderByproductId(produc.id).productId==produc.id">
-                            <i class="ion-android-checkmark-circle chicang-icon" data-pack="android" data-tags=""></i>
-                        </div>
-                    </div>
-                        
-                         
                     </div>
                 </div>
+            </ion-item>
+        </ion-list>
+        <!-- <ul class="product-list list">
+            <li class="item" ng-repeat="produc in allProductlists" ng-click="buy(produc.id)">
             </li>
-        </ul>
+        </ul> -->
     </ion-content>
 </ion-view>

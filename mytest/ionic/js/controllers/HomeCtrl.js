@@ -23,6 +23,13 @@ angular.module('starter').controller('HomeCtrl', function($scope, $stateParams, 
         $scope.buyProduct = utils.findById($scope.allProductlists, id);
         $scope.buymodal.show();
     };
+    $scope.doRefresh = function() {
+        console.log("dorefresh");
+        $timeout(function() {
+            // Stop the ion-refresher from spinning
+            $scope.$broadcast('scroll.refreshComplete');
+        }, 2000);
+    }
 
     $scope.doBuy = function() {
         $ionicLoading.show();
@@ -54,7 +61,7 @@ angular.module('starter').controller('HomeCtrl', function($scope, $stateParams, 
     $scope.$on('priceService.update', function(event) {
 
         priceService.all().then(function(data) {
-          //  var _data = utils.newRandomPrice(data); 
+            //  var _data = utils.newRandomPrice(data); 
             $scope.priceList = data;
         });
     });
@@ -87,7 +94,7 @@ angular.module('starter').controller('HomeCtrl', function($scope, $stateParams, 
         return null;
 
     };
-    
+
     $scope.allProductlists = products;
 
 

@@ -200,10 +200,10 @@ angular.module('starter', ['ionic', 'oc.lazyLoad', 'templates', 'starter.directi
                         return $ocLazyLoad.load('js/controllers/PositionsCtrl.js');
                     }],
                     products: ['productsService',
-                    function(productsService) {
-                        return productsService.all();
-                    }
-                ]
+                        function(productsService) {
+                            return productsService.all();
+                        }
+                    ]
                 }
             })
             .state('app.index.tabs.navstack', {
@@ -211,6 +211,7 @@ angular.module('starter', ['ionic', 'oc.lazyLoad', 'templates', 'starter.directi
                 views: {
                     'about-tab': {
                         templateUrl: "nav-stack.html"
+
                     }
                 }
             })
@@ -218,10 +219,33 @@ angular.module('starter', ['ionic', 'oc.lazyLoad', 'templates', 'starter.directi
                 url: "/contact",
                 views: {
                     'contact-tab': {
-                        templateUrl: "contact.html"
+                        templateUrl: "refresher.html",
+                        controller: 'RefresherCtrl'
                     }
+                },
+                resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+                    loadOcModal: ['$ocLazyLoad', '$injector', '$rootScope', function($ocLazyLoad, $injector, $rootScope) {
+                        // Load 'oc.modal' defined in the config of the provider $ocLazyLoadProvider
+                        console.log('load');
+                        return $ocLazyLoad.load([
+                            'css/ionic.app.css',
+                            'js/services/person.js',
+                            'js/templates.min.js',
+                            'js/controllers/refresher.js'
+                        ]).then(function() {
+                            console.log('--------then');
+                           /* $rootScope.bootstrapLoaded = true;
+                            // inject the lazy loaded service
+                            var $ocModal = $injector.get("$ocModal");
+                            console.log($ocModal);
+                            $ocModal.open({
+                                url: 'modal',
+                                cls: 'fade-in'
+                            });*/
+                        });
+                    }]
                 }
-            });
 
-        // if none of the above states are matched, use this as the fallback
+                // if none of the above states are matched, use this as the fallback
+            });
     });
