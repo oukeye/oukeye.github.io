@@ -1,0 +1,10 @@
+[
+	"RectType.ts",
+	"data.ts",
+	"Rect.ts",
+	"GameOverPanel.ts",
+	"GroupRect.ts",
+	"TimerPanel.ts",
+	"game.ts",
+	"GameApp.ts"
+]
