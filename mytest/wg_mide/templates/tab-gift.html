@@ -2,28 +2,28 @@
     <ion-content>
         <ion-slide-box on-slide-changed="slideHasChanged($index)" class="slidebox" auto-play="true" slide-interval="4000" does-continue="true" style="overflow: hidden;">
             <ion-slide>
-                <div class="box blue">
+                <div class="box">
                     <img ng-src="./img/gift_banner1.jpg" alt="微光公益" style="width:100%"></div>
             </ion-slide>
             <ion-slide>
-                <div class="box yellow">
+                <div class="box">
                     <img ng-src="./img/gift_banner2.jpg" alt="微光公益" style="width:100%"></div>
             </ion-slide>
             <ion-slide>
-                <div class="box pink">
+                <div class="box">
                     <img ng-src="./img/gift_banner3.jpg" alt="微光公益" style="width:100%"></div>
             </ion-slide>
              <ion-slide>
-                <div class="box pink">
+                <div class="box">
                     <img ng-src="./img/gift_banner4.jpg" alt="微光公益" style="width:100%"></div>
             </ion-slide>
              <ion-slide>
-                <div class="box pink">
+                <div class="box">
                     <img ng-src="./img/gift_banner5.jpg" alt="微光公益" style="width:100%"></div>
             </ion-slide>
         </ion-slide-box>
         <div class="row" collection-repeat="gs in gifts">
-            <a class="col col-33" ng-repeat="gift in gs" style="width:33%;" href="#/tab/gift/{{gift.id}}">
+            <a class="col col-33" ng-repeat="gift in gs" style="width:33%; display: block;" href="#/tab/gift/{{gift.id}}">
             	<img ng-src="{{gift.img}}" style="width:100%;" >
             	<div>{{gift.name}}</div>
             </a>
