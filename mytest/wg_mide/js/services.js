@@ -56,47 +56,47 @@ angular.module('starter.services', [])
             id: 0,
             name: 'Ben Sparrow',
             lastText: 'You on your way?',
-            img: '/img/gift1.jpg'
+            img: '../img/gift1.jpg'
         }, {
             id: 1,
             name: 'Ben Sparrow',
             lastText: 'You on your way?',
-            img: '/img/gift2.jpg'
+            img: '../img/gift2.jpg'
         }, {
             id: 2,
             name: 'Ben Sparrow',
             lastText: 'You on your way?',
-            img: '/img/gift3.jpg'
+            img: '../img/gift3.jpg'
         }, {
             id: 3,
             name: 'Ben Sparrow',
             lastText: 'You on your way?',
-            img: '/img/gift4.jpg'
+            img: '../img/gift4.jpg'
         }, {
             id: 4,
             name: 'Ben Sparrow',
             lastText: 'You on your way?',
-            img: '/img/gift5.jpg'
+            img: '../img/gift5.jpg'
         }, {
             id: 5,
             name: 'Ben Sparrow',
             lastText: 'You on your way?',
-            img: '/img/gift6.jpg'
+            img: '../img/gift6.jpg'
         }, {
             id: 6,
             name: 'Ben Sparrow',
             lastText: 'You on your way?',
-            img: '/img/gift7.jpg'
+            img: '../img/gift7.jpg'
         }, {
             id: 7,
             name: 'Ben Sparrow',
             lastText: 'You on your way?',
-            img: '/img/gift8.jpg'
+            img: '../img/gift8.jpg'
         }, {
             id: 8,
             name: 'Ben Sparrow',
             lastText: 'You on your way?',
-            img: '/img/gift9.jpg'
+            img: '../img/gift9.jpg'
         }, ];
 
         return {
