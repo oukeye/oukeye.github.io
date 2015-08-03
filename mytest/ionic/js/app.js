@@ -26,6 +26,7 @@ angular.module('starter', ['ionic', 'oc.lazyLoad', 'templates', 'starter.directi
     })
 
 .config(function($ionicConfigProvider) {
+    
         $ionicConfigProvider.views.maxCache(30);
         // note that you can also chain configs
         $ionicConfigProvider.backButton.text('返回').icon('ion-chevron-left');
