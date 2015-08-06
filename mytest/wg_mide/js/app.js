@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','afkl.lazyImage'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'me-lazyload'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -25,6 +25,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','a
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
+    $ionicConfigProvider.views.maxCache(0);
 
     $ionicConfigProvider.platform.ios.tabs.style('standard');
     $ionicConfigProvider.platform.ios.tabs.position('bottom');
@@ -34,8 +35,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','a
     $ionicConfigProvider.platform.ios.navBar.alignTitle('center');
     $ionicConfigProvider.platform.android.navBar.alignTitle('center');
 
-    $ionicConfigProvider.platform.ios.backButton.previousTitleText('返回').icon('ion-chevron-left');
-    $ionicConfigProvider.platform.android.backButton.previousTitleText('返回').icon('ion-chevron-left');
+    $ionicConfigProvider.platform.ios.backButton.previousTitleText('返回').icon('ion-ios-arrow-back');
+    $ionicConfigProvider.platform.android.backButton.previousTitleText('返回').icon('ion-ios-arrow-back');
+
+    $ionicConfigProvider.platform.ios.views.transition('ios');
+    $ionicConfigProvider.platform.android.views.transition('android');
 
     $ionicConfigProvider.platform.ios.views.transition('ios');
     $ionicConfigProvider.platform.android.views.transition('android');
@@ -91,7 +95,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','a
                 }
             }
         })
-        .state('tab.gift-detail', {
+        .state('tab.giftDetail', {
             url: '/gift/:giftId',
             views: {
                 'tab-gift': {
@@ -108,7 +112,135 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','a
                     controller: 'AccountCtrl'
                 }
             }
-        });
+        })
+        .state('tab.basicInfo', {
+            url: '/basicInfo',
+            views: {
+                'tab-account': {
+                    templateUrl: 'templates/tab-basicInfo.html',
+                    controller: 'BasicInfoCtrl'
+                }
+            }
+        })
+        .state('tab.userName', {
+            url: '/userName',
+            views: {
+                'tab-account': {
+                    templateUrl: 'templates/userName.html',
+                    // controller: 'AccountCtrl'
+                }
+            }
+        })
+        .state('tab.address', {
+            url: '/address',
+            views: {
+                'tab-account': {
+                    templateUrl: 'templates/address.html',
+                    // controller: 'AccountCtrl'
+                }
+            }
+        })
+        .state('tab.phone', {
+            url: '/phone',
+            views: {
+                'tab-account': {
+                    templateUrl: 'templates/phone.html',
+                    // controller: 'AccountCtrl'
+                }
+            }
+        })
+        .state('tab.email', {
+            url: '/email',
+            views: {
+                'tab-account': {
+                    templateUrl: 'templates/email.html',
+                    // controller: 'AccountCtrl'
+                }
+            }
+        })
+        .state('tab.expertise', {
+            url: '/expertise',
+            views: {
+                'tab-account': {
+                    templateUrl: 'templates/expertise.html',
+                    // controller: 'AccountCtrl'
+                }
+            }
+        })
+        .state('tab.serviceSillingness', {
+            url: '/serviceSillingness',
+            views: {
+                'tab-account': {
+                    templateUrl: 'templates/serviceSillingness.html',
+                    // controller: 'AccountCtrl'
+                }
+            }
+        })
+        .state('tab.feedback', {
+            url: '/feedback',
+            views: {
+                'tab-account': {
+                    templateUrl: 'templates/feedback.html',
+                    // controller: 'AccountCtrl'
+                }
+            }
+        })
+        .state('tab.gender', {
+            url: '/gender',
+            views: {
+                'tab-account': {
+                    templateUrl: 'templates/gender.html',
+                    // controller: 'AccountCtrl'
+                }
+            }
+        })
+        .state('tab.area', {
+            url: '/area',
+            views: {
+                'tab-account': {
+                    templateUrl: 'templates/area.html',
+                    // controller: 'AccountCtrl'
+                }
+            }
+        })
+       
+        .state('tab.myGift', {
+            url: '/myGift',
+            views: {
+                'tab-account': {
+                    templateUrl: 'templates/tab-myGift.html',
+                    // controller: 'AccountCtrl'
+                }
+            }
+        })
+        .state('tab.honorRanking', {
+            url: '/honorRanking',
+            views: {
+                'tab-account': {
+                    templateUrl: 'templates/tab-honorRanking.html',
+                    //controller: 'AccountCtrl'
+                }
+            }
+        })
+        .state('tab.help', {
+            url: '/help',
+            views: {
+                'tab-account': {
+                    templateUrl: 'templates/tab-help.html',
+                    // controller: 'AccountCtrl'
+                }
+            }
+        })
+
+    .state('tab.myTeam', {
+        url: '/myTeam',
+        views: {
+            'tab-account': {
+                templateUrl: 'templates/tab-myTeam.html',
+                // controller: 'AccountCtrl'
+            }
+        }
+    });
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/dash');

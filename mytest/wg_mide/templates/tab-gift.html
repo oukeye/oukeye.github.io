@@ -1,5 +1,5 @@
 <ion-view view-title="礼品店">
-    <ion-content>
+    <ion-content class="ion-content-background">
         <ion-slide-box on-slide-changed="slideHasChanged($index)" class="slidebox" auto-play="true" slide-interval="4000" does-continue="true" style="overflow: hidden;">
             <ion-slide>
                 <div class="box">
@@ -23,7 +23,7 @@
             </ion-slide>
         </ion-slide-box>
         <div class="row" collection-repeat="gs in gifts">
-            <a class="col col-33" ng-repeat="gift in gs" style="width:33%; display: block;" href="#/tab/gift/{{gift.id}}">
+            <a class="col col-33" ng-repeat="gift in gs" style="width:33%; display: block;" href="#/tab/gift/{{gift.id}}" >
             	<img ng-src="{{gift.img}}" style="width:100%;" >
             	<div>{{gift.name}}</div>
             </a>

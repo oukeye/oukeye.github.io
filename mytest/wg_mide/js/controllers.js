@@ -38,7 +38,41 @@ angular.module('starter.controllers', [])
         $scope.gift = Gift.get($stateParams.giftId);
     })
     .controller('AccountCtrl', function($scope) {
-        $scope.settings = {
-            enableFriends: true
+        // Triggered on a button click, or some other target
+
+    })
+    .controller('BasicInfoCtrl', function($scope, $ionicActionSheet) {
+        $scope.showActionsheet = function() {
+
+            $ionicActionSheet.show({
+                titleText: '性别',
+                buttons: [{
+                    text: '<i class="icon ion-male balanced"></i> 男'
+                }, {
+                    text: '<i class="icon ion-female balanced"></i> 女'
+                }, ],
+                destructiveText: '',
+                cancelText: "取消",
+                cancel: function() {
+                    console.log('CANCELLED');
+                },
+                buttonClicked: function(index) {
+                    console.log('BUTTON CLICKED', index);
+                    if(index==0){
+                        $scope.genter="男";
+                    }else{
+                        $scope.genter="女";
+                    }
+                    return true;
+                },
+                destructiveButtonClicked: function() {
+                    console.log('DESTRUCT');
+                    return true;
+                },
+                cssClass:"wg-sheet"
+            });
         };
-    });
+    })
+
+
+;
