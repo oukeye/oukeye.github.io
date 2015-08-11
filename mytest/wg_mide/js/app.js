@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'me-lazyload'])
+angular.module('starter', ['ionic', 'oc.lazyLoad', 'templates' ,'starter.config','starter.controllers', 'starter.services', 'ngResource'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -42,18 +42,25 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     $ionicConfigProvider.platform.android.views.transition('android');
 
     $ionicConfigProvider.platform.ios.views.transition('ios');
-    $ionicConfigProvider.platform.android.views.transition('android');
-    // Ionic uses AngularUI Router which uses the concept of states
-    // Learn more here: https://github.com/angular-ui/ui-router
-    // Set up the various states which the app can be in.
-    // Each state's controller can be found in controllers.js
+    $ionicConfigProvider.platform.android.sh
+        // Ionic uses AngularUI Router which uses the concept of states
+        // Learn more here: https://github.com/angular-ui/ui-router
+        // Set up the various states which the app can be in.
+        // Each state's controller can be found in controllers.js
     $stateProvider
 
     // setup an abstract state for the tabs directive
         .state('tab', {
         url: '/tab',
         abstract: true,
-        templateUrl: 'templates/tabs.html'
+        views: {
+            "": {
+                //  controller: 'AppCtrl', // This view will use AppCtrl loaded below in the resolve
+                templateUrl: 'tabs.html'
+            }
+        }
+        
+
     })
 
     // Each tab has its own nav history stack:
@@ -62,9 +69,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         url: '/dash',
         views: {
             'tab-dash': {
-                templateUrl: 'templates/tab-dash.html',
+                templateUrl: 'tab-dash.html',
                 controller: 'DashCtrl'
             }
+        },
+        resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+            DashCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                // you can lazy load files for an existing module
+                return $ocLazyLoad.load('js/controllers.js');
+            }]
         }
     })
 
@@ -72,7 +85,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             url: '/chats',
             views: {
                 'tab-chats': {
-                    templateUrl: 'templates/tab-chats.html',
+                    templateUrl: 'tab-chats.html',
                     controller: 'ChatsCtrl'
                 }
             }
@@ -81,7 +94,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             url: '/chats/:chatId',
             views: {
                 'tab-chats': {
-                    templateUrl: 'templates/chat-detail.html',
+                    templateUrl: 'chat-detail.html',
                     controller: 'ChatDetailCtrl'
                 }
             }
@@ -90,7 +103,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             url: '/gift',
             views: {
                 'tab-gift': {
-                    templateUrl: 'templates/tab-gift.html',
+                    templateUrl: 'tab-gift.html',
                     controller: 'GiftCtrl'
                 }
             }
@@ -99,7 +112,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             url: '/gift/:giftId',
             views: {
                 'tab-gift': {
-                    templateUrl: 'templates/gift-detail.html',
+                    templateUrl: 'gift-detail.html',
                     controller: 'GiftDetailCtrl'
                 }
             }
@@ -108,7 +121,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             url: '/account',
             views: {
                 'tab-account': {
-                    templateUrl: 'templates/tab-account.html',
+                    templateUrl: 'tab-account.html',
                     controller: 'AccountCtrl'
                 }
             }
@@ -117,7 +130,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             url: '/basicInfo',
             views: {
                 'tab-account': {
-                    templateUrl: 'templates/tab-basicInfo.html',
+                    templateUrl: 'tab-basicInfo.html',
                     controller: 'BasicInfoCtrl'
                 }
             }
@@ -126,7 +139,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             url: '/userName',
             views: {
                 'tab-account': {
-                    templateUrl: 'templates/userName.html',
+                    templateUrl: 'userName.html',
                     // controller: 'AccountCtrl'
                 }
             }
@@ -135,7 +148,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             url: '/address',
             views: {
                 'tab-account': {
-                    templateUrl: 'templates/address.html',
+                    templateUrl: 'address.html',
                     // controller: 'AccountCtrl'
                 }
             }
@@ -144,7 +157,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             url: '/phone',
             views: {
                 'tab-account': {
-                    templateUrl: 'templates/phone.html',
+                    templateUrl: 'phone.html',
                     // controller: 'AccountCtrl'
                 }
             }
@@ -153,7 +166,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             url: '/email',
             views: {
                 'tab-account': {
-                    templateUrl: 'templates/email.html',
+                    templateUrl: 'email.html',
                     // controller: 'AccountCtrl'
                 }
             }
@@ -162,7 +175,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             url: '/expertise',
             views: {
                 'tab-account': {
-                    templateUrl: 'templates/expertise.html',
+                    templateUrl: 'expertise.html',
                     // controller: 'AccountCtrl'
                 }
             }
@@ -171,7 +184,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             url: '/serviceSillingness',
             views: {
                 'tab-account': {
-                    templateUrl: 'templates/serviceSillingness.html',
+                    templateUrl: 'serviceSillingness.html',
                     // controller: 'AccountCtrl'
                 }
             }
@@ -180,7 +193,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             url: '/feedback',
             views: {
                 'tab-account': {
-                    templateUrl: 'templates/feedback.html',
+                    templateUrl: 'feedback.html',
                     // controller: 'AccountCtrl'
                 }
             }
@@ -189,7 +202,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             url: '/gender',
             views: {
                 'tab-account': {
-                    templateUrl: 'templates/gender.html',
+                    templateUrl: 'gender.html',
                     // controller: 'AccountCtrl'
                 }
             }
@@ -198,35 +211,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             url: '/area',
             views: {
                 'tab-account': {
-                    templateUrl: 'templates/area.html',
+                    templateUrl: 'area.html',
                     // controller: 'AccountCtrl'
                 }
             }
         })
-       
-        .state('tab.myGift', {
+
+    .state('tab.myGift', {
             url: '/myGift',
             views: {
                 'tab-account': {
-                    templateUrl: 'templates/tab-myGift.html',
+                    templateUrl: 'tab-myGift.html',
                     // controller: 'AccountCtrl'
                 }
             }
         })
-        .state('tab.honorRanking', {
-            url: '/honorRanking',
-            views: {
-                'tab-account': {
-                    templateUrl: 'templates/tab-honorRanking.html',
-                    //controller: 'AccountCtrl'
-                }
-            }
-        })
+        
         .state('tab.help', {
             url: '/help',
             views: {
                 'tab-account': {
-                    templateUrl: 'templates/tab-help.html',
+                    templateUrl: 'tab-help.html',
                     // controller: 'AccountCtrl'
                 }
             }
@@ -236,7 +241,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         url: '/myTeam',
         views: {
             'tab-account': {
-                templateUrl: 'templates/tab-myTeam.html',
+                templateUrl: 'tab-myTeam.html',
                 // controller: 'AccountCtrl'
             }
         }
@@ -245,4 +250,35 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/dash');
 
+})
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+     $stateProvider.state('tab.honorRanking', {
+            url: '/honorRanking',
+            abstract: true,
+            views: {
+                'tab-account': {
+                    templateUrl: 'tab-honorRanking.html',
+                    //controller: 'AccountCtrl'
+                }
+            }
+        })
+         .state('tab.honorRanking.local', {
+            url: '/honorRanking/local',
+            views: {
+                'tab-account': {
+                    templateUrl: 'tab-honorRanking.html',
+                    //controller: 'AccountCtrl'
+                }
+            }
+        })
+          .state('tab.honorRanking.all', {
+            url: '/honorRanking/all',
+            views: {
+                'tab-account': {
+                    templateUrl: 'tab-honorRanking.html',
+                    //controller: 'AccountCtrl'
+                }
+            }
+        })
 });
