@@ -1,9 +1,10 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, $rootScope, $log, $timeout,
+.controller('TopicsCtrl', function($scope, $rootScope, $log, $timeout,
     $ionicTabsDelegate, $ionicPopover, $ionicModal, $ionicLoading,
     $location, $state,
-    /*$cordovaNetwork,*/ /*$cordovaGoogleAnalytics,*/
+    /*$cordovaNetwork,*/
+    /*$cordovaGoogleAnalytics,*/
     Topics, Tabs, My, User, ENV) {
     console.log("enter topics ctrl");
 
@@ -22,7 +23,7 @@ angular.module('starter.controllers', [])
 
         document.addEventListener("deviceready", function() {
             // trackView
-           // $cordovaGoogleAnalytics.trackView('topics view');
+            // $cordovaGoogleAnalytics.trackView('topics view');
         }, false);
 
 
@@ -215,13 +216,118 @@ angular.module('starter.controllers', [])
     .controller('GiftDetailCtrl', function($scope, $stateParams, Gift) {
         $scope.gift = Gift.get($stateParams.giftId);
     })
-    .controller('AccountCtrl', function($scope) {
-        // Triggered on a button click, or some other target
+    .controller('AccountCtrl', function($scope, $rootScope, $ionicModal, $ionicHistory, $ionicLoading, $state, $ionicActionSheet, $log, $timeout, ENV, User) {
+
+        // 监听退出
+        $rootScope.$on('app.logout', function() {
+            $log.debug('logout broadcast handle');
+            $scope.loginName = null;
+            $scope.messagesCount = 0;
+            // setBadge(0);
+            // 清空历史记录
+
+            // $ionicHistory.clearHistory();
+            // $ionicHistory.clearCache();
+        });
+
+        // get current user
+        var currentUser = User.getCurrentUser();
+        $scope.loginName = currentUser.loginname || null;
+        $scope.currentUser = currentUser;
+        if ($scope.loginName !== null) {
+            // $rootScope.getMessageCount();
+        }
+
+        // login action callback
+        var loginCallback = function(response) {
+            $scope.closeLogin();
+            $scope.loginName = response.data.loginname;
+            $scope.currentUser = response.data;
+            // $rootScope.getMessageCount();
+        };
+        // Form data for the login modal
+        $scope.loginData = {};
+
+        $ionicLoading.show();
+
+        // Create the login modal that we will use later
+        $ionicModal.fromTemplateUrl('login.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.modal = modal;
+            $ionicLoading.hide();
+            if (!$scope.loginName) {
+                $scope.modal.show();
+            }
+        });
+
+
+        // Triggered in the login modal to close it
+        $scope.closeLogin = function() {
+            $scope.modal.hide();
+        };
+
+        // Open the login modal
+        $scope.login = function() {
+            $scope.modal.show();
+        };
+        $scope.logout = function() {
+                console.log('logout');
+                // Show the action sheet
+                var hideSheet = $ionicActionSheet.show({
+
+                    destructiveText: '退出登录',
+                    titleText: '确定退出当前登录账号么？',
+                    cancelText: '取消',
+                    cancel: function() {
+                        // add cancel code..
+                    },
+                    destructiveButtonClicked: function() {
+                        logout();
+                        return true;
+                    },
+                    cssClass: "wg-sheet"
+                });
+
+            }
+            // logout action
+        var logout = function() {
+            $log.debug('logout button action');
+            User.logout();
+            $rootScope.$broadcast('app.logout');
+
+            // track event
+            /* if (window.analytics) {
+                 window.analytics.trackEvent('User', 'logout');
+             }*/
+            // 刷新页面
+            // $ionicHistory.clearHistory();
+            // $ionicHistory.clearCache();
+            $state.go('tab.account');
+
+            // $state.go("tab.setting", {}, {
+            //   reload: true
+            // });
+
+
+        };
+
+        // Perform the login action when the user submits the login form
+        $scope.doLogin = function() {
+            console.log('Doing login', $scope.loginData);
+
+            User.login($scope.loginData.username).$promise.then(loginCallback, $rootScope.requestErrorHandler());
+        };
+
 
     })
-    .controller('BasicInfoCtrl', function($scope, $ionicActionSheet) {
-        $scope.showActionsheet = function() {
+    .controller('BasicInfoCtrl', function($scope, $ionicActionSheet,User) {
+        // get current user
+        var currentUser = User.getCurrentUser();
+        $scope.loginName = currentUser.loginname || null;
+        $scope.currentUser = currentUser;
 
+        $scope.showActionsheet = function() {
             $ionicActionSheet.show({
                 titleText: '性别',
                 buttons: [{

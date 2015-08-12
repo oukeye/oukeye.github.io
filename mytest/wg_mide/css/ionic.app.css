@@ -7683,8 +7683,9 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
-.slider-pager {
-  overflow: hidden; }
+.wg-logoutBtn .button-block {
+  margin-top: 0px;
+  margin-bottom: 0px; }
 
 .wg-item-divider {
   padding-top: 8px;
@@ -7768,5 +7769,76 @@ a.button {
   line-height: 42px;
   cursor: pointer; }
 
-.slider-pager-page .icon {
-  font-size: 8px; }
+.slider-pager {
+  bottom: 10px;
+  overflow: hidden; }
+  .slider-pager .slider-pager-page .icon {
+    font-size: 8px; }
+  .slider-pager .slider-pager-page.active {
+    -webkit-transition: opacity .4s ease-in;
+    transition: opacity .4s ease-in;
+    opacity: 1;
+    color: #45c01a; }
+
+.item-thumbnail-left, .item-thumbnail-left .item-content {
+  padding-top: 16px; }
+
+.loading-container .loading .loading-icon {
+  font-size: 32px;
+  color: #387ef5;
+  -webkit-animation: loading 1000ms linear infinite;
+  -moz-animation: loading 1000ms linear infinite;
+  -ms-animation: loading 1000ms linear infinite;
+  animation: loading 1000ms linear infinite; }
+
+/*loading*/
+@keyframes "loading" {
+  from {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg); }
+
+  to {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+@-moz-keyframes loading {
+  from {
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg); }
+
+  to {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+@-webkit-keyframes "loading" {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+@-ms-keyframes "loading" {
+  from {
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg); }
+
+  to {
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+@-o-keyframes "loading" {
+  from {
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg); }
+
+  to {
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg); } }

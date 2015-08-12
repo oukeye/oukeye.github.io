@@ -489,24 +489,13 @@ angular.module('starter.services', [])
         });
         var user = Storage.get(storageKey) || {};
         return {
-            login: function(accesstoken) {
-                var $this = this;
-                return resource.save({
-                    accesstoken: accesstoken
-                }, null, function(response) {
-                    $log.debug('post accesstoken:', response);
-                    user.accesstoken = accesstoken;
-                    $this.getByLoginName(response.loginname).$promise.then(function(r) {
-                        user = r.data;
-                        user.id = response.id;
-                        user.accesstoken = accesstoken;
+            login: function(loginName) {
 
-                        // set alias for jpush
-                        Push.setAlias(user.id);
-
-                        Storage.set(storageKey, user);
-                    });
-                    user.loginname = response.loginname;
+                return userResource.get({
+                    loginname: loginName
+                }, function(response) {
+                    user = response.data;
+                    Storage.set(storageKey, user);
                 });
             },
             logout: function() {

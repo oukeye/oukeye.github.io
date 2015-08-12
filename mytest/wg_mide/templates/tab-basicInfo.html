@@ -2,10 +2,10 @@
     <ion-content class="stable-bg">
         <div class="list ">
             <a class="item item-avatar-right text-midel" href="#">
-                <img src="http://wx.qlogo.cn/mmopen/elibOibaic0K7Picb0xFVTKsVkGPpzdmCB6MUc5YCWv8DjdIL3aAYw69psM1BBbQmspFOSUp00dR5mBQISKAD4FkxqjlhKUlsEFF/0" style="width:100%"> 头像
+                <img ng-src="{{currentUser.avatar_url}}" style="width:100%"> 头像
             </a>
             <a class="item" ui-sref="tab.userName">
-                名称<span class="item-note">oukey</span> 
+                名称<span class="item-note">{{currentUser.loginname}}</span> 
             </a>
             <a class="item" ui-sref="tab.address">
                 常住地址
@@ -34,5 +34,6 @@
                 地区<span class="item-note">广东广州</span>
             </a>
         </div>
+       
     </ion-content>
 </ion-view>
