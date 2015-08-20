@@ -119,21 +119,20 @@ angular.module('starter.services', [])
     ///
     ///
     .factory('Topics', function($resource, $rootScope, Storage, User, ENV) {
+       // var APIUrl = ENV.localapi + '/topics.json',
         var APIUrl = ENV.api + '/topics',
             // 用来存储话题类别的数据结构，包含了下一页、是否有下一页等属性
             topics = {},
             currentTab = "all";
 
-
-
         var resource = $resource(APIUrl, {}, {
             query: {
                 method: 'get',
                 params: {
-                    tab: '@tab',
-                    page: 1,
-                    limit: 20,
-                    mdrender: true
+                    /* tab: '@tab',
+                     page: 1,
+                     limit: 20,
+                     mdrender: true*/
                 },
                 timeout: 20000
             }
@@ -143,7 +142,7 @@ angular.module('starter.services', [])
         return {
             fetchTopStories: function() {
                 // console.log("currentTab: " + currentTab);
-                var hasNextPage = true;
+                var hasNextPage = false;
                 resource.query({
                     tab: currentTab
                 }, function(r) {
@@ -494,8 +493,13 @@ angular.module('starter.services', [])
                 return userResource.get({
                     loginname: loginName
                 }, function(response) {
-                    user = response.data;
-                    Storage.set(storageKey, user);
+                    if (typeof response.data !="undefined") {
+                        user = response.data;
+                        Storage.set(storageKey, user);
+                    } else {
+                        //error_msg: "user `aaa` is not exists"
+                    }
+
                 });
             },
             logout: function() {
@@ -603,6 +607,104 @@ angular.module('starter.services', [])
             }
         };
     })
+    .directive('lazyContainer', [
+        function() {
+            var uid = 0;
+
+            function getUid(el) {
+                return el.__uid || (el.__uid = '' + ++uid);
+            }
+
+            return {
+                restrict: 'EA',
+                controller: ['$scope', '$element', function($scope, $element) {
+                    var elements = {};
+
+                    function onLoad() {
+                        var $el = angular.element(this);
+                        var uid = getUid($el);
+
+                        $el.css('opacity', 1);
+
+                        if (elements.hasOwnProperty(uid)) {
+                            delete elements[uid];
+                        }
+                    }
+
+                    function isVisible(elem) {
+                        var containerRect = $element[0].getBoundingClientRect();
+                        var elemRect = elem[0].getBoundingClientRect();
+                        var xVisible, yVisible;
+                        var offset = 50;
+
+                        if (elemRect.bottom + offset >= containerRect.top &&
+                            elemRect.top - offset <= containerRect.bottom) {
+                            yVisible = true;
+                        }
+
+                        if (elemRect.right + offset >= containerRect.left &&
+                            elemRect.left - offset <= containerRect.right) {
+                            xVisible = true;
+                        }
+
+                        return xVisible && yVisible;
+                    }
+
+                    function checkImage() {
+                        Object.keys(elements).forEach(function(uid) {
+                            var obj = elements[uid],
+                                iElement = obj.iElement,
+                                iScope = obj.iScope;
+                            if (isVisible(iElement)) {
+                                iElement.attr('src', iScope.lazySrc);
+                            }
+                        });
+                    }
+
+                    this.addImg = function(iScope, iElement, iAttrs) {
+                        iElement.bind('load', onLoad);
+                        iScope.$watch('lazySrc', function() {
+                            if (isVisible(iElement)) {
+                                iElement.attr('src', iScope.lazySrc);
+                            } else {
+                                var uid = getUid(iElement);
+                                iElement.css({
+                                    'background-color': '#fff',
+                                    'opacity': 0,
+                                    '-webkit-transition': 'opacity 1s',
+                                    'transition': 'opacity 1s'
+                                });
+                                elements[uid] = {
+                                    iElement: iElement,
+                                    iScope: iScope
+                                };
+                            }
+                        });
+                        iScope.$on('$destroy', function() {
+                            iElement.unbind('load');
+                        });
+                    };
+
+                    $element.bind('scroll', checkImage);
+                    $element.bind('resize', checkImage);
+                }]
+            };
+        }
+    ])
+    .directive('lazySrc', [
+        function() {
+            return {
+                restrict: 'A',
+                require: '^lazyContainer',
+                scope: {
+                    lazySrc: '@'
+                },
+                link: function(iScope, iElement, iAttrs, containerCtrl) {
+                    containerCtrl.addImg(iScope, iElement, iAttrs);
+                }
+            };
+        }
+    ])
     .directive(
         // Collection-repeat image recycling while loading
         // https://github.com/driftyco/ionic/issues/1742

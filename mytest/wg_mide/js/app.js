@@ -9,7 +9,7 @@ angular.module('starter', ['ionic', 'oc.lazyLoad', 'templates', 'starter.config'
     .constant("$ionicLoadingConfig", {
         template: '<div class="ion-load-c loading-icon"></div>加载中...'
     })
-    .run(function($ionicPlatform, $rootScope, $state, $ionicLoading, $log,  My, User, Push) {
+    .run(function($ionicPlatform, $rootScope, $state, $ionicLoading, $log, My, User, Push) {
 
         $rootScope.requestErrorHandler = function(options, callback) {
             return function(response) {
@@ -46,8 +46,8 @@ angular.module('starter', ['ionic', 'oc.lazyLoad', 'templates', 'starter.config'
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
-        $ionicConfigProvider.views.maxCache(0);
-
+        $ionicConfigProvider.views.maxCache(30);
+        $ionicConfigProvider.scrolling.jsScrolling(false);
         $ionicConfigProvider.platform.ios.tabs.style('standard');
         $ionicConfigProvider.platform.ios.tabs.position('bottom');
         $ionicConfigProvider.platform.android.tabs.style('standard');
@@ -56,18 +56,18 @@ angular.module('starter', ['ionic', 'oc.lazyLoad', 'templates', 'starter.config'
         $ionicConfigProvider.platform.ios.navBar.alignTitle('center');
         $ionicConfigProvider.platform.android.navBar.alignTitle('center');
 
-        $ionicConfigProvider.platform.ios.backButton.previousTitleText('返回').icon('ion-ios-arrow-back');
-        $ionicConfigProvider.platform.android.backButton.previousTitleText('返回').icon('ion-ios-arrow-back');
+        /*        $ionicConfigProvider.platform.ios.backButton.previousTitleText('返回').icon('ion-ios-arrow-back');
+                $ionicConfigProvider.platform.android.backButton.previousTitleText('返回').icon('ion-ios-arrow-back');*/
 
-        $ionicConfigProvider.platform.ios.views.transition('ios');
-        $ionicConfigProvider.platform.android.views.transition('android');
+        $ionicConfigProvider.backButton.text('返回').icon('ion-ios-arrow-back');
 
-        $ionicConfigProvider.platform.ios.views.transition('ios');
-        $ionicConfigProvider.platform.android.sh
-            // Ionic uses AngularUI Router which uses the concept of states
-            // Learn more here: https://github.com/angular-ui/ui-router
-            // Set up the various states which the app can be in.
-            // Each state's controller can be found in controllers.js
+        /*   $ionicConfigProvider.platform.ios.views.transition('ios');
+           $ionicConfigProvider.platform.android.views.transition('android');*/
+
+        // Ionic uses AngularUI Router which uses the concept of states
+        // Learn more here: https://github.com/angular-ui/ui-router
+        // Set up the various states which the app can be in.
+        // Each state's controller can be found in controllers.js
         $stateProvider
 
         // setup an abstract state for the tabs directive
@@ -87,22 +87,39 @@ angular.module('starter', ['ionic', 'oc.lazyLoad', 'templates', 'starter.config'
         // Each tab has its own nav history stack:
 
         .state('tab.topics', {
-            url: '/topics',
-            views: {
-                'tab-topics': {
-                    templateUrl: 'tab-topics.html',
-                    controller: 'TopicsCtrl'
+                url: '/topics',
+                views: {
+                    'tab-topics': {
+                        templateUrl: 'tab-topics.html',
+                        controller: 'TopicsCtrl'
+                    }
+                },
+                resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+                    DashCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                        // you can lazy load files for an existing module
+                        return $ocLazyLoad.load('js/controllers.js');
+                    }]
                 }
-            },
-            resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-                DashCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                    // you can lazy load files for an existing module
-                    return $ocLazyLoad.load('js/controllers.js');
-                }]
-            }
-        })
-
-        .state('tab.chats', {
+            })
+            .state('tab.topic', {
+                url: '/topics/:topicsId',
+                views: {
+                    'tab-topics': {
+                        templateUrl: 'topic.html',
+                        controller: 'TopicCtrl'
+                    }
+                }
+            })
+            .state('tab.newtopic', {
+                url: '/newTopic',
+                views: {
+                    'tab-topics': {
+                        templateUrl: 'newTopic.html',
+                        controller: 'NewTopicCtrl'
+                    }
+                }
+            })
+            .state('tab.chats', {
                 url: '/chats',
                 views: {
                     'tab-chats': {
@@ -153,6 +170,24 @@ angular.module('starter', ['ionic', 'oc.lazyLoad', 'templates', 'starter.config'
                     'tab-account': {
                         templateUrl: 'tab-basicInfo.html',
                         controller: 'BasicInfoCtrl'
+                    }
+                }
+            })
+            .state('tab.login', {
+                url: '/login',
+                views: {
+                    'tab-account': {
+                        templateUrl: 'login.html',
+                        controller: 'LoginCtrl'
+                    }
+                }
+            })
+            .state('tab.reg', {
+                url: '/reg',
+                views: {
+                    'tab-account': {
+                        templateUrl: 'reg.html',
+                        controller: 'RegCtrl'
                     }
                 }
             })

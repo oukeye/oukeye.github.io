@@ -1,201 +1,177 @@
 angular.module('starter.controllers', [])
 
 .controller('TopicsCtrl', function($scope, $rootScope, $log, $timeout,
-    $ionicTabsDelegate, $ionicPopover, $ionicModal, $ionicLoading,
-    $location, $state,
-    /*$cordovaNetwork,*/
-    /*$cordovaGoogleAnalytics,*/
-    Topics, Tabs, My, User, ENV) {
-    console.log("enter topics ctrl");
+        $ionicTabsDelegate, $ionicPopover, $ionicModal, $ionicLoading,
+        $location, $state,
+        /*$cordovaNetwork,*/
+        /*$cordovaGoogleAnalytics,*/
+        Topics, Tabs, My, User, ENV) {
+        console.log("enter topics ctrl");
 
-    // get current user
-    var currentUser = User.getCurrentUser();
-    $scope.loginName = currentUser.loginname || null;
+        // get current user
+        var currentUser = User.getCurrentUser();
+        $scope.loginName = currentUser.loginname || null;
 
-    $scope.$on('$ionicView.beforeEnter', function() {
-        // get user settings
-        $scope.settings = My.getSettings();
-        $rootScope.hideTabs = '';
-    });
-
-
-    $scope.$on('$ionicView.afterEnter', function() {
-
-        document.addEventListener("deviceready", function() {
-            // trackView
-            // $cordovaGoogleAnalytics.trackView('topics view');
-        }, false);
+        $scope.$on('$ionicView.beforeEnter', function() {
+            // get user settings
+            $scope.settings = My.getSettings();
+            $rootScope.hideTabs = '';
+        });
 
 
-        $timeout(function() {
-            $scope.topics = Topics.getTopics();
-        }, 100);
-    });
+        $scope.$on('$ionicView.afterEnter', function() {
+
+            document.addEventListener("deviceready", function() {
+                // trackView
+                // $cordovaGoogleAnalytics.trackView('topics view');
+            }, false);
 
 
+            $timeout(function() {
+                $scope.topics = Topics.getTopics();
+            }, 100);
+        });
 
 
-    // $scope.title = "全部话题";
-    // assign tabs
-    $scope.tabs = Tabs;
-    $scope.currentTab = Topics.getCurrentTab();
-
-
-
-
-    // .fromTemplateUrl() method
-    $ionicPopover.fromTemplateUrl('views/topic/popover.html', {
-        scope: $scope
-    }).then(function(popover) {
-        $scope.popover = popover;
-    });
-
-    $scope.openPopover = function($event) {
-        // console.log('show popover');
-        $scope.popover.show($event);
-    };
-
-    $scope.changeTab = function(tab) {
-        Topics.setCurrentTab(tab);
+        // $scope.title = "全部话题";
+        // assign tabs
+        $scope.tabs = Tabs;
         $scope.currentTab = Topics.getCurrentTab();
-        $scope.popover.hide();
-    };
 
 
-    // $topicCategory = $ionicTabsDelegate.$getByHandle('topic-category');
-    // var category = TabCategory.get($topicCategory.selectedIndex());
-    // var category = "all";
-    Topics.fetchTopStories();
-
-
-
-
-
-    $scope.$on('ioniclub.topicsUpdated', function() {
-        // $timeout(function() {
-        $scope.topics = Topics.getTopics();
-        $scope.$broadcast('scroll.refreshComplete');
-        // }, 100);
-    });
-
-    // logout
-    $rootScope.$on('ioniclub.logout', function() {
-        $log.debug('logout broadcast handle');
-        $scope.loginName = null;
-        $scope.messagesCount = 0;
-        // setBadge(0);
-    });
-
-
-
-
-
-
-    // $scope.onTabSelected = function() {
-    //   // category = TabCategory.get($topicCategory.selectedIndex());
-    //   Topics.setCurrentTab(category);
-    //   Topics.fetchTopStories();
-    //   $scope.topics = Topics.getTopics();
-    //   // console.log(category);
-    // };
-
-    $scope.doRefresh = function() {
+        // $topicCategory = $ionicTabsDelegate.$getByHandle('topic-category');
+        // var category = TabCategory.get($topicCategory.selectedIndex());
+        // var category = "all";
         Topics.fetchTopStories();
-    };
+
+        $scope.$on('ioniclub.topicsUpdated', function() {
+            // $timeout(function() {
+            $scope.topics = Topics.getTopics();
+            $scope.$broadcast('scroll.refreshComplete');
+            // }, 100);
+        });
+
+        // logout
+        $rootScope.$on('ioniclub.logout', function() {
+            $log.debug('logout broadcast handle');
+            $scope.loginName = null;
+            $scope.messagesCount = 0;
+            // setBadge(0);
+        });
 
 
-    $scope.loadMore = function() {
-        // console.log("loadMore");
-        Topics.increaseNewTopicsCount(15);
-        $scope.$broadcast('scroll.infiniteScrollComplete');
-    };
+        // $scope.onTabSelected = function() {
+        //   // category = TabCategory.get($topicCategory.selectedIndex());
+        //   Topics.setCurrentTab(category);
+        //   Topics.fetchTopStories();
+        //   $scope.topics = Topics.getTopics();
+        //   // console.log(category);
+        // };
 
-    $scope.moreDataCanBeLoaded = function() {
-        // console.log(Topics.hasNextPage());
-        return Topics.hasNextPage();
-    };
+        $scope.doRefresh = function() {
+            Topics.fetchTopStories();
+        };
 
-    // Create the new topic modal that we will use later
-    $ionicModal.fromTemplateUrl('views/topic/newTopic.html', {
-        tabs: Tabs,
-        scope: $scope
-    }).then(function(modal) {
-        $scope.newTopicModal = modal;
-    });
 
-    $scope.newTopicData = {
-        tab: 'share',
-        title: '',
-        content: ''
-    };
-    $scope.newTopicId = null;
+        $scope.loadMore = function() {
+            // console.log("loadMore");
+            Topics.increaseNewTopicsCount(15);
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+        };
 
-    // save new topic
-    $scope.saveNewTopic = function() {
-        $log.debug('new topic data:', $scope.newTopicData);
-        $ionicLoading.show();
-        Topics.saveNewTopic($scope.newTopicData).$promise.then(function(response) {
-            $ionicLoading.hide();
-            $scope.newTopicId = response.topic_id;
-            $scope.closeNewTopicModal();
-            $timeout(function() {
-                $state.go('tab.topic-detail', {
-                    id: $scope.newTopicId
-                });
+        $scope.moreDataCanBeLoaded = function() {
+            // console.log(Topics.hasNextPage());
+            return Topics.hasNextPage();
+        };
+
+        // Create the new topic modal that we will use later
+        $ionicModal.fromTemplateUrl('newTopic.html', {
+            tabs: Tabs,
+            scope: $scope
+        }).then(function(modal) {
+            $scope.newTopicModal = modal;
+        });
+
+        $scope.newTopicData = {
+            tab: 'share',
+            title: '',
+            content: ''
+        };
+        $scope.newTopicId = null;
+
+        // save new topic
+        $scope.saveNewTopic = function() {
+            $log.debug('new topic data:', $scope.newTopicData);
+            $ionicLoading.show();
+            Topics.saveNewTopic($scope.newTopicData).$promise.then(function(response) {
+                $ionicLoading.hide();
+                $scope.newTopicId = response.topic_id;
+                $scope.closeNewTopicModal();
                 $timeout(function() {
-                    $scope.doRefresh();
+                    $state.go('tab.topic-detail', {
+                        id: $scope.newTopicId
+                    });
+                    $timeout(function() {
+                        $scope.doRefresh();
+                    }, 300);
                 }, 300);
-            }, 300);
-        }, $rootScope.requestErrorHandler);
-    };
-    $scope.$on('modal.hidden', function() {
-        // Execute action
-        if ($scope.newTopicId) {
-            $timeout(function() {
-                $location.path('#/tab/topics/' + $scope.newTopicId);
-            }, 300);
-        }
-    });
-    // show new topic modal
-    $scope.showNewTopicModal = function() {
+            }, $rootScope.requestErrorHandler);
+        };
+        $scope.$on('modal.hidden', function() {
+            // Execute action
+            if ($scope.newTopicId) {
+                $timeout(function() {
+                    $location.path('#/tab/topics/' + $scope.newTopicId);
+                }, 300);
+            }
+        });
+        // show new topic modal
+        $scope.showNewTopicModal = function() {
 
-        // track view
-        if (window.analytics) {
-            window.analytics.trackView('new topic view');
-        }
+            // track view
+            if (window.analytics) {
+                window.analytics.trackView('new topic view');
+            }
 
-        if (window.StatusBar) {
-            StatusBar.styleDefault();
-        }
-        $scope.newTopicModal.show();
-    };
+            if (window.StatusBar) {
+                StatusBar.styleDefault();
+            }
+            $scope.newTopicModal.show();
+        };
 
-    // close new topic modal
-    $scope.closeNewTopicModal = function() {
-        if (window.StatusBar) {
-            StatusBar.styleLightContent();
-        }
-        $scope.newTopicModal.hide();
-    };
+        // close new topic modal
+        $scope.closeNewTopicModal = function() {
+            if (window.StatusBar) {
+                StatusBar.styleLightContent();
+            }
+            $scope.newTopicModal.hide();
+        };
 
 
-})
+    })
+    .controller('TopicCtrl', function($scope, $stateParams) {
+        console.log($stateParams);
+        //$scope.chat = Chats.get($stateParams.chatId);
+    })
+     .controller('NewTopicCtrl', function($scope, $stateParams) {
+        console.log($stateParams);
+        //$scope.chat = Chats.get($stateParams.chatId);
+    })
+    .controller('ChatsCtrl', function($scope, Chats) {
+        // With the new view caching in Ionic, Controllers are only called
+        // when they are recreated or on app start, instead of every page change.
+        // To listen for when this page is active (for example, to refresh data),
+        // listen for the $ionicView.enter event:
+        //
+        //$scope.$on('$ionicView.enter', function(e) {
+        //});
 
-.controller('ChatsCtrl', function($scope, Chats) {
-    // With the new view caching in Ionic, Controllers are only called
-    // when they are recreated or on app start, instead of every page change.
-    // To listen for when this page is active (for example, to refresh data),
-    // listen for the $ionicView.enter event:
-    //
-    //$scope.$on('$ionicView.enter', function(e) {
-    //});
+        $scope.chats = Chats.all();
 
-    $scope.chats = Chats.all();
-
-    $scope.remove = function(chat) {
-        Chats.remove(chat);
-    };
-})
+        $scope.remove = function(chat) {
+            Chats.remove(chat);
+        };
+    })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
         $scope.chat = Chats.get($stateParams.chatId);
@@ -216,7 +192,7 @@ angular.module('starter.controllers', [])
     .controller('GiftDetailCtrl', function($scope, $stateParams, Gift) {
         $scope.gift = Gift.get($stateParams.giftId);
     })
-    .controller('AccountCtrl', function($scope, $rootScope, $ionicModal, $ionicHistory, $ionicLoading, $state, $ionicActionSheet, $log, $timeout, ENV, User) {
+    .controller('AccountCtrl', function($scope, $rootScope, $ionicModal, $ionicHistory, $ionicLoading, $ionicPopup, $state, $ionicActionSheet, $log, $timeout, ENV, User) {
 
         // 监听退出
         $rootScope.$on('app.logout', function() {
@@ -229,48 +205,26 @@ angular.module('starter.controllers', [])
             // $ionicHistory.clearHistory();
             // $ionicHistory.clearCache();
         });
-
+        // 监听登录
+        $rootScope.$on('app.login', function() {
+            $log.debug('login broadcast handle');
+            // get current user
+            var currentUser = User.getCurrentUser();
+            $scope.loginName = currentUser.loginname || null;
+            $scope.currentUser = currentUser;
+        });
         // get current user
         var currentUser = User.getCurrentUser();
         $scope.loginName = currentUser.loginname || null;
         $scope.currentUser = currentUser;
-        if ($scope.loginName !== null) {
-            // $rootScope.getMessageCount();
-        }
-
-        // login action callback
-        var loginCallback = function(response) {
-            $scope.closeLogin();
-            $scope.loginName = response.data.loginname;
-            $scope.currentUser = response.data;
-            // $rootScope.getMessageCount();
-        };
-        // Form data for the login modal
-        $scope.loginData = {};
-
-        $ionicLoading.show();
-
-        // Create the login modal that we will use later
-        $ionicModal.fromTemplateUrl('login.html', {
-            scope: $scope
-        }).then(function(modal) {
-            $scope.modal = modal;
-            $ionicLoading.hide();
-            if (!$scope.loginName) {
-                $scope.modal.show();
-            }
-        });
 
 
-        // Triggered in the login modal to close it
-        $scope.closeLogin = function() {
+
+        $scope.reg = function() {
             $scope.modal.hide();
+            $state.go('tab.reg');
         };
 
-        // Open the login modal
-        $scope.login = function() {
-            $scope.modal.show();
-        };
         $scope.logout = function() {
                 console.log('logout');
                 // Show the action sheet
@@ -295,7 +249,7 @@ angular.module('starter.controllers', [])
             $log.debug('logout button action');
             User.logout();
             $rootScope.$broadcast('app.logout');
-
+            $scope.loginData = {};
             // track event
             /* if (window.analytics) {
                  window.analytics.trackEvent('User', 'logout');
@@ -312,16 +266,51 @@ angular.module('starter.controllers', [])
 
         };
 
+    })
+    .controller('LoginCtrl', function($scope, $rootScope, $ionicActionSheet, $ionicLoading, $state, $ionicPopup, User) {
+        // get current user
+        var currentUser = User.getCurrentUser();
+        $scope.loginName = currentUser.loginname || null;
+        $scope.currentUser = currentUser;
+        if ($scope.loginName !== null) {
+            $state.go("tab.account");
+        }
+        // Form data for the login modal
+        $scope.loginData = {};
         // Perform the login action when the user submits the login form
         $scope.doLogin = function() {
             console.log('Doing login', $scope.loginData);
 
+            $ionicLoading.show();
+
             User.login($scope.loginData.username).$promise.then(loginCallback, $rootScope.requestErrorHandler());
         };
+        // login action callback
+        var loginCallback = function(response) {
+            $ionicLoading.hide();
+            if (typeof response.data == "undefined") {
+                showAlert('提示', response.error_msg);
+            } else {
+                $rootScope.$broadcast('app.login');
+                $state.go("tab.account");
 
+            }
+
+
+        };
+        // 一个提示对话框
+        var showAlert = function(title, template) {
+            var alertPopup = $ionicPopup.alert({
+                title: title,
+                template: template
+            });
+            alertPopup.then(function(res) {
+                console.log('Thank you for not eating my delicious ice cream cone');
+            });
+        };
 
     })
-    .controller('BasicInfoCtrl', function($scope, $ionicActionSheet,User) {
+    .controller('BasicInfoCtrl', function($scope, $ionicActionSheet, User) {
         // get current user
         var currentUser = User.getCurrentUser();
         $scope.loginName = currentUser.loginname || null;
@@ -357,6 +346,15 @@ angular.module('starter.controllers', [])
             });
         };
     })
-
+    .controller('RegCtrl', function($scope, $ionicActionSheet, $state, User) {
+        // get current user
+        var currentUser = User.getCurrentUser();
+        $scope.loginName = currentUser.loginname || null;
+        $scope.currentUser = currentUser;
+        if ($scope.loginName !== null) {
+            $state.go("tab.account");
+        }
+        console.log("RegCtrl");
+    })
 
 ;

@@ -3,9 +3,9 @@ angular.module("starter.config", [])
         // "name": "production",
         "accessToken": '',
         "debug": false,
-        //"api": "http://192.168.22.128:8088",
+        //"api": "/data",
         "api": "http://ionichina.com/api/v1",
-       // "localapi": "http://192.168.22.128:8088/data",
+        "localapi": "/data",
         "appleId": 'id981408438',
         'version': '1.0.1'
     });
