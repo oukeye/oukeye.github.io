@@ -1,14 +1,11 @@
-<ion-view view-title="更改性别">
-    <ion-nav-bar class="bar-dark">
-        <ion-nav-back-button class="button-clear">返回</ion-nav-back-button>
-       
-        <ion-nav-buttons side="primary">
-            <button class="button button-balanced" ng-click="doSomething()">
-                保存
-            </button>
-        </ion-nav-buttons>
-    </ion-nav-bar>
-    <ion-content class="stable-bg">
+<ion-header-bar class="bar-positive">
+    <a class="button icon-left ion-ios-arrow-left button-clear button-linght" ng-click="back()"></a>
+    <h1 class="title">更改性别</h1>
+    <a class="button button-clear button-linght" ng-click="doSomething()">
+            保存</a>
+</ion-header-bar>
+<ion-view>
+    <ion-content class="stable-bg  has-footer">
         <div class="list">
             <label class="item item-input">
                 <input type="text" placeholder="性别">

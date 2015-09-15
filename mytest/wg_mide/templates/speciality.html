@@ -1,0 +1,21 @@
+<ion-header-bar class="bar-positive">
+    <a class="button icon-left ion-ios-arrow-left button-clear button-linght" ng-click="back()"></a>
+    <h1 class="title">更改特长</h1>
+</ion-header-bar>
+<ion-view >
+    <ion-content class="light-bg has-header no-footer">
+     <form name="myForm">
+        <div class="list">
+            <label class="item item-input">
+                <input type="text" placeholder="特长" ng-model="mideApp_user.speciality" required>
+            </label>
+             <label class="item tips_item">
+               <div>准确的特长可以更好的让好友了解你</div>
+            </label>
+        </div>
+        <div class="padding">
+                 <button class="button button-block button-positive" ng-click=save() ng-disabled="myForm.$invalid ">保存</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>
