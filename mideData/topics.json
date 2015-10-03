@@ -21,7 +21,10 @@
         "status": 1,
         "startTime": "2015-09-09 09:00:00",
         "duration": "3小时",
-        "serviceType": "服务类型"
+        "serviceType": "服务类型",
+        "contactPhone": "13580530583",
+        "address": "佛山南海"
+
 
     }, {
         "id": "2",
@@ -42,7 +45,9 @@
         "status": 2,
         "startTime": "2015-09-09 09:00:00",
         "duration": "3小时",
-        "serviceType": "服务类型"
+        "serviceType": "服务类型",
+        "contactPhone": "13580530583",
+        "address": "佛山南海"
 
 
     }, {
@@ -64,7 +69,9 @@
         "status": 2,
         "startTime": "2015-09-09 09:00:00",
         "duration": "3小时",
-        "serviceType": "服务类型"
+        "serviceType": "服务类型",
+        "contactPhone": "13580530583",
+        "address": "佛山南海"
 
 
     }, {
@@ -86,7 +93,9 @@
         "status": 3,
         "startTime": "2015-09-09 09:00:00",
         "duration": "3小时",
-        "serviceType": "服务类型"
+        "serviceType": "服务类型",
+        "contactPhone": "13580530583",
+        "address": "佛山南海"
 
 
     }, {
@@ -108,7 +117,9 @@
         "status": 4,
         "startTime": "2015-09-09 09:00:00",
         "duration": "3小时",
-        "serviceType": "服务类型"
+        "serviceType": "服务类型",
+        "contactPhone": "13580530583",
+        "address": "佛山南海"
 
 
     }]
