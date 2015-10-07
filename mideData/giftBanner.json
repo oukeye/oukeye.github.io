@@ -4,7 +4,7 @@
     "success": true,
     "data": [{
         "id": 1,
-        "image": "http://oukeye.github.io/mideImages/banner/wg_banner1.jpg",
+        "image": "http://oukeye.github.io/mideImages/gift_banner/gift_banner1.jpg",
         "href": "javascirpt:;",
         "addtime": "2015-09-08 10:00:00"
     },{
@@ -15,6 +15,16 @@
     },{
         "id": 3,
         "image": "http://oukeye.github.io/mideImages/gift_banner/gift_banner3.jpg",
+        "href": "javascirpt:;",
+        "addtime": "2015-09-08 10:00:00"
+    },{
+        "id": 4,
+        "image": "http://oukeye.github.io/mideImages/gift_banner/gift_banner4.jpg",
+        "href": "javascirpt:;",
+        "addtime": "2015-09-08 10:00:00"
+    },{
+        "id": 5,
+        "image": "http://oukeye.github.io/mideImages/gift_banner/gift_banner5.jpg",
         "href": "javascirpt:;",
         "addtime": "2015-09-08 10:00:00"
     }]
