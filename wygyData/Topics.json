@@ -30,8 +30,8 @@
             "_wechat": "502342395"
         },
         "HelpRequest": {
-            "_begintime": "\/Date(1444579200000+0800)\/",
-            "_createdate": "\/Date(1444658237000+0800)\/",
+            "_begintime": "2015-01-01",
+            "_createdate": "2015-01-01",
             "_detail": "333333333333",
             "_duration": 3,
             "_id": 1,
@@ -43,12 +43,12 @@
             "_status": 1,
             "_title": "第一个人工求助",
             "_undertakerid": 1,
-            "_updatedate": "\/Date(1444658237000+0800)\/"
+            "_updatedate": "2015-01-01"
         },
         "Helper": {
             "_address": "广州市",
             "_birthday": "19870908",
-            "_createdate": "\/Date(1444657676000+0800)\/",
+            "_createdate": "2015-01-01",
             "_education": "本科",
             "_email": "mide_2008@126.com",
             "_flag": 2,
@@ -69,7 +69,7 @@
             "_sex": "男",
             "_specialskill": "编程",
             "_status": 0,
-            "_updatedate": "\/Date(1444657676000+0800)\/",
+            "_updatedate": "2015-01-01",
             "_wechat": "502342395"
         },
         "ID":1
