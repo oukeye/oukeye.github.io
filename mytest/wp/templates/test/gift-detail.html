@@ -1,0 +1,42 @@
+<ion-modal-view>
+    <ion-header-bar class=" bar-positive nav-title-slide-full">
+        <div class="buttons">
+            <button class="button button-clear  icon-left ion-android-arrow-back" ng-click="closeGiftModal()"></button>
+        </div>
+        <h1 class="title title-center">礼品店</h1>
+    </ion-header-bar>
+    <ion-content class="padding  no-footer" has-bouncing="true" delegate-handle="giftDetailScroll">
+        <div class="list" >
+            <div class="row">
+                <div class="col col-50 ">
+                    <img ng-src="{{buyGift._photourl}} " style="width:100%;border:1px solid #ccc; ">
+                </div>
+                <div class="col ">
+                 <div class="row ">
+                        <div class="col ">名称 : {{buyGift._title}}</div>
+                    </div>
+                    <div class="row ">
+                        <div class="col ">价格 : {{buyGift._needscores}}积分</div>
+                    </div>
+                   
+                    <div class="row ">
+                        <div class="col ">库存 : {{buyGift._count}}件</div>
+                    </div>
+                </div>
+            </div>
+            <div class=" bar-positive item item-input">
+                <span class="input-label">数量:</span>
+                <numberinput buycount='buyGift.buyCount' maxCount="{{buyGift._count}}"></numberinput>
+            </div>
+            <button class="button button-block button-positive " ng-click="showGiftsheet('兑换') ">
+                确认兑换
+            </button>
+            <div class="item item-body ">
+                <h3>说明:</h3>
+                <p>
+                    {{buyGift._detail}}
+                </p>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

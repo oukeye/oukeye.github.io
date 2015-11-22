@@ -1,0 +1,40 @@
+<ion-modal-view>
+    <ion-header-bar class=" bar-positive nav-title-slide-full">
+        <div class="buttons">
+            <button class="button button-clear icon-left ion-android-arrow-back" ng-click="closeTeamDetailModal()"></button>
+        </div>
+        <h1 class="title title-center">网益公益</h1>
+        <div class="buttons">
+            <button class="button button-clear icon " ng-click="showTeamAction()" ng-if="buttonName!=''">{{buttonName}}</button>
+        </div>
+    </ion-header-bar>
+    <ion-content has-bouncing="true" padding="false" class="has-header  no-footer" delegate-handle="teamDetailMainScroll">
+        <div ng-if="current_team">
+            <div class="list card topics ">
+                <div class="item">
+                    <h2>{{current_team._name}}</h2>
+                </div>
+                <div class="item summary" style="padding:4px;">
+                    <div class="row">
+                        <div class="col text-ellipsis"><span>联系人:</span> {{current_team._linkman}}</div>
+                        <div class="col text-ellipsis text-right  contactPhone"> <a href="tel:{{current_team._linkphone}}"><i class="ion-ios-telephone "> </i>{{current_team._linkphone}}</a></div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><span>区域:</span> {{current_team._region}}</div>
+                        <div class="col text-right">服务类型:{{current_team._serviceintention }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><span>地址:</span> {{current_team._linkaddress}}</div>
+                    </div>
+                </div>
+                <div class="item item-body" ng-bind-html="current_team._teamaim">
+                </div>
+                <div class="item  item-divider">成员列表</div>
+                <a href="tel:{{member._phone}}" class="item item-avatar item-icon-right" ng-repeat="member in current_team.menberlist">
+                    <img ng-src="{{member._photourl}}">{{member._name}}
+                    <span class="item-note"><i class="icon ion-ios-telephone positive"></i></span>
+                </a>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

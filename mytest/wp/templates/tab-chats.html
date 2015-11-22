@@ -1,0 +1,21 @@
+<ion-view view-title="网益公益">
+  
+    <ion-content class="has-tabs "  has-bouncing="true">
+        <ion-refresher pulling-text="下拉刷新..." spinner="spiral" on-refresh="doRefresh()" class="wg_spinner">
+        </ion-refresher>
+        <ion-list show-delete="flag.showDelete" ng-if="chatsConfig.chats">
+            <ion-item ng-repeat="chat in chatsConfig.chats">
+                <p>{{chat.addtime}}</p>
+                <p style="color:#000;font-weight:bold">{{chat._title}}</p>
+                <p style="color:#000;white-space: pre">{{chat._noticecontent}}</p>
+                <ion-option-button class="button-assertive icon ion-close-round" ng-click="deleteItem(chat,chat._id)"></ion-option-button>
+                <ion-delete-button class="ion-minus-circled" ng-click="deleteItem(chat,chat._id)"></ion-delete-button>
+            </ion-item>
+        </ion-list>
+        <div ng-if="chatsConfig.chats.length <1"  style="height:100%;color:#e6e6e6;padding:20px;">
+            <i class="ion-chatbubble-working center" style="font-size:80px;"></i>
+            <div  class="center"  style="font-size:20px;color:#afafaf;">您没有消息</div>
+        </div>
+        <ion-infinite-scroll on-infinite="infinite()" distance="1%" ng-if="chatsConfig.infinite" spinner="spiral" class="wg_spinner"></ion-infinite-scroll>
+    </ion-content>
+</ion-view>

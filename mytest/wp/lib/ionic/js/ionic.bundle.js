@@ -58341,6 +58341,7 @@ function($timeout, $compile, $ionicSlideBoxDelegate, $ionicHistory, $ionicScroll
         startSlide: $scope.activeSlide,
         slidesChanged: function() {
           $scope.currentSlide = slider.currentIndex();
+
           // Try to trigger a digest
           $timeout(function() {});
         },
@@ -58348,7 +58349,6 @@ function($timeout, $compile, $ionicSlideBoxDelegate, $ionicHistory, $ionicScroll
           $scope.currentSlide = slideIndex;
           $scope.onSlideChanged({ index: $scope.currentSlide, $index: $scope.currentSlide});
           $scope.$parent.$broadcast('slideBox.slideChanged', slideIndex);
-          console.log("slideIndex is "+slideIndex);
           $scope.activeSlide = slideIndex;
           // Try to trigger a digest
           $timeout(function() {});
@@ -58361,8 +58361,6 @@ function($timeout, $compile, $ionicSlideBoxDelegate, $ionicHistory, $ionicScroll
         }
       });
 
-
-      $scope.sliderObj = slider;
       function freezeAllScrolls(shouldFreeze) {
         if (shouldFreeze && !_this.isScrollFreeze) {
           $ionicScrollDelegate.freezeAllScrolls(shouldFreeze);

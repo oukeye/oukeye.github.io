@@ -1,0 +1,43 @@
+<ion-modal-view>
+    <ion-header-bar class=" bar-positive nav-title-slide-full">
+        <div class="buttons">
+            <button class="button button-clear icon-left ion-android-arrow-back" ng-click="closeHelpAndAskModal()"></button>
+        </div>
+        <h1 class="title title-center">求助与帮助</h1>
+        </div>
+    </ion-header-bar>
+    <div class="tabs-striped  tabs-color-positive tabs-top tabs-light tabs-icon-top">
+        <div class="tabs">
+            <a ng-class="{ask: 'tab-item active', help: 'tab-item'}[helpAndAsk_isActive]" data-active="ask" ng-click="helpAndAsk_changeTab($event)" style="font-size:16px;line-height:48px;">我的求助</a>
+            <a ng-class="{ask: 'tab-item', help: 'tab-item active'}[helpAndAsk_isActive]" data-active="help" ng-click="helpAndAsk_changeTab($event)" style="font-size:16px;line-height:48px;">我的帮助</a>
+        </div>
+    </div>
+    <ion-content class=" has-subheader " has-bouncing="true" delegate-handle="helpAndAskScroll">
+        <ion-refresher pulling-text="下拉刷新..." spinner="spiral" on-refresh="doRefresh()" class="wg_spinner">
+        </ion-refresher>
+         <div ng-if="activeConfig.topics.length <1"  style="height:100%;color:#e6e6e6;padding:20px;">
+            <i class="ion-chatbubble-working center" style="font-size:80px;"></i>
+            <div  class="center"  style="font-size:20px;color:#afafaf;">没有数据</div>
+        </div>
+        <div class=" list topics" ng-if="activeConfig.topics">
+            <!--    <div class="item item-divider">求助列表</div> -->
+            <div class="item item-avatar" collection-repeat="topic in activeConfig.topics" collection-item-width="'100%'" collection-item-height="65px" ng-click="showTopicModal(topic.HelpRequest._id)">
+               
+                <img src='img/commentfailure.jpg' defaultsrc="topic.Author._photourl" default-img />
+                <h2 class='row row_wrap'>
+                <span class='col title_col' >{{topic.HelpRequest._title}}</span>
+                 <span class=" ago time_col" am-time-ago="topic.HelpRequest._createdate" vam-preprocess="unix" ></span>
+                </h2>
+                <p class="summary">
+                    <span ng-if="topic.HelpRequest._type==1" class="tab status1">求助</span>
+                    <span ng-if="topic.HelpRequest._type==2" class="tab status5">助人</span>
+                    <span class="tab">发起人:</span> {{topic.Author._nickname}}
+                    <span ng-if="topic.HelpRequest._status==0" class="tab status3 item-note">待配对</span>
+                    <span ng-if="topic.HelpRequest._status==1" class="tab status2 item-note">已配对</span>
+                    <span ng-if="topic.HelpRequest._status==2" class="tab status4 item-note">已完成</span>
+                </p>
+            </div>
+        </div>
+        <ion-infinite-scroll on-infinite="helpAndAsk_infinite()" distance="1%" ng-if="activeConfig.infinite" spinner="spiral" class="wg_spinner"></ion-infinite-scroll>
+    </ion-content>
+</ion-modal-view>

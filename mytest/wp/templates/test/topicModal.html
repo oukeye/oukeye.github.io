@@ -1,0 +1,61 @@
+<ion-modal-view>
+    <ion-header-bar class=" bar-positive nav-title-slide-full">
+        <div class="buttons">
+            <button class="button icon-left ion-android-arrow-back button-clear" ng-click="closeTopicModal()"></button>
+        </div>
+        <h1 class="title title-center">网益公益</h1>
+        <div class="buttons">
+            <button class="button button-clear icon " ng-click="help()" ng-if="show_help_button">{{buttonName}}</button>
+        </div>
+    </ion-header-bar>
+    <ion-content has-bouncing="true" padding="false" class="has-header  no-footer" delegate-handle="topicMainScroll">
+        <div ng-if="current_topic">
+            <div class="list card topics ">
+                <div class="item item-avatar">
+                    <img src='img/commentfailure.jpg' defaultsrc="current_topic.Author._photourl" default-img />
+                    <h2>{{current_topic.HelpRequest._title}}</h2>
+                    <p class="summary">
+                        <span ng-if="current_topic.HelpRequest._type==1" class="tab status1">求助</span>
+                        <span ng-if="current_topic.HelpRequest._type==2" class="tab status5">助人</span>
+                        <span class="tab">发起人:</span> {{current_topic.Author._nickname}}
+                        <span ng-if="current_topic.HelpRequest._status==0" class="tab status3 item-note">待配对</span>
+                        <span ng-if="current_topic.HelpRequest._status==1" class="tab status2 item-note">已配对</span>
+                        <span ng-if="current_topic.HelpRequest._status==2" class="tab status4 item-note">已完成</span>
+                    </p>
+                </div>
+                <div class="item item-avatar " ng-if="current_topic.Helper._id">
+                    <img src='img/commentfailure.jpg' defaultsrc="current_topic.Helper._photourl" default-img />
+                    <!-- <h2>{{current_topic.HelpRequest._title}}</h2> -->
+                    <p class="summary">
+                        <span class="tab">承接人:</span> {{current_topic.Helper._nickname}}
+                        <span ng-if="current_topic.HelpRequest._status==1" class="item-note contactPhone summary"> <a href="tel:{{current_topic.Helper._phone}}"><i class="ion-ios-telephone "> </i>{{current_topic.Helper._phone}}</a></span>
+                    </p>
+                                           
+                    <p class="summary">   
+                     <span class="tab">承接时间:</span><span class="item-note summary">{{current_topic.Helper._updatedate | CdateTime}}</span>
+                    </p>
+                </div>
+                <div class="item summary" style="padding:4px;">
+                    <div class="row">
+                        <div class="col text-ellipsis"><span>联系人:</span> {{current_topic.HelpRequest._linkman}}</div>
+                        <div class="col text-ellipsis text-right"> {{current_topic.HelpRequest._region}}</div>
+                    </div>
+                    <dov class="row">
+                        <div class="col  text-ellipsis">联系电话</div>
+                        <div class="col  text-ellipsis text-right contactPhone"><a href="tel:{{current_topic.HelpRequest._linkphone}}"><i class="ion-ios-telephone "> </i>{{current_topic.HelpRequest._linkphone}}</a></div>
+                    </dov>
+                    <div class="row">
+                        <div class="col"><span>开始时间:</span> {{current_topic.HelpRequest._begintime  | CdateTime}}</div>
+                        <div class="col text-right"><span>时长:</span> {{current_topic.HelpRequest._duration}}小时</div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><span>服务类型:</span> {{current_topic.HelpRequest._serviceintention}}</div>
+                        <div class="col text-right">发布时间:<span class="item-note ago" am-time-ago="current_topic.HelpRequest._createdate" vam-preprocess="unix"></span></div>
+                    </div>
+                </div>
+                <div class="item item-body" ng-bind-html="current_topic.HelpRequest._detail">
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

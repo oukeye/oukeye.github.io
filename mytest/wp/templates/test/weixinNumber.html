@@ -1,0 +1,21 @@
+ <ion-header-bar class="bar-positive">
+    <a class="button icon-left ion-android-arrow-back button-clear button-linght" ng-click="back()"></a> 
+    <h1 class="title">更改微信</h1>
+ </ion-header-bar>
+<ion-view >
+    <ion-content class="light-bg has-header no-footer">
+     <form name="myForm">
+        <div class="list">
+            <label class="item item-input">
+                <input type="text" placeholder="微信号码" ng-model="mideApp_user.weixinNumber" required>
+            </label>
+             <label class="item tips_item">
+               <div>常用的微信可以更好的让好友联系您</div>
+            </label>
+        </div>
+        <div class="padding">
+                 <button class="button button-block button-positive" ng-click=save() ng-disabled="myForm.$invalid ">保存</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

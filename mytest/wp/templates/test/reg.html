@@ -1,0 +1,72 @@
+<ion-view view-title="注册">
+    <ion-nav-buttons side="left">
+        <button class="button icon-left ion-android-arrow-back button-clear button-linght" ng-click="back()"></button>
+    </ion-nav-buttons>
+    <ion-content class='has-tabs'>
+        <form name='reg' >
+            <div class="list css-valid-form">
+                <div class="item item-input item-avatar-right headImg_40 text-midel" style="padding-top:6px;padding-bottom:6px;" ng-click="showGetImagesheet()">
+                    <img ng-src="{{mideApp_user_reg.avatar_url||'img/commentfailure.jpg'}}" style="width:100%"> 头像
+                </div>
+                <label class="item item-input item-icon-right">
+                    <span class="input-label">账号:</span>
+
+                    <input type="text" ng-model="mideApp_user_reg.username" name="username" placeholder="长度6~32位，字母或数字组合" required ng-minlength="6" ng-maxlength="32"> 
+                    <i class="icon ion-close-circled error_icon" ng-show='reg.username.$invalid' ></i>
+                    <i class="icon ion-checkmark-circled success_icon" ng-show='!reg.username.$invalid'></i>                  
+                </label>
+                <label class="item item-input item-icon-right">
+                    <span class="input-label">密码:</span>
+                    <input type="password" ng-model="mideApp_user_reg.password" name="password" placeholder="至少6位，字母或数字组合" ng-minlength="6" required>
+                    <i class="icon ion-close-circled error_icon" ng-show='reg.password.$invalid' ></i>
+                    <i class="icon ion-checkmark-circled success_icon" ng-show='!reg.password.$invalid'></i>
+                </label>
+                <label class="item item-input item-icon-right">
+                    <span class="input-label">确认密码:</span>
+                    <input type="password" ng-model="mideApp_user_reg.confirmPassword" name="confirmPassword" placeholder="再输入密码"   ng-minlength="6" required>
+                    <i class="icon ion-close-circled error_icon" ng-show='reg.confirmPassword.$invalid' ></i>
+                    <i class="icon ion-checkmark-circled success_icon" ng-show='!reg.confirmPassword.$invalid'></i>
+                </label>
+                 <label class="item item-input item-icon-right">
+                    <span class="input-label">姓名:</span>
+                    <input type="text" ng-model="mideApp_user_reg.nickname" name="nickname" placeholder="请输入姓名" required ng-minlength="2"  required>
+                    <i class="icon ion-close-circled error_icon" ng-show='reg.nickname.$invalid' ></i>
+                    <i class="icon ion-checkmark-circled success_icon" ng-show='!reg.nickname.$invalid'></i>
+                </label>
+                <label class="item item-input item-icon-right">
+                    <span class="input-label">性别:</span>
+                    <input type="text" ng-model="mideApp_user_reg.gender" name="gender" placeholder="请选择性别" ng-click="showGendersheet()" readonly="readonly" class="light" style="background:#fff" required>
+                    <i class="icon ion-close-circled error_icon" ng-show='reg.gender.$invalid' ></i>
+                    <i class="icon ion-checkmark-circled success_icon" ng-show='!reg.gender.$invalid'></i>
+                </label>
+                <label class="item item-input item-icon-right">
+                    <span class="input-label">联系电话:</span>
+                    <input type="tel" ng-model="mideApp_user_reg.phoneNumber"  name="phoneNumber" placeholder="11位数字" ng-maxlength="11" maxlength="11"  ng-pattern="/^[0-9]{11}$/" required>
+                    <i class="icon ion-close-circled error_icon" ng-show='reg.phoneNumber.$invalid' ></i>
+                    <i class="icon ion-checkmark-circled success_icon" ng-show='!reg.phoneNumber.$invalid'></i>
+                </label>
+                <label class="item item-input item-icon-right">
+                    <span class="input-label">邮箱:</span>
+                    <input type="email" ng-model="mideApp_user_reg.email" name="email" placeholder="请输入邮箱"  ng-pattern="/^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/" required>
+                    <i class="icon ion-close-circled error_icon" ng-show='reg.email.$invalid' ></i>
+                    <i class="icon ion-checkmark-circled success_icon" ng-show='!reg.email.$invalid'></i>
+                </label>
+                <label class="item item-input item-icon-right" >
+                    <span class="input-label">QQ:</span>
+                    <input type="text" ng-model="mideApp_user_reg.QQnumber" name="QQnumber" placeholder="请输入QQ号码" ng-pattern="/^[0-9]*$/" ng-minlength="5" >
+                    <i class="icon ion-close-circled error_icon" ng-show='reg.QQnumber.$invalid' ></i>
+                    <i class="icon ion-checkmark-circled success_icon" ng-show='!reg.QQnumber.$invalid'></i>
+                </label>
+            </div>
+            <div class="padding">
+                <div class="row">
+                    <dov class="col"><a class="button button-block button-positive " ng-click=doReg(0) ng-disabled=reg.$invalid>提交</a>
+                    </dov>
+                    <dov class="col">
+                        <a class="button button-block button-positive" ng-click="showReForHelpModal()" ng-disabled=reg.$invalid>注册求助者</a>
+                    </dov>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

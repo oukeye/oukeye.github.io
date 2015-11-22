@@ -12149,19 +12149,23 @@ Copyright (c) 2015 Daniel Eden
   .price_wrap .up {
     color: #ff2e73; }
     .price_wrap .up .price_value {
-      border: 1px solid #ff2e73; }
+      border: 1px solid transparent; }
       .price_wrap .up .price_value .ion-arrow-up-b {
         display: ''; }
       .price_wrap .up .price_value .ion-arrow-down-b {
         display: none; }
+  .price_wrap .show-border .up {
+    border: 1px solid #ff2e73; }
   .price_wrap .down {
     color: #2effdf; }
     .price_wrap .down .price_value {
-      border: 1px solid #2effdf; }
+      border: 1px solid transparent; }
       .price_wrap .down .price_value .ion-arrow-up-b {
         display: none; }
       .price_wrap .down .price_value .ion-arrow-down-b {
         display: ''; }
+  .price_wrap .show-border .down {
+    border: 1px solid #2effdf; }
   .price_wrap .price_left {
     font-size: 22px;
     line-height: 45px; }
