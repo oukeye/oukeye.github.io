@@ -3,7 +3,7 @@
     <ion-content class=" has-tabs royal-bg" delegate-handle="mainScroll">
         <div class="list">
             <label class="item item_wp button_recharge_line" >
-                <span class="item-note text_wp">￥{{currentProduct.currentCartIndex}}</span>
+                <span class="item-note text_wp moneyIcon">￥{{currentProduct.currentCartIndex}}</span>
                 <button class="button button-small  item-note  button_wp button_recharge">充值</button>
                 <!-- <input type="text" placeholder="微信号码" ng-model="mideApp_user.weixinNumber" required> -->
             </label>
@@ -24,15 +24,18 @@
                         </dov>
                     </div>
                 </div>
-                <div id="kLine" style="height:{{chart_Height}}px;"></div>
+                <div id="kLine" style="height:{{chart_Height}}px;position:relative">
+                     <div class='center kLine_loading' style="height:{{chart_Height}}px;" ng-hide="myChart.isShow">加载中...</div> 
+                </div>
+               
             </label>
             <lable class="item item_wp button_line" style="padding:0;">
                 <div class="row">
-                    <div class="col text-center " ng-click="changeSJ(1)" ng-class="{1:'active'}[currentProduct.clickSj]">分时线</div>
-                    <div class="col text-center" ng-click="changeSJ(5)" ng-class="{5:'active'}[currentProduct.clickSj]">5分钟</div>
-                    <div class="col text-center" ng-click="changeSJ(15)" ng-class="{15:'active'}[currentProduct.clickSj]">15分钟</div>
-                    <div class="col text-center" ng-click="changeSJ(30)" ng-class="{30:'active'}[currentProduct.clickSj]">30分钟</div>
-                    <div class="col text-center" ng-click="changeSJ(60)" ng-class="{60:'active'}[currentProduct.clickSj]">1小时</div>
+                    <div class="col text-center " on-touch="changeSJ(1)" ng-class="{1:'active'}[currentProduct.clickSj]">分时线</div>
+                    <div class="col text-center" on-touch="changeSJ(5)" ng-class="{5:'active'}[currentProduct.clickSj]">5分钟</div>
+                    <div class="col text-center" on-touch="changeSJ(15)" ng-class="{15:'active'}[currentProduct.clickSj]">15分钟</div>
+                    <div class="col text-center" on-touch="changeSJ(30)" ng-class="{30:'active'}[currentProduct.clickSj]">30分钟</div>
+                    <div class="col text-center" on-touch="changeSJ(60)" ng-class="{60:'active'}[currentProduct.clickSj]">1小时</div>
                 </div>
             </lable>
         </div>
@@ -40,22 +43,22 @@
             <ion-slide-box class="slidebox fadeInDown"  on-slide-changed="changeCallBack($index)" auto-play="false"  does-continue="true" delegate-handle="productCart">
                 <div class="slider-slide" ng-repeat="item in protuct">
                     <div class="row slide_box" >
-                        <div class="col product_box" >
+                        <div class="col product_box hairlines" >
                             <div class="text-center price_info">100元/手</div>
                             <div class="text-center productType_info">150g粤银</div>
                             <div class="text-center yingku_info">浮动盈亏:010元</div>
                             <div class="row buy_btn_line">
-                                <div class="col text-center">买涨</div>
-                                <div class="col text-center">买跌</div>
+                                <div class="col text-center" on-touch='showOrdersModal()'>买涨</div>
+                                <div class="col text-center" on-touch='showOrdersModal()'>买跌</div>
                             </div>
                         </div>
-                        <div class="col product_box">
+                        <div class="col product_box hairlines">
                             <div class="text-center price_info">100元/手</div>
                             <div class="text-center productType_info">150g粤银</div>
                             <div class="text-center yingku_info">浮动盈亏:010元</div>
                             <div class="row buy_btn_line">
-                                <div class="col text-center">买涨</div>
-                                <div class="col text-center">买跌</div>
+                                <div class="col text-center" on-touch='showOrdersModal()'>买涨</div>
+                                <div class="col text-center" on-touch='showOrdersModal()'>买跌</div>
                             </div>
                         </div>
                     </div>

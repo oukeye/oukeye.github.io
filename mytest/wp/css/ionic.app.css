@@ -9420,6 +9420,13 @@ a.button {
   -moz-align-items: center;
   align-items: center; }
 
+.center_h {
+  display: box;
+  display: -webkit-box;
+  display: -moz-box;
+  -webkit-box-align: center;
+  -moz-box-align: center; }
+
 .teamList {
   width: 50%;
   height: 100px;
@@ -12119,7 +12126,7 @@ Copyright (c) 2015 Daniel Eden
   padding: 8px 16px;
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid #222626; }
+  border-bottom: thin solid #222626; }
 
 .button_recharge_line {
   padding: 4px 16px; }
@@ -12173,6 +12180,11 @@ Copyright (c) 2015 Daniel Eden
     color: #69818b;
     text-align: right;
     font-size: 12px; }
+  .price_wrap .kLine_loading {
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px; }
 
 .button_line {
   color: #999999;
@@ -12186,8 +12198,8 @@ Copyright (c) 2015 Daniel Eden
 
 .product .product_box {
   margin: 0px 6px;
-  border: 1px solid #f2e600;
-  border-radius: 10px;
+  /*  border: 1px solid $positive;
+       border-radius: 10px; */
   color: #ffffff;
   padding: 0px; }
   .product .product_box .buy_btn_line {
@@ -12215,6 +12227,61 @@ Copyright (c) 2015 Daniel Eden
   line-height: 27px;
   font-size: 14px; }
 
+.moneyIcon {
+  font-family: arial,'Microsoft Yahei', 微软雅黑,  宋体, sans-serif; }
+
+.hairlines {
+  position: relative;
+  margin-bottom: 20px;
+  border: none; }
+
+.hairlines:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid #f2e600;
+  border-radius: 10px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 200%;
+  height: 200%;
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
+  -webkit-transform-origin: left top;
+  transform-origin: left top; }
+
+.orders_modal {
+  background-color: rgba(17, 17, 17, 0.9); }
+  .orders_modal .scroll {
+    width: 100%; }
+  .orders_modal .item {
+    border: none; }
+  .orders_modal .order_title {
+    height: 60px;
+    background-color: #f2e600;
+    position: relative; }
+    .orders_modal .order_title .input-label {
+      font-size: 38px; }
+    .orders_modal .order_title .colse_btn {
+      top: 16px; }
+      .orders_modal .order_title .colse_btn .icon:before {
+        font-size: 42px; }
+  .orders_modal .buy_btn {
+    margin-top: 47px; }
+  .orders_modal .round {
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px; }
+  .orders_modal .round_top {
+    -moz-border-radius: 8px 8px 0px 0px;
+    -webkit-border-radius: 8px 8px 0px 0px;
+    border-radius: 8px 8px 0px 0px; }
+  .orders_modal .round_bottom {
+    -moz-border-radius: 0px 0px 8px 8px;
+    -webkit-border-radius: 0px 0px 8px 8px;
+    border-radius: 0px 0px 8px 8px; }
+
 .nav-bar-tabs-top.hide + .view-container > .tabs-top > .tabs,
 .tabs.tabs-top {
   top: 0 !important; }
@@ -12223,3 +12290,6 @@ Copyright (c) 2015 Daniel Eden
   text-align: center;
   left: 55px;
   right: 55px; }
+
+body {
+  font-family: arial,'Microsoft Yahei', 微软雅黑,  宋体, sans-serif; }
