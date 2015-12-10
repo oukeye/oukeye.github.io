@@ -1,4 +1,4 @@
-myApp.controller('TopicsCtrl', function($scope, $timeout, $ionicModal, $ionicScrollDelegate, sj, windowInfo, price) {
+myApp.controller('TopicsCtrl', function($scope, $timeout, $ionicModal, $ionicSlideBoxDelegate,$ionicScrollDelegate, sj, windowInfo, price) {
 
     $scope.chartOption = sj.getChartOption(1)
     $scope.newprice = price.getPriceData();
@@ -61,6 +61,9 @@ myApp.controller('TopicsCtrl', function($scope, $timeout, $ionicModal, $ionicScr
             }
         }, 800);
 
+    }
+    $scope.slideTo=function(index){
+        $ionicSlideBoxDelegate.slide(index)
     }
 
     $scope.windowInfo = windowInfo.getWindowInfo();
