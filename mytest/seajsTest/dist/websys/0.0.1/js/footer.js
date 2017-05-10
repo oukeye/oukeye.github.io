@@ -1,1 +1,0 @@
-define("websys/0.0.1/js/footer",["jquery/1.10.1/jquery"],function(e,r,t){var u=e("jquery/1.10.1/jquery"),n=(new Date).getFullYear();t.exports=function(e,r,t){u(e).html("Copyright ©"+r+"-"+n+" "+t)}});
