@@ -1,0 +1,36 @@
+<ion-modal-view class="transparent_bg_modal orderHistroy-detail-view ">
+    <ion-header-bar class=" bar-energized nav-title-slide-full">
+        
+        <h1 class="title title-center">收支详情</h1>
+        <div class="buttons">
+            <a class="button button-icon icon ion-ios-close-empty light" on-tap="closeOrderHistoryDetailModal()"></a>
+        </div>
+    </ion-header-bar>
+    <ion-content class="dark-bg has-header" has-bouncing="false" delegate-handle="orderHistoryDetailScroll">
+        <div class="list">
+            <div class="item">
+                <span class="label">流水号:</span><span class="value">{{currontOrderHistory.context}}</span>
+            </div>
+            <div class="item">
+                <span class="label">类型:</span><span class="value">{{currontOrderHistory.transactionTypeName}}</span>
+            </div>
+            <div class="item">
+                <span class="label">时间:</span><span class="value">{{currontOrderHistory.formatDate}}</span>
+            </div>
+        </div>
+        <div class="list">
+            <div class="item transactionMoney">
+                <span class="label">收/支:</span><span class="value " ng-class="{up:currontOrderHistory.transactionMoney>0,down:currontOrderHistory.transactionMoney<=0}">
+               
+                {{currontOrderHistory.moneyString}}
+                元</span>
+            </div>
+            <div class="item">
+                <span class="label">余额:</span><span class="value">{{currontOrderHistory.remainingMoney}}</span>
+            </div>
+            <div class="item">
+               <span class="label">备注:</span><span class="value">{{currontOrderHistory.mark}}</span>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

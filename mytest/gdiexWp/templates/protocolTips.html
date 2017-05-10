@@ -1,0 +1,73 @@
+<ion-modal-view class="protocolTips-view">
+    <ion-header-bar class=" bar-energized nav-title-slide-full">
+        
+        <h1 class="title title-center">粤国际微盘微协议</h1>
+        <div class="buttons">
+            <button class="button button-clear  icon-left ion-android-close" on-tap="closeProtocolModal()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content has-bouncing="false" padding="false" class="padding light-bg  has-footer" delegate-handle="protocolTipsScroll">
+        <div class="r-con " style="overflow: scroll;">
+            <p class="r-s-title">甲方:<span id="member" style="border-bottom:1px solid #000000" ng-bind="memberName"></span> </p>
+            <p class="r-s-title">乙方:<span style="border-bottom:1px solid #000000">本协议签署或确认方</span> </p>
+            <p class="r-s-title"></p>
+            <p class="r-s-title">一、合同主体</p>
+            <p class="">(一) 甲方为广东国际商品交易中心有限公司（下称“交易中心”）的挂牌会员，在交易中心微盘平台上开展有关商品的现货交易业务（下称“交易业务”）的企业法人或者其他经济组织。</p>
+            <p class="">(二) 乙方为根据交易中心相关规定，向挂牌会员申请开户，并与挂牌会员在交易中心微盘上进行有关商品交易的客户。乙方提供的开户资料虚假的，由此而引起的一切后果自行承担。甲方终止微盘业务的，乙方同意由交易中心旗下其他挂牌会员继承本协议中甲方的权利义务。</p>
+            <p class="r-s-title"></p>
+            <p class="r-s-title">二、交易事项</p>
+            <p class="">(一) 甲方和乙方同意根据中华人民共和国有关法律法规、本协议约定及交易中心现行的或将来颁布的有关交易制度，在交易中心微盘平台上进行交易，并服从交易中心的监督管理。</p>
+            <p class="">(二) 在交易中心微信平台上下达的交易指令，不得撤回或撤销。</p>
+            <p class="">(三) 乙方自行对交易盈亏等风险结果负责，且在交易过程中产生的一切纠纷均由双方自行解决，与交易中心无关。</p>
+            <p class="r-s-title"></p>
+            <p class="r-s-title">三、交易标的</p>
+            <p class="">交易中心微信平台上上线交易的所有商品，具体交易数量按交易中心发布的相关交易规则及管理规定执行。</p>
+            <p class="r-s-title"></p>
+            <p class="r-s-title">四、交易报价</p>
+            <p class="">交易中心综合国际大宗商品现货市场价格和国内其他大宗商品现货市场价格以及中国人民银行人民币兑美元基准汇率、市场供求关系等，连续报出交易中心大宗商品现货的人民币中间指导价。交易中心根据相应的管理办法，在上述人民币中间指导价的基础上，连续报出大宗商品现货的人民币价格。</p>
+            <p class="r-s-title"></p>
+            <p class="r-s-title">五、账户管理</p>
+            <p class="">(一) 凡通过乙方的交易账户和密码进行的交易操作，无论是否确属乙方本人进行的交易，均视为是乙方操作，乙方对交易结果负责。</p>
+            <p class="">（二）乙方必须对交易账户和密码妥善保管，密码丢失的，可申请密码重置。因乙方密码遗失及被盗导致的损失，均与甲方及交易中心无关，由乙方自行承担。</p>
+            <p class="">（三）交易中心的电话录音、系统记录等证据具有法律效力，甲、乙双方所有交易数据以交易中心提供的为准。</p>
+            <p class="">（四）乙方开户申请资料发生变化时，应及时通知甲方，否则因此造成的损失由乙方自行承担。</p>
+            <p class="">（五）乙方不得以任何方式委托甲方、交易中心及其工作人员代为操作交易账户，否则因此而造成的损失由乙方自行承担。</p>
+            <p class="r-s-title"></p>
+            <p class="r-s-title">六、交易保证金</p>
+            <p class="">甲、乙双方均须按交易中心有关规定预存交易保证金，以确保交易顺利进行，预存的交易保证金不享有利息。</p>
+            <p class="r-s-title"></p>
+            <p class="r-s-title">七、交易及结算休市时间</p>
+            <p class="">交易中心按照不同商品在官网上公布具体的开市时间，具体开市、休市时间遇国家法定节假日、国际市场休市则另行通知。</p>
+            <p class="r-s-title"></p>
+            <p class="r-s-title">八、交易费用</p>
+            <p class="">乙方按交易中心的有关规定向甲方支付交易手续费，若乙方要求交收的，产生的库存费、提货费、交货费等费用，按交易中心的有关规定执行。</p>
+            <p class="r-s-title"></p>
+            <p clas="r-s-title">九、结算与清算</p>
+            <p class="">甲、乙双方同意执行交易中心的资金管理、结算和清算等制度。</p>
+            <p class="e">因系统后台保留的小数点位数要长于前端展示给客户的小数点位数，加之系统后台计算自动四舍五入因素，两种数据取值的计算结果存在一定差异，以系统后台结算数据为准。</p>
+            <p class="r-s-title"></p>
+            <p class="r-s-title">十、免责条款</p>
+            <p class="">（一）由于交易是通过电子通讯技术来实现的，这些技术存在着被网络黑客和病毒攻击的可能，由此可能给客户带来损失，该损失由客户自行承担，甲方和交易中心不承担任何责任。</p>
+            <p class="">（二）由于微盘并不能控制电讯信号的中断和连接以及互联网的畅通，也不能保证客户自身网络设备及电讯设备的稳定性，由此等原因而使客户遭受的损失，由客户自行承担，甲方和交易中心不承担任何责任。</p>
+            <p class="">（三）由于发生不可抗力诸如地震、火灾、水灾、战争、暴动、罢工等导致的交易中断、延误等风险，甲方和交易中心不承担责任，但应在条件允许的范围内采取必要的补救措施以减少因不可抗力造成的损失。</p>
+            <p class="">（四）由于客户密码失密、操作不当、投资决策失误等原因可能会发生亏损，该损失将由客户自行承担，甲方和交易中心不承担任何责任。</p>
+            <p class="">（五）由于市场情况或其他的特殊原因，交易无法继续进行的，甲方或交易中心将暂停交易，并可即时免除迟延交易责任。</p>
+            <p class="">（六）由于国家有关法律法规、规章、政策的改变，或紧急措施的出台等原因导致交易系统临时或永久性关闭等风险的，甲方和交易中心不承担责任。</p>
+            <p class="r-s-title"></p>
+            <p class="r-s-title">十一、争议解决</p>
+            <p class="">如甲、乙双方发生与本协议相关的一切争议，应以友好协商的原则商议解决。经协商不能达成一致意见的，可向交易中心申请调解；调解不成的，任何一方可提交广州仲裁委员会，按照申请仲裁时其现行有效的仲裁规则进行仲裁。仲裁裁决是终局的，对双方均有约束力。</p>
+            <p class="r-s-title"></p>
+            <p class="r-s-title">十二、其他条款</p>
+            <p>本协议以电子化形式存档，协议各方均认可该电子化存档文件的法律效力，如各方对协议版本及内容产生争议的，以交易中心存档数据及解释为准。</p>
+            <p class="r-s-title"></p>
+            <p class="r-s-title">十三、特别提示</p>
+            <p>（一）甲方已提醒乙方特别注意有关其权利义务的全部条款，并应乙方的要求对全部条款作了详尽的说明，乙方知悉、理解与同意并自愿接受本协议所有条款的约束。</p>
+            <p>（二）本协议书为甲方要约，乙方签署或通过互联网点击确认则视为承诺，本协议自乙方承诺之日起生效。</p>
+            <p class="r-s-title"></p>
+            <p class="r-s-title">入市有风险，投资需谨慎！</p>
+        </div>
+    </ion-content>
+    <div class="bar bar-footer bar-energized">
+        <button class="button button-block button-energized ok_btn" on-tap="makeSure()" ng-disabled=registerform.$invalid>确定</button>
+    </div>
+</ion-modal-view>

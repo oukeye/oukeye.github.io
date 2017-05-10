@@ -1,0 +1,55 @@
+<ion-modal-view class="transparent_bg_modal setOrder_modal" style="z-index: 12;">
+    <!--  <ion-header-bar class=" bar-positive nav-title-slide-full">
+       <div class="buttons">
+           <button class="button button-clear icon-left ion-android-arrow-back" on-tap="closeOrdersModal()"></button>
+       </div>
+       <h1 class="title title-center">建仓</h1>
+       <div class="buttons">
+           <button class="button button-clear icon " on-tap="showNewTopicsheet()">提交</button>
+       </div>
+   </ion-header-bar> -->
+    <ion-content class="no-header no-footer center_h  padding  " has-bouncing="true">
+        <div class="modal_box order_box">
+            <div class=" list ">
+                <label class="item item-input modal_title">
+                    <div class=" text-left ">
+                        <div class="order_number">
+                            订单号:{{buyOrder.id}}
+                        </div>
+                        <div class="title_text">
+                            继续设置止盈止损
+                        </div>
+                    </div>
+                    
+                </label>
+                <label class="item item-input item-icon-right  row modal_subtitle">
+                    <div class="col text-left">方向:{{ordertype(buyOrder.dealDirection)}}</div>
+                    <div class="col text-right">规格:{{buyOrder.product.name}}</div>
+                </label>
+                <div class="list modal_content">
+                    <label class="item item-input row">
+                        <span class="input-label">设置止盈</span>
+                    </label>
+                    <label class="item item-input  row_input-number">
+                        <input-number init="initProfit" max="90" min="0" step="10" editable="false" unit="%" minreplace="不设" data="buyOrder.profit"></input-number>
+                    </label>
+                    <label class="item item-input row">
+                        <span class="input-label">设置止损</span>
+                    </label>
+                    <label class="item item-input  row_input-number">
+                        <input-number init="initloss" max="90" min="0" step="10" editable="false" unit="%" minreplace="不设" data="buyOrder.loss "></input-number>
+                    </label>
+                </div>
+                <label class="modal_footer ">
+                </label>
+                <!-- <label class="item  buy_btn button button-light" >
+                    购买
+                </label> -->
+                <div class=" button-bar">
+                    <a class="button cancel_btn" on-tap="closeSetOrderModal()">取消</a>
+                    <a class="button buy_btn" on-tap="setOrder()">确认</a>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

@@ -1,0 +1,56 @@
+<ion-modal-view  class="position-detail-view">
+    <ion-header-bar class=" bar-energized  nav-title-slide-full">
+        
+        <h1 class="title title-center">详情</h1>
+       <div class="buttons">
+            <button class=" button button-icon icon ion-ios-close-empty" on-tap="closePositionDetailModal()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content has-bouncing="false" padding="false" class=" no-footer dark-bg " delegate-handle="loginScroll">
+        <div class="list">
+            <div class="item">
+                <div class="name">{{products[currentPosition.contractCode].name}}({{products[currentPosition.contractCode].margin}})元</div>
+                <div class="yk">盈亏资金:<span class="value" ng-class="Storages_CalPro[currentPosition.id].status">{{Storages_CalPro[currentPosition.id].data }}元({{ratioPosition(currentPosition)}})</span></div>
+                <div class="userTicket" ng-if="currentPosition.usedTicket ">
+                    <div class="valueTicket">{{Tickets[currentPosition.usedTicketId].displayValue}}元</div>
+                    <div class="countTicket">已使用体验券({{currentPosition.usedTicketCount}})</div>
+                </div>
+            </div>
+            <div class="item">
+                <span>入仓价:<span class="value" ng-bind="currentPosition.buyingRate"></span></span>
+                <span class="item-note">本单余额:<span class="value">{{balancePosition(currentPosition)}}元</span></span>
+            </div>
+            <div class="item">
+                <span>入仓金额:<span class="value" ng-bind="currentPosition.payAmount"></span></span>
+                <span class="item-note">方向:<span class="value" ng-bind="ordertype(currentPosition.dealDirection)"></span></span>
+            </div>
+            <div class="item">
+                <span class="salePrice">平仓价:<span class="value"
+                 ng-class="Price[products[currentPosition.contractCode].dataType].priceStatus"
+                 ng-bind="Price[products[currentPosition.contractCode].dataType].data[0]">-</span></span>
+                <span class="item-note">数量:<span class="value" ng-bind="currentPosition.usedTicketCount + currentPosition.dealCount">-</span></span>
+            </div>
+            <div class="item">
+                <span>建仓时间:<span class="value" ng-bind="date(currentPosition.buyingDate)">-</span></span>
+            </div>
+            <div class="item">
+                <span>订单号:<span class="value" ng-bind="currentPosition.id">-</span></span>
+            </div>
+            <div class="item">
+                <div>止盈:<span class="value" ng-bind="currentPosition.profitStr">-</span></div>
+                <div>止损:<span class="value" ng-bind="currentPosition.lossStr">-</span></div>
+                <button class="button button-small  button-default editeBtn" on-tap="updateTap(currentPosition,products[currentPosition.contractCode])">修改止盈止损</button>
+            </div>
+        </div>
+
+        <div class="saleTips">
+            <div>如果该订单在结算时间({{ date(closeDate,'yyyy-MM-dd')}} 04:00:00)前还未平仓，会被强行平仓</div>
+        </div>
+        <div class="padding">
+            <button class="button button-block button-energized" on-tap="tapSale(products[currentPosition.contractCode].name,currentPosition.id)">
+              我要平仓
+            </button>
+        </div>
+        
+    </ion-content>
+</ion-modal-view>

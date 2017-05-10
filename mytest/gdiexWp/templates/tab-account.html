@@ -1,0 +1,58 @@
+<ion-view view-title="粤国际微盘" class="account-view" show-tabs>
+    <ion-content class="dark-bg" has-bouncing="false" delegate-handle="accountScroll">
+        <div class="list ">
+            <div class="item item-icon-left item-icon-right news" on-tap="gotoState('tab.news')">
+                <i class="icon"></i>公告
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </div>
+        </div>
+        <div class="list ">
+            <div class="item item-icon-left item-icon-right cash " on-tap="gotoState('tab.charge')">
+                <i class="icon">
+                </i>充值
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </div>
+            <div class="item item-icon-left item-icon-right withdrawal" on-tap="gotoState('tab.withdrawal')">
+                <i class="icon">
+                </i>提现
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </div>
+        </div>
+        <div class="list ">
+            <div class="item item-icon-left item-icon-right payment_details " on-tap="gotoState('tab.orderHistory')">
+                <i class="icon">
+                </i>收支明细
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </div>
+            <div class="item item-icon-left item-icon-right trading_rules" on-tap="gotoState('tab.tradingRules')">
+                <i class="icon">
+                </i>交易规则
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </div>
+            <div class="item item-icon-left item-icon-right transaction_history" on-tap="gotoState('tab.dealhistory')">
+                <i class="icon">
+                </i>交易历史
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </div>
+        </div>
+        <div class="list ">
+            <div class="item item-icon-left item-icon-right experience_volume " on-tap="gotoState('tab.tikets')">
+                <i class="icon account_icon1">
+                </i>体验券
+                <span class="item-note">{{Customer.tickets.length}}张</span>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+               
+            </div>
+            <div class="item item-icon-left item-icon-right rank" on-tap="gotoState('tab.ranklist')">
+                <i class="icon">
+                </i>排行榜
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </div>
+            <div class="item item-icon-left item-icon-right personcenter" on-tap="gotoState('tab.personInfo')">
+                <i class="icon">
+                </i>个人中心
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

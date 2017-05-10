@@ -1,0 +1,21 @@
+<ion-view view-title="公告列表" class="news-view" hide-tabs>
+    <ion-nav-bar class="bar-energized">
+        <ion-nav-buttons side="left">
+            <a class="button button-icon icon ion-ios-arrow-left light" on-tap="goBack()"></a>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="dark-bg" has-bouncing="false" delegate-handle="NewsScroll">
+        <ion-refresher pulling-text="下拉刷新..." spinner="ios" on-refresh="doRefresh()" class="wg_spinner">
+        </ion-refresher>
+        
+         <div class=" list news" ng-if="hasNews">
+           
+            <div class="item " ng-repeat="item in news.content track by item.id"  on-tap="showNewsDetailModal(item)">
+                <div class="title">{{item.title}}</div>
+                <div class="date">{{date(item.date * 1000)}}</div>
+            </div>
+        </div>
+         <div class="emptyTips" ng-if="!hasNews && news.last">暂无数据</div>
+        <ion-infinite-scroll on-infinite="infinite()" distance="1%" ng-show="!news.last" spinner="ios" class="wg_spinner"></ion-infinite-scroll>
+    </ion-content>
+</ion-view>

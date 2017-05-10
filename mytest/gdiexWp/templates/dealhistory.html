@@ -1,0 +1,26 @@
+<ion-view view-title="交易历史" class="dealhistory-view" hide-tabs>
+    <ion-nav-bar class="bar-energized">
+        <ion-nav-buttons side="left">
+            <a class="button button-icon icon ion-ios-arrow-left light" on-tap="goBack()"></a>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="dark-bg" has-bouncing="false" delegate-handle="dealhistoryScroll">
+        <ion-refresher pulling-text="下拉刷新..." spinner="ios" on-refresh="doRefresh()" class="wg_spinner">
+        </ion-refresher>
+        <div class=" list dealhistory" ng-if="0<dealhistory.content.length">
+            <div class="item " ng-repeat="item in dealhistory.content track by item.id" on-tap="showDealhistoryDetailModal(item)">
+                <div class="money" ng-class="{up:item.profitAndLoss >=0,down:item.profitAndLoss <0}">
+                    {{ moneyStr(item.profitAndLoss,1) }}</div>
+                <div class="type">{{ ordertype(item.dealDirection)}}</div>
+                <div class="sellingType">{{ storagesStateName(item.sellingType,1)}}({{products[item.contractCode].name}})</div>
+                <div class="date">{{date(item.sellingDate)}}</div>
+            </div>
+        </div>
+        <div class="emptyTips" ng-if="0==dealhistory.content.length && dealhistory.last">暂无数据</div>
+        <ion-infinite-scroll on-infinite="infinite()" distance="1%" ng-if="!dealhistory.last" spinner="ios" class="wg_spinner"></ion-infinite-scroll>
+    </ion-content>
+    <ion-footer-bar align-title="left" class="bar-count">
+        <div class="CountAll">总手数:{{Customer.dealCountAll || 0}} 总单数:{{dealhistory.totalElements || 0}}</div>
+        <div class="profitlossAll">总盈亏:{{Customer.profitlossAll.toFixed(2) || 0.00}}</div>
+    </ion-footer-bar>
+</ion-view>

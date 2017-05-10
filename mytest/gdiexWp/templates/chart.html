@@ -1,0 +1,27 @@
+<div class="echarts_content" id='echarts_content' style="width:100%;display: block;">
+    <div class="echarts_tips" id='echarts_tips' style="width:100%;" ng-show="showTips">
+        <div class="box">
+            <div class="title"><i class="icon ion-android-alert"></i>当前不是交易时段</div>
+            <div class="subtitle">交易时间:周一早上8:00-周六凌晨4:00</div>
+            <div class="closeTime">夏令时4:00-6:00为休市结算时段</div>
+            <div class="closeTime">冬令时4:00-7:00为休市结算时段</div>
+        </div>
+    </div>
+    <div class="echarts_retry" id='echarts_retry' style="width:100%;" ng-show="showRetry">
+        <a class="button button-outline button-small icon-left ion-ios-reload retry_btn" on-tap="_retry()">重新获取</a>
+    </div>
+    <div class="echarts_loading loading " id='echarts_loading' style="width:100%;" ng-show="loading">
+        <div class="box">
+            <div class="ion-load-d loading-icon"></div>
+        </div>
+        
+    </div>
+    <div class="echarts_k" id='echarts_k' style="width:100%;display: block;"></div>
+</div>
+<div class="echarts_bar row" id="echarts_nav">
+    <div class="col line_btn" on-tap="_update(1)" ng-class="{active:type==1, default:type!=1}"> 分时线</div>
+    <div class="col five_btn" on-tap="_update(2)" ng-class="{active:type==2, default:type!=2}">五分</div>
+    <div class="col fifteen_btn" on-tap="_update(3)" ng-class="{active:type==3, default:type!=3}">十五分</div>
+    <div class="col thirty_btn" on-tap="_update(4)" ng-class="{active:type==4, default:type!=4}">三十分</div>
+    <div class="col hour_btn" on-tap="_update(5)" ng-class="{active:type==5, default:type!=5}">一小时</div>
+</div>

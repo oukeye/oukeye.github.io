@@ -1,0 +1,46 @@
+<ion-view class="ranklist-view" hide-tabs>
+    <!-- <ion-nav-bar class="bar-energized">
+        <ion-nav-buttons side="left">
+            <a class="button button-icon icon ion-ios-arrow-left light" on-tap="goBack()"></a>
+        </ion-nav-buttons>
+        
+    </ion-nav-bar> -->
+    <ion-content class="dark-bg" has-bouncing="false" delegate-handle="ChargeScroll">
+        <ion-refresher pulling-text="下拉刷新..." spinner="ios" on-refresh="doRefresh()" class="wg_spinner">
+        </ion-refresher>
+        <div class="backBtn" on-tap="goBack()"></div>
+        <div class="reank_title">
+            <div class="headimg">
+                <img ng-src="{{rank.ranks[rank.currentRank.type].self.headimgurl}}" class="" alert="头像" />
+            </div>
+            <div class="name">{{rank.ranks[rank.currentRank.type].self.name}}</div>
+            <div class="title">本周{{rank.currentRank.text}}击败全国</div>
+            <div class="rank_beat"><span class="percent">{{percenTage(rank.ranks[rank.currentRank.type].winPercent)}}</span>用户</div>
+        </div>
+        <div class="rank_nav">
+            <div class="button-bar ">
+                <a class="button" ng-class="{active:rank.currentRank.type=='TRADE_RANK'}" on-tap="changeCurrentRank('TRADE_RANK')">交易榜</a>
+                <a class="button" ng-class="{active:rank.currentRank.type=='PROFIT_LOSS_RANK'}" on-tap="changeCurrentRank('PROFIT_LOSS_RANK')">盈利榜</a>
+            </div>
+        </div>
+        <div class="date">{{ date(rank.today,'MM月dd日') }}</div>
+
+        <div class="list rank_list">
+            <div class="item item-avatar " ng-repeat="item in rank.ranks[rank.currentRank.type].ranks track by $index " >
+                <img ng-src="{{item.headimgurl}}" alt="头像" class="headimg">
+                <h2 class="name" ng-bind="item.name"></h2>
+                <span class="value" >{{item.value}}元</span>
+                <span class="rank rank{{item.rank}}">{{item.rank}}</span>
+
+            </div>
+             <div class="item emptyValue" ng-show="rank.ranks[rank.currentRank.type].ranks.length==0">
+               暂无数据
+            </div>
+             <!--<div class="item item-avatar rank2">
+               <img src="venkman.jpg" class="headimg">
+               <h2 class="name">Venkman</h2>
+               <span class="value">Grammy</span>
+                        </div> -->
+        </div>
+    </ion-content>
+</ion-view>

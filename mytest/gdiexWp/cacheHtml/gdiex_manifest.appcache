@@ -1,0 +1,35 @@
+CACHE MANIFEST
+#VERSION v20161208&r=1
+# 直接缓存的文件
+CACHE:
+#images cache
+../images/loading.png?v=v20161208&r=1
+../images/gdiex/account.png?v=v20161208&r=1
+../images/gdiex/icon.png?v=v20161208&r=1
+../images/gdiex/rank-bg.png?v=v20161208&r=1
+../images/gdiex/rank-icon.png?v=v20161208&r=1
+../images/gdiex/recharge_text_card.png?v=v20161208&r=1
+../images/gdiex/recharge_text_weixin.png?v=v20161208&r=1
+../images/gdiex/the_rules.png?v=v20161208&r=1
+../images/gdiex/couponpic.png?v=v20161208&r=1
+../images/gdiex/tickets_bg.png?v=v20161208&r=1
+../images/gdiex/ufo.png?v=v20161208&r=1
+
+#css cache
+../css/gdiex.app.min.css?v=v20161208&r=1
+
+#js cache
+../lib/jquery/dist/jquery.min.js?v=v20161208&r=1
+../dist/ionic.gdiex.min.js?v=v20161208&r=1
+../lib/jquery/dist/jquery.min.js?v=v20161208&r=1
+../lib/echarts/dist/echarts.min.js?v=v20161208&r=1
+../dist/index.js
+
+#需要在时间在线的文件
+NETWORK:
+*
+
+# 替代方案
+FALLBACK:
+#index.html
+#./x.css /Test/a.css

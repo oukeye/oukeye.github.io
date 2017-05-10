@@ -1,0 +1,46 @@
+<ion-view view-title="充值" class="charge-view" hide-tabs>
+    <ion-nav-bar class="bar-energized">
+        <ion-nav-buttons side="left">
+            <a class="button button-icon icon ion-ios-arrow-left light" on-tap="goBack()"></a>
+        </ion-nav-buttons>
+        
+    </ion-nav-bar>
+    <ion-content class="dark-bg" has-bouncing="false" delegate-handle="ChargeScroll">
+        <!--   <ion-refresher pulling-text="下拉刷新..." spinner="ios" on-refresh="doRefresh()" class="wg_spinner">
+      </ion-refresher> -->
+        <div class=" list has_bg_list charge">
+            <div class="item ">
+                <div class="nickname">用户名:{{Customer.nickname}}</div>
+            </div>
+            <div class="item ">
+                <div class="amount">用户金额:{{Customer.money.amount}}</div>
+                <div class="chargeMoney">充值金额:{{chargeMoney()}}</div>
+            </div>
+            <label class="item item-input inputMoney ">
+                <input type="text" class="has_bg_input" placeholder="输入充值金额" ng-model="charge.money " ng-keyup="changeInput()" ng-blur="checkMoney()" ng-pattern="moneyReg">
+            </label>
+            <div class="bar_btn row">
+                <div class="col" ng-class="{active:charge.money ==20}" on-tap="selectMoney(20)">￥20</div>
+                <div class="col" ng-class="{active:charge.money ==50}" on-tap="selectMoney(50)">￥50</div>
+                <div class="col" ng-class="{active:charge.money ==120}" on-tap="selectMoney(120)">￥120</div>
+            </div>
+            <div class="bar_btn row">
+                <div class="col" ng-class="{active:charge.money ==500}" on-tap="selectMoney(500)">￥500</div>
+                <div class="col" ng-class="{active:charge.money ==1000}" on-tap="selectMoney(1000)">￥1000</div>
+                <div class="col" ng-class="{active:charge.money ==2000}" on-tap="selectMoney(2000)">￥2000</div>
+            </div>
+            <div class="tips">
+                <p ng-if="charge.chargeScale!=1">每笔收取通道费用0.8%</p>
+                <p>每笔最少20元,每笔限额5000元,每天限额两万元</p>
+                <a href="http://kf.qq.com/touch/sappfaq/151210NZzmuY151210ZRj2y2.html?platform=15&amp;ADTAG=veda.weixinpay.wenti&amp;pass_ticket=D1nDkxCBjLQv6TIOzsZ7D3cvJVjw%2FDPDehOR58jYxVrnicC7Vn1aAmBvDc9GLuPq" class="weixinTips">微信支付绑卡的银行卡限额说明</a>
+                <a href="https://static.95516.com/static/help/detail_38.html" class="cardTips">银联在线支付各支持银行的限额说明</a>
+            </div>
+        </div>
+    </ion-content>
+    <ion-footer-bar align-title="left" class="bar-newsReading">
+        <div class="button-bar">
+            <a class="button buy_btn disable-user-behavior bank-card" on-tap="rechargeUnionpay()">网银</a>
+            <a class="button cancel_btn disable-user-behavior bank-weixin" on-tap="rechargeWxpay()" ng-if="isWeixin">微信</a>
+        </div>
+    </ion-footer-bar>
+</ion-view>

@@ -1,0 +1,24 @@
+<ion-view view-title="收支明细" class="orderHistory-view" hide-tabs>
+    <ion-nav-bar class="bar-energized">
+        <ion-nav-buttons side="left">
+            <a class="button button-icon icon ion-ios-arrow-left light" on-tap="goBack()"></a>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="dark-bg" has-bouncing="false" delegate-handle="orderHistoryScroll">
+        <ion-refresher pulling-text="下拉刷新..." spinner="ios" on-refresh="doRefresh()" class="wg_spinner">
+        </ion-refresher>
+        <div class=" list orderHistory" ng-if="0<orderHistory.content.length">
+            <div class="item " ng-repeat="item in orderHistory.content track by item.id" on-tap="showOrderHistoryDetailModal(item)">
+                <div class="money" ng-class="{up:item.transactionMoney>0,down:item.transactionMoney<=0}">
+                {{ moneyStr(item.transactionMoney,item.transactionType) }}</div>
+                <div class="type">{{moneyType(item.transactionMoney,item.transactionType) }}</div>
+
+                <div class="transactionType">{{transactionType(item.transactionType)}}</div>
+                <div class="remainingMoney">{{item.remainingMoney }}</div>
+                <div class="date">{{date(item.date)}}</div>
+            </div>
+        </div>
+        <div class="emptyTips" ng-if="0==orderHistory.content.length && orderHistory.last">暂无数据</div>
+        <ion-infinite-scroll on-infinite="infinite()" distance="1%" ng-if="!orderHistory.last" spinner="ios" class="wg_spinner"></ion-infinite-scroll>
+    </ion-content>
+</ion-view>

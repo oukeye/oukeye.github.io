@@ -1,0 +1,45 @@
+<ion-view view-title="个人中心" class="personInfo-view" hide-tabs>
+    <ion-nav-bar class="bar-energized">
+        <ion-nav-buttons side="left">
+            <a class="button button-icon icon ion-ios-arrow-left light" on-tap="gotoState('tab.account')"></a>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="dark-bg" has-bouncing="false" delegate-handle="personInfoScroll">
+        <ion-refresher pulling-text="下拉刷新..." spinner="ios" on-refresh="doRefresh()" class="wg_spinner">
+        </ion-refresher>
+        <div class="list">
+            <div class="item">
+                头像
+                <span class="item-note headimgurl"><img ng-src="{{::Customer.headimgurl}}" alt="头像"></span>
+            </div>
+            <div class="item">
+                姓名
+                <span class="item-note nickname value" ng-bind="::Customer.nickname"></span>
+            </div>
+            <div class="item">
+                性别
+                <span class="item-note sex value">{{::sexName(Customer.sex)}}</span>
+            </div>
+            <div class="item">
+                电话
+                <span class="item-note telNumber value" ng-bind="::Customer.telNumber"></span>
+            </div>
+            <div class="item">
+                IP
+                <span class="item-note ip value" ng-bind="IP"></span>
+            </div>
+            <div class="item  item-icon-right " on-tap="gotoState('tab.password')">
+                修改密码
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </div>
+            <div class="item  item-icon-right unbindBank " on-tap="showPopUnbindBank()">
+                解绑银行卡信息
+                <!--  <i class="icon ion-chevron-right icon-accessory"></i> -->
+            </div>
+            <div class="item  item-icon-right logout " on-tap="logout()" ng-if="isPC">
+                退出
+                <!--  <i class="icon ion-log-out icon-accessory"></i> -->
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

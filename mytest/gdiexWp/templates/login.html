@@ -1,0 +1,51 @@
+<ion-modal-view class="transparent_bg_modal login-view">
+    <!-- <ion-header-bar class=" bar-positive nav-title-slide-full">
+        <div class="buttons">
+            <button class="button button-clear  icon-left ion-android-close" on-tap="closeBuyModal()"></button>
+        </div>
+        <h1 class="title title-center">登录</h1>
+        <div class="buttons">
+            <button class="button button-clear light" on-tap="gotoState('tab.reg',false)">注册</button>
+        </div>
+    </ion-header-bar> -->
+    <ion-content has-bouncing="false" padding="false" class="padding no-footer center_h" delegate-handle="loginScroll">
+        <div class="modal_box" id="login_box">
+            <div class=" list">
+                <label class="item item-input row modal_title">
+                    <div class="col text-left title_text">登录</div>
+                      <div class="col text-right">
+                        <i class="sversion"></i>
+                    </div> 
+                </label>
+                <label class="item item-input item-icon-right  row modal_subtitle">
+                    <div class="col text-left title_text" ng-show="IP">IP:{{IP}}</div>
+                </label>
+                <div class="list modal_content login_modal_content" id="login_modal_content" >
+                   <label class="item item-input">
+                       <div class="col text-right">
+                       <button class="button button-clear button-small button-positive reg_btn" ng-if="isH5" on-tap="goState(LoginModal,'tab.pcReg')">注册
+                        </button>
+                        <button class="button button-clear button-small button-positive forgetPwd_btn" on-tap="goState(LoginModal,'tab.forgetCode')">忘记密码
+                        </button>
+                          <!--  <a href="javascript:;" class="reg_btn">注册</a>
+                          <a href="javascript:;" class="forgetPwd_btn">忘记密码</a> -->
+                       </div>
+                   </label>
+                   <label class="item item-input" ng-if="isH5">
+                       <input type="text" class="input" ng-model="user.account" name="account" placeholder="请输入手机号" onfocus-action required>
+                   </label>
+                   <label class="item item-input">
+                       <input type="password" class="input" ng-model="user.password" name="password" placeholder="请输入密码" onfocus-action required>
+                   </label>
+                   <div id="embed-captcha"></div>
+               </div>
+                <label class="modal_footer ">
+                </label>
+
+                <label class=" button button-block loginBtn" on-tap="tapLoginBtn()" id="loginBtn" >
+                    确认登录
+                </label>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>
