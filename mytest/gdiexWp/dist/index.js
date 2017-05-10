@@ -3417,17 +3417,18 @@
 	            }
 	        };
 	        this.isH5 = function() {
-	            var ua = navigator.userAgent.toLowerCase();
-	            if (ua.match(/MicroMessenger/i) == "micromessenger") {
-	                if (this.getURLPara('h5') == 1) {
-	                    return true;
-	                } else {
-	                    return false;
-	                }
-	            } else {
-	                this.saveStorage('autoCheck', false);
-	                return true;
-	            }
+	            return true;
+	            // var ua = navigator.userAgent.toLowerCase();
+	            // if (ua.match(/MicroMessenger/i) == "micromessenger") {
+	            //     if (this.getURLPara('h5') == 1) {
+	            //         return true;
+	            //     } else {
+	            //         return false;
+	            //     }
+	            // } else {
+	            //     this.saveStorage('autoCheck', false);
+	            //     return true;
+	            // }
 	        };
 	        this.showLoading = function() {
 	            return $ionicLoading.show({
